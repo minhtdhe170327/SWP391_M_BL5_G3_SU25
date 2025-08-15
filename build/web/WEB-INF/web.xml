@@ -16,6 +16,14 @@
         <servlet-name>LogOut</servlet-name>
         <servlet-class>controller.LogOut</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminSkillManager</servlet-name>
+        <servlet-class>controller.AdminSkillManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllAccount</servlet-name>
+        <servlet-class>controller.ViewAllAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -31,5 +39,13 @@
     <servlet-mapping>
         <servlet-name>LogOut</servlet-name>
         <url-pattern>/LogOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminSkillManager</servlet-name>
+        <url-pattern>/AdminSkillManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllAccount</servlet-name>
+        <url-pattern>/ViewAllAccount</url-pattern>
     </servlet-mapping>
 </web-app>
