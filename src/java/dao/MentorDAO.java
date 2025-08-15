@@ -1,0 +1,52 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package dao;
+
+import dbcontext.DBContext;
+import entity.*;
+import java.sql.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author Asus TUF
+ */
+public class MentorDAO extends DBContext {
+    public List<Mentor> getTop3Mentor() {
+        List<Mentor> list = new ArrayList<>();
+        query = "WITH t AS(SELECT mc.mentorid id,AVG(CAST (f.star AS FLOAT(2))) averageStar FROM Feedback f, feedbackanswer fa, answer a, mentorcoderequest mc\n"
+                + "WHERE f.id=fa.feedbackid and fa.answerid=a.id and a.mentorcoderequestid=mc.id\n"
+                + "GROUP BY mc.mentorid)\n"
+                + "SELECT TOP (3) m.id,m.accountid,m.name,m.address,m.phone,m.birthday,m.sex,m.introduce,m.achievement,m.avatar,m.costHire,\n"
+                + "COALESCE(t.averageStar, 0) as averageStar\n"
+                + "FROM mentor m\n"
+                + "LEFT JOIN t ON m.id=t.id\n"
+                + "ORDER BY COALESCE(t.averageStar, 0) DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int accountid = rs.getInt("accountid");
+                String name = rs.getString("name");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                Date birthday = rs.getDate("birthday");
+                String sex = rs.getString("sex");
+                String introduce = rs.getString("introduce");
+                String achievement = rs.getString("achievement");
+                String avatar = rs.getString("avatar");
+                float costHire = rs.getFloat("costHire");
+                float averageStar = rs.getFloat("averageStar");
+                list.add(new Mentor(id, accountid, name, address, phone, birthday, sex, introduce, achievement, avatar, costHire, averageStar));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+}
