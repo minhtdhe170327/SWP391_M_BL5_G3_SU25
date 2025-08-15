@@ -93,7 +93,10 @@ public class RegisterController extends HttpServlet {
        } else if (roleid == 1) { // Mentee
            dao.insertMentee(accountid, fullname, "default", "default", null, "M", "default", "mentee1.jpg");
        }
-       response.sendRedirect("Login.jsp?msg=success");
+       request.setAttribute("msg", "success");
+request.getRequestDispatcher("/views/Login.jsp").forward(request, response);
+
+
    } else {
        request.setAttribute("errorMsg", "Registration failed. Please try again.");
        request.getRequestDispatcher("views/Register.jsp").forward(request, response);
