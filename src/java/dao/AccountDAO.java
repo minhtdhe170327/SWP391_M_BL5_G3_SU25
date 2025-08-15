@@ -86,5 +86,81 @@ public class AccountDAO extends DBContext {
         }
         return 0;
     }
+    public boolean checkExistedEmail(String email) {
+        String sql = "select email from account where email = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            System.out.println("checkExistedEmail: " + e.getMessage());
+        }
+        return false;
+    }
+    public boolean checkExistedUserWithUsername(String username) {
+        String sql = "SELECT * FROM account WHERE username = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (Exception e) {
+            System.out.println("checkExistedUserWithUsername: " + e.getMessage());
+        }
+        return false;
+    }  
+    
+    public int insertAccountAndGetId(String username, String password, int roleid, String email) {
+        String sql = "INSERT INTO Account(accountname, password, roleid, email) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            st.setString(1, username);
+            st.setString(2, password);
+            st.setInt(3, roleid);
+            st.setString(4, email);
+            st.executeUpdate();
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) { e.printStackTrace(); }
+        return -1;
+    }
+    
+    public void insertMentee(int accountid, String name, String address, String phone, java.sql.Date birthday, String sex, String introduce, String avatar) {
+        String sql = "INSERT INTO Mentee(accountid, name, address, phone, birthday, sex, introduce, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, accountid);
+            st.setString(2, name);
+            st.setString(3, address);
+            st.setString(4, phone);
+            st.setDate(5, birthday);
+            st.setString(6, sex);
+            st.setString(7, introduce);
+            st.setString(8, avatar);
+            st.executeUpdate();
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    public void insertMentor(int accountid, String name, String address, String phone, java.sql.Date birthday, String sex, String introduce, String achievement, String avatar, float costHire) {
+        String sql = "INSERT INTO Mentor(accountid, name, address, phone, birthday, sex, introduce, achievement, avatar, costHire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, accountid);
+            st.setString(2, name);
+            st.setString(3, address);
+            st.setString(4, phone);
+            st.setDate(5, birthday);
+            st.setString(6, sex);
+            st.setString(7, introduce);
+            st.setString(8, achievement);
+            st.setString(9, avatar);
+            st.setFloat(10, costHire);
+            st.executeUpdate();
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+    
 
 }

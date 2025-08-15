@@ -24,9 +24,9 @@
                     <button class="btn white-button" id="loginBtn" onclick="window.location.href='Login.jsp'">
                         Sign in
                     </button>
-                    <button class="btn" id="registerBtn" onclick="window.location.href='Register.jsp'">
-                        Sign up
-                    </button>
+                    <button class="btn" id="registerBtn" onclick="window.location.href='<%=request.getContextPath()%>/Register'">
+    Sign up
+</button>
                 </div>
                 <div class="nav-menu-btn">
                     <i id="navMenuBtn" class="bx bx-menu" onclick="myMenuFunction()"></i>
@@ -38,7 +38,9 @@
                 <div class="login-container" id="login">
                     <form action="Login" method="post" id="loginForm">
                         <div class="top">
-                            <span>Don't have an account? <a href="Register.jsp">Sign up</a></span>
+                            <span>Don't have an account? 
+    <a href="<%=request.getContextPath()%>/Register">Sign up</a>
+</span>
                             <header>Log In</header>
                         </div>
                         <div>
