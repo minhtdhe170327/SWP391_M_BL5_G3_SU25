@@ -320,5 +320,15 @@ public class AccountDAO extends DBContext {
         }
         return 0;
     }
+    public void changePassword(int accid,String newpassword){
+        query = "UPDATE Account SET Password=? WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1,newpassword);
+            ps.setInt(2,accid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
 }
