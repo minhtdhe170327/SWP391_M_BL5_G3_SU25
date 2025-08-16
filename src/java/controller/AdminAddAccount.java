@@ -45,10 +45,32 @@ public class AdminAddAccount extends HttpServlet {
             int accountid = dao.insertAccountAndGetId(accountname, password, roleid, email);
             if (accountid > 0) {
                 if (roleid == 2) { // Mentor
-                    dao.insertMentor(accountid, "default", "default", "default", null, "M", "default", "default", "mentor1.jpg", 0f);
-                } else if (roleid == 1) { // Mentee
-                    dao.insertMentee(accountid, "default", "default", "default", null, "M", "default", "mentor1.jpg");
-                }
+    dao.insertMentor(
+        accountid,
+        "default",   // firstname
+        "default",   // lastname
+        "default",   // address
+        "default",   // phone
+        null,        // birthday
+        "M",         // sex
+        "default",   // introduce
+        "default",   // achievement
+        "mentor1.jpg", // avatar
+        0f           // costHire
+    );
+} else if (roleid == 1) { // Mentee
+    dao.insertMentee(
+        accountid,
+        "default",   // firstname
+        "default",   // lastname
+        "default",   // address
+        "default",   // phone
+        null,        // birthday
+        "M",         // sex
+        "mentor1.jpg", // avatar
+        "default"    // introduce
+    );
+}
                 response.sendRedirect(request.getContextPath() + "/ViewAllAccount");
             } else {
                 request.setAttribute("error", "Failed to create account");
