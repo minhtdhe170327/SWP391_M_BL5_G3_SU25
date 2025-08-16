@@ -53,6 +53,7 @@ public class AccountDAO extends DBContext {
 
     public Account getAccount(String username, String password) {
         Account account = null;
+        String hashedPassword = md5(password);
         query = "SELECT * FROM Account WHERE accountname=? AND password=?";
         try {
             ps = connection.prepareStatement(query);
@@ -71,7 +72,20 @@ public class AccountDAO extends DBContext {
         }
         return account;
     }
-
+private String md5(String input) {
+    try {
+        java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+        byte[] array = md.digest(input.getBytes());
+        StringBuilder sb = new StringBuilder();
+        for (byte b : array) {
+            sb.append(String.format("%02x", b & 0xff));
+        }
+        return sb.toString();
+    } catch (java.security.NoSuchAlgorithmException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
     public int checkrole(int accid) {
         query = "SELECT r.id id FROM roles r, ACCOUNT a WHERE r.id=a.roleid AND a.id=?";
         try {
@@ -161,6 +175,17 @@ public class AccountDAO extends DBContext {
             st.executeUpdate();
         } catch (Exception e) { e.printStackTrace(); }
     }
-    
+     public void changePassword(int accid, String newpassword) {
+    String hashedPassword = md5(newpassword); // băm mật khẩu mới
+    query = "UPDATE Account SET password=? WHERE id=?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, hashedPassword);
+        ps.setInt(2, accid);
+        ps.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 
 }
