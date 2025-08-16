@@ -13,6 +13,7 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
         <title>Change Pass</title>
+         <link rel="stylesheet" type="text/css" href="../assets/css/changepass.css">
         <meta content="" name="description">
         <meta content="" name="keywords">
 
@@ -72,7 +73,7 @@
                             </div>
                             <div class="text-center text-lg-start mt-4 pt-2 mb-4">
                                 <button type="submit" class="btn btn-outline-primary btn-lg"style="padding-left: 2.5rem; padding-right: 2.5rem;">
-                                    Done
+                                    Submit
                                 </button>
                             </div>    
                             

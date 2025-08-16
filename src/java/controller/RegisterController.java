@@ -3,6 +3,7 @@ package controller;
 import dao.*;
 import util.*;
 import java.io.IOException;
+import java.sql.Date;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,30 +11,11 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class RegisterController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,39 +23,40 @@ public class RegisterController extends HttpServlet {
         request.getRequestDispatcher("/views/Register.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
         // Lấy dữ liệu từ form
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String confirmpassword = request.getParameter("confirmpass");
         String email = request.getParameter("email");
         String role = request.getParameter("role");
-        String fullname = request.getParameter("fullname");
+
+        // các field mới
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String sex = request.getParameter("sex");
+        String phone = request.getParameter("phone");
+        String birthday = request.getParameter("birthday");
+        String address = request.getParameter("address");
 
         // Khởi tạo Validation
         Validation validation = new Validation();
         PasswordUtil passwordUtil = new PasswordUtil();
 
-        // Kiểm tra input sử dụng Validation
+        // Kiểm tra input
         String errorMsg = validation.validateSignUpInput(username, password, confirmpassword, email);
-        
-        if (errorMsg.isEmpty() && (fullname == null || !validation.validateFullname(fullname))) {
-            errorMsg = "Fullname is invalid. It must start with a letter and contain only letters, spaces, or dots.";
+
+        if (errorMsg.isEmpty() && 
+            (firstname == null || firstname.trim().isEmpty() ||
+             lastname == null || lastname.trim().isEmpty())) {
+            errorMsg = "Firstname and Lastname are required.";
         }
-        
+
         if (!errorMsg.isEmpty()) {
-            // Nếu có lỗi từ Validation, gửi thông báo lỗi về Register.jsp
             request.setAttribute("errorMsg", errorMsg);
             request.getRequestDispatcher("views/Register.jsp").forward(request, response);
         } else {
@@ -83,35 +66,35 @@ public class RegisterController extends HttpServlet {
                 request.getRequestDispatcher("views/Register.jsp").forward(request, response);
                 return;
             }
-            // Nếu không có lỗi, xác định roleid và chèn tài khoản
+
+            // xác định roleid
             int roleid = role.equals("Mentor") ? 2 : 1;
             AccountDAO dao = new AccountDAO();
             int accountid = dao.insertAccountAndGetId(username, hashedPassword, roleid, email);
-   if (accountid > 0) {
-       if (roleid == 2) { // Mentor
-           dao.insertMentor(accountid, fullname, "default", "default", null, "M", "default", "default", "mentor1.jpg", 0f);
-       } else if (roleid == 1) { // Mentee
-           dao.insertMentee(accountid, fullname, "default", "default", null, "M", "default", "mentee1.jpg");
-       }
-       request.setAttribute("msg", "success");
-request.getRequestDispatcher("/views/Login.jsp").forward(request, response);
 
+            if (accountid > 0) {
+                if (roleid == 2) { // Mentor
+                    dao.insertMentor(accountid, firstname, lastname, address, phone,
+                            (birthday != null && !birthday.isEmpty()) ? Date.valueOf(birthday) : null,
+                            sex, "default", "default", "mentor1.jpg", 0f);
+                } else if (roleid == 1) { // Mentee
+                    dao.insertMentee(accountid, firstname, lastname, address, phone,
+                            (birthday != null && !birthday.isEmpty()) ? Date.valueOf(birthday) : null,
+                            sex, "mentee1.jpg", "Xin chào, tôi là mentee mới!");
+                }
 
-   } else {
-       request.setAttribute("errorMsg", "Registration failed. Please try again.");
-       request.getRequestDispatcher("views/Register.jsp").forward(request, response);
+                request.setAttribute("msg", "success");
+                request.getRequestDispatcher("/views/Login.jsp").forward(request, response);
+            } else {
+                request.setAttribute("errorMsg", "Registration failed. Please try again.");
+                request.getRequestDispatcher("views/Register.jsp").forward(request, response);
+            }
         }
     }
-    }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Register new account with personal info";
+    }
 
 }
