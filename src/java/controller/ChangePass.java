@@ -14,6 +14,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import util.PasswordUtil;
+
 
 /**
  *
@@ -66,27 +68,53 @@ public class ChangePass extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        String username=request.getParameter("username");
-        String oldpassword=request.getParameter("oldpassword");
-        String newpassword=request.getParameter("newpassword");
-        String confirmnewpassword=request.getParameter("confirmnewpassword");
-        AccountDAO dao= new AccountDAO();
-        Account acc=dao.getAccount(username, oldpassword);
-        if(!newpassword.equals(confirmnewpassword)){
-            request.setAttribute("error", "New Pass and confirmnewpassword doesn't same!");
-            request.getRequestDispatcher("views/ChangePassword.jsp").forward(request, response);
-        }else if(acc==null){
-            request.setAttribute("error", "wrong usernamr or old Password!");
-            request.getRequestDispatcher("views/ChangePassword.jsp").forward(request, response);
-        }else{
-            dao.changePassword(acc.getId(), newpassword);
-            request.setAttribute("success", "Change password is successful!");
-            request.getRequestDispatcher("views/ChangePassword.jsp").forward(request, response);
-        }
+  @Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    Account account = (Account) request.getSession().getAttribute("account");
+    if (account == null) {
+       
+        return;
     }
+
+    String oldpassword = request.getParameter("oldpassword");
+    String newpassword = request.getParameter("newpassword");
+    String confirmnewpassword = request.getParameter("confirmnewpassword");
+
+    AccountDAO dao = new AccountDAO();
+    PasswordUtil passUtil = new PasswordUtil();
+
+    // hash old password để so sánh
+    String oldPassHash = passUtil.hashPasswordMD5(oldpassword);
+
+    // kiểm tra mật khẩu cũ có đúng không (so với mật khẩu trong session hoặc DB)
+    if (!account.getPassword().equals(oldPassHash)) {
+        request.setAttribute("error", "Old password is incorrect!");
+        request.getRequestDispatcher("views/ChangePassword.jsp").forward(request, response);
+        return;
+    }
+
+    // kiểm tra new password và confirm
+    if (!newpassword.equals(confirmnewpassword)) {
+        request.setAttribute("error", "New password and confirm password do not match!");
+        request.getRequestDispatcher("views/ChangePassword.jsp").forward(request, response);
+        return;
+    }
+
+    // hash new password
+    String newPassHash = passUtil.hashPasswordMD5(newpassword);
+
+    // update DB
+    dao.changePassword(account.getId(), newPassHash);
+
+    // cập nhật lại account trong session (tránh lỗi lần sau check mật khẩu cũ)
+    account.setPassword(newPassHash);
+    request.getSession().setAttribute("account", account);
+
+    request.setAttribute("success", "Password changed successfully!");
+    request.getRequestDispatcher("views/ChangePassword.jsp").forward(request, response);
+}
+
 
     /** 
      * Returns a short description of the servlet.

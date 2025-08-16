@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/src/java/dao/AccountDAO.java</file>
-            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/web/WEB-INF/web.xml</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/ChangePass.java</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/Register.jsp</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/guest/HomePage.jsp</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/guest/Header.jsp</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/Login.jsp</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/ChangePassword.jsp</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/RegisterController.java</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/dao/AccountDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -128,39 +128,55 @@ public class AccountDAO extends DBContext {
         return -1;
     }
     
-    public void insertMentee(int accountid, String name, String address, String phone, java.sql.Date birthday, String sex, String introduce, String avatar) {
-        String sql = "INSERT INTO Mentee(accountid, name, address, phone, birthday, sex, introduce, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, accountid);
-            st.setString(2, name);
-            st.setString(3, address);
-            st.setString(4, phone);
-            st.setDate(5, birthday);
-            st.setString(6, sex);
-            st.setString(7, introduce);
-            st.setString(8, avatar);
-            st.executeUpdate();
-        } catch (Exception e) { e.printStackTrace(); }
+    // Mentee
+public void insertMentee(int accountid, String firstname, String lastname,
+                         String address, String phone, java.sql.Date birthday,
+                         String sex, String avatar, String introduce) {
+    String sql = "INSERT INTO Mentee(accountid, firstname, lastname, address, phone, birthday, sex, avatar, introduce) "
+               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setInt(1, accountid);
+        st.setString(2, firstname);
+        st.setString(3, lastname);
+        st.setString(4, address);
+        st.setString(5, phone);
+        st.setDate(6, birthday);
+        st.setString(7, sex);
+        st.setString(8, avatar);
+        st.setString(9, introduce);
+        st.executeUpdate();
+    } catch (Exception e) { 
+        e.printStackTrace(); 
     }
+}
 
-    public void insertMentor(int accountid, String name, String address, String phone, java.sql.Date birthday, String sex, String introduce, String achievement, String avatar, float costHire) {
-        String sql = "INSERT INTO Mentor(accountid, name, address, phone, birthday, sex, introduce, achievement, avatar, costHire) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, accountid);
-            st.setString(2, name);
-            st.setString(3, address);
-            st.setString(4, phone);
-            st.setDate(5, birthday);
-            st.setString(6, sex);
-            st.setString(7, introduce);
-            st.setString(8, achievement);
-            st.setString(9, avatar);
-            st.setFloat(10, costHire);
-            st.executeUpdate();
-        } catch (Exception e) { e.printStackTrace(); }
+// Mentor
+public void insertMentor(int accountid, String firstname, String lastname,
+                         String address, String phone, java.sql.Date birthday,
+                         String sex, String introduce, String achievement,
+                         String avatar, float costHire) {
+    String sql = "INSERT INTO Mentor(accountid, firstname, lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire) "
+               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setInt(1, accountid);
+        st.setString(2, firstname);
+        st.setString(3, lastname);
+        st.setString(4, address);
+        st.setString(5, phone);
+        st.setDate(6, birthday);
+        st.setString(7, sex);
+        st.setString(8, introduce);
+        st.setString(9, achievement);
+        st.setString(10, avatar);
+        st.setFloat(11, costHire);
+        st.executeUpdate();
+    } catch (Exception e) { 
+        e.printStackTrace(); 
     }
+}
+
     //Admin Skill Mânger
     public void addSkillAdmin(String name) {
         String sql = "INSERT INTO Skill(name) VALUES(?)";
@@ -320,15 +336,16 @@ public class AccountDAO extends DBContext {
         }
         return 0;
     }
-    public void changePassword(int accid,String newpassword){
-        query = "UPDATE Account SET Password=? WHERE id=?";
-        try {
-            ps = connection.prepareStatement(query);
-            ps.setString(1,newpassword);
-            ps.setInt(2,accid);
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
+    public void changePassword(int accid, String newpassword) {
+    query = "UPDATE Account SET Password=? WHERE id=?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, newpassword); // newpassword đã hash
+        ps.setInt(2, accid);
+        ps.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 
 }
