@@ -24,6 +24,10 @@
         <servlet-name>ViewAllAccount</servlet-name>
         <servlet-class>controller.ViewAllAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePass</servlet-name>
+        <servlet-class>controller.ChangePass</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -47,5 +51,9 @@
     <servlet-mapping>
         <servlet-name>ViewAllAccount</servlet-name>
         <url-pattern>/ViewAllAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePass</servlet-name>
+        <url-pattern>/ChangePass</url-pattern>
     </servlet-mapping>
 </web-app>
