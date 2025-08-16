@@ -28,6 +28,14 @@
         <servlet-name>ChangePass</servlet-name>
         <servlet-class>controller.ChangePass</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminAddAccount</servlet-name>
+        <servlet-class>controller.AdminAddAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminEditAccount</servlet-name>
+        <servlet-class>controller.AdminEditAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -55,5 +63,13 @@
     <servlet-mapping>
         <servlet-name>ChangePass</servlet-name>
         <url-pattern>/ChangePass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAddAccount</servlet-name>
+        <url-pattern>/AdminAddAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminEditAccount</servlet-name>
+        <url-pattern>/AdminEditAccount</url-pattern>
     </servlet-mapping>
 </web-app>
