@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Statement;
 import entity.Job;
+import java.util.Map;
+import java.util.HashMap;
+
 
 /**
  *
@@ -501,6 +504,41 @@ public void deleteJobAdmin(int id) {
         e.printStackTrace();
     }
 }
+
+
+public Map<String, Object> getMenteeDetail(int accountId) {
+    Map<String, Object> data = new HashMap<>();
+    String sql = "SELECT a.id, a.accountname, a.email, r.name as rolename, " +
+                 "m.firstname, m.lastname, m.address, m.phone, m.birthday, m.sex, m.avatar, m.introduce " +
+                 "FROM account a " +
+                 "JOIN roles r ON a.roleid = r.id " +
+                 "JOIN mentee m ON a.id = m.accountid " +
+                 "WHERE a.id = ?";
+    try {
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, accountId);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            data.put("id", rs.getInt("id"));
+            data.put("accountname", rs.getString("accountname"));
+            data.put("email", rs.getString("email"));
+            data.put("rolename", rs.getString("rolename"));
+            data.put("firstname", rs.getString("firstname"));
+            data.put("lastname", rs.getString("lastname"));
+            data.put("address", rs.getString("address"));
+            data.put("phone", rs.getString("phone"));
+            data.put("birthday", rs.getDate("birthday"));
+            data.put("sex", rs.getString("sex"));
+            data.put("avatar", rs.getString("avatar"));
+            data.put("introduce", rs.getString("introduce"));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return data;
+}
+
+
 
 }
 
