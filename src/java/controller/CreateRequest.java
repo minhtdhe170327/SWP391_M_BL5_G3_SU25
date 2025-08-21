@@ -44,7 +44,10 @@ public class CreateRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        // Always forward to the form for GET
+        // Load skills for the form
+        MentorDAO mdao = new MentorDAO();
+        request.setAttribute("listallskill", mdao.getallskill());
+        // Forward to the form
         request.getRequestDispatcher("views/CreateRequest.jsp").forward(request, response);
     } 
 
@@ -66,8 +69,11 @@ public class CreateRequest extends HttpServlet {
         String[] mentorid=request.getParameterValues("choosementor");
         String[] skill=request.getParameterValues("skill");
         if(mentorid==null||skill==null){
-             request.setAttribute("error", "you forget choosse mentor or skill");
-        request.getRequestDispatcher("views/CreateRequest.jsp").forward(request, response);
+             request.setAttribute("error", "you forgot choose mentor or skill");
+             // Reload skills for the form rendering after validation error
+             MentorDAO mdao = new MentorDAO();
+             request.setAttribute("listallskill", mdao.getallskill());
+             request.getRequestDispatcher("views/CreateRequest.jsp").forward(request, response);
         }else{
         int id=Integer.parseInt(menteeid);
         Date dead=Date.valueOf(deadline);
@@ -83,7 +89,10 @@ public class CreateRequest extends HttpServlet {
             int b=Integer.parseInt(m);
             dao.inserCodeRequestSkill(coderequest.getId(),b );
         }
-        request.setAttribute("done", "Create sucess");
+        request.setAttribute("done", "Create success");
+        // Reload skills for the form after success to allow creating another request
+        MentorDAO mdao2 = new MentorDAO();
+        request.setAttribute("listallskill", mdao2.getallskill());
         request.getRequestDispatcher("views/CreateRequest.jsp").forward(request, response);
         }
     }

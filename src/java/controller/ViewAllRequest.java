@@ -72,6 +72,7 @@ public class ViewAllRequest extends HttpServlet {
             }
 
             request.setAttribute("endpage", end);
+            request.setAttribute("tag", indexp);
             request.setAttribute("coderequest", list);
             request.getSession().setAttribute("listallmentor", listmentor);
             request.getRequestDispatcher("views/MyRequest.jsp").forward(request, response);
@@ -94,6 +95,7 @@ public class ViewAllRequest extends HttpServlet {
             }
 
             request.setAttribute("endpage", end);
+            request.setAttribute("tag", indexp);
             request.setAttribute("coderequest", list);
             request.getRequestDispatcher("views/MyRequest.jsp").forward(request, response);
             return;
