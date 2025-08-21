@@ -35,9 +35,10 @@
         <div class="register-container" id="register">
             <form action="Register" method="post">
                 <div class="top">
-                    <span>Have an account? <a href="Login">Login</a></span>
-                    <header>SIGN UP</header>
+                    <span>Have an account? <a href="<%=request.getContextPath()%>/Login">Sign in</a>
+                    
                 </div>
+                    <header>SIGN UP</header>
 
                 <!-- Firstname + Lastname -->
                 <div class="two-forms">
