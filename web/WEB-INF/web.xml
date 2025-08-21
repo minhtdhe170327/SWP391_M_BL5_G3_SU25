@@ -36,6 +36,14 @@
         <servlet-name>AdminEditAccount</servlet-name>
         <servlet-class>controller.AdminEditAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>controller.ResetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JobManager</servlet-name>
+        <servlet-class>controller.JobManager</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -71,5 +79,13 @@
     <servlet-mapping>
         <servlet-name>AdminEditAccount</servlet-name>
         <url-pattern>/AdminEditAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JobManager</servlet-name>
+        <url-pattern>/JobManager</url-pattern>
     </servlet-mapping>
 </web-app>
