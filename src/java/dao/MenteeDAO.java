@@ -184,7 +184,8 @@ public class MenteeDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int accountid = rs.getInt("accountid");
-                String name = rs.getString("name");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 java.sql.Date birthday = rs.getDate("birthday");
@@ -193,7 +194,7 @@ public class MenteeDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                list.add(new Mentor(id, accountid, name, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+                list.add(new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
             }
         } catch (Exception e) {
         }

@@ -21,7 +21,7 @@ public class MentorDAO extends DBContext {
         query = "WITH t AS(SELECT mc.mentorid id,AVG(CAST (f.star AS FLOAT(2))) averageStar FROM Feedback f, feedbackanswer fa, answer a, mentorcoderequest mc\n"
                 + "WHERE f.id=fa.feedbackid and fa.answerid=a.id and a.mentorcoderequestid=mc.id\n"
                 + "GROUP BY mc.mentorid)\n"
-                + "SELECT TOP (3) m.id,m.accountid,m.name,m.address,m.phone,m.birthday,m.sex,m.introduce,m.achievement,m.avatar,m.costHire,\n"
+                + "SELECT TOP (3) m.id,m.accountid, m.firstname,m.lastname,m.address,m.phone,m.birthday,m.sex,m.introduce,m.achievement,m.avatar,m.costHire,\n"
                 + "COALESCE(t.averageStar, 0) as averageStar\n"
                 + "FROM mentor m\n"
                 + "LEFT JOIN t ON m.id=t.id\n"
@@ -32,7 +32,8 @@ public class MentorDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int accountid = rs.getInt("accountid");
-                String name = rs.getString("name");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 Date birthday = rs.getDate("birthday");
@@ -42,7 +43,8 @@ public class MentorDAO extends DBContext {
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
                 float averageStar = rs.getFloat("averageStar");
-                list.add(new Mentor(id, accountid, name, address, phone, birthday, sex, introduce, achievement, avatar, costHire, averageStar));
+                list.add(new Mentor(id, accountid, firstname, lastname, address, phone, birthday,
+            sex, introduce, achievement, avatar, costHire, averageStar));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,7 +61,8 @@ public class MentorDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int accountid = rs.getInt("accountid");
-                String name = rs.getString("name");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 Date birthday = rs.getDate("birthday");
@@ -68,7 +71,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                return new Mentor(id, accountid, name, address, phone, birthday, sex, introduce, achievement, avatar, costHire);
+                return new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire);
             }
         } catch (Exception e) {
         }
@@ -85,7 +88,8 @@ public class MentorDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int accountid = rs.getInt("accountid");
-                String name = rs.getString("name");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 Date birthday = rs.getDate("birthday");
@@ -94,7 +98,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                mentor = new Mentor(id, accountid, name, address, phone, birthday, sex, introduce, achievement, avatar, costHire);
+                mentor = new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire);
             }
         } catch (Exception e) {
         }
@@ -109,7 +113,8 @@ public class MentorDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int accountid = rs.getInt("accountid");
-                String name = rs.getString("name");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 Date birthday = rs.getDate("birthday");
@@ -118,7 +123,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                list.add(new Mentor(id, accountid, name, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+                list.add(new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
             }
         } catch (Exception e) {
         }
@@ -151,7 +156,8 @@ public class MentorDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int accountid = rs.getInt("accountid");
-                String mentorname = rs.getString("name");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 Date birthday = rs.getDate("birthday");
@@ -160,7 +166,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                list.add(new Mentor(id, accountid, mentorname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+                list.add(new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
             }
         } catch (Exception e) {
         }

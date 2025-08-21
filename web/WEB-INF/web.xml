@@ -59,7 +59,14 @@
     <servlet>
         <servlet-name>UpdateRequest</servlet-name>
         <servlet-class>controller.UpdateRequest</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllPost</servlet-name>
+        <servlet-class>controller.ViewAllPost</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewPostDetail</servlet-name>
+        <servlet-class>controller.ViewPostDetail</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
@@ -120,5 +127,13 @@
     <servlet-mapping>
         <servlet-name>UpdateRequest</servlet-name>
         <url-pattern>/UpdateRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllPost</servlet-name>
+        <url-pattern>/ViewAllPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPostDetail</servlet-name>
+        <url-pattern>/ViewPostDetail</url-pattern>
     </servlet-mapping>
 </web-app>
