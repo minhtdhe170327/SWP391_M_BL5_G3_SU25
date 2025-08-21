@@ -4,11 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/web/views/ResetPassword.jsp</file>
+            <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/web/assets/css/style.css</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/web/views/Login.jsp</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/web/guest/HomePage.jsp</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/src/java/controller/LoginController.java</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/src/java/entity/Job.java</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/web/views/ChangePassword.jsp</file>
+            <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/web/WEB-INF/web.xml</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/web/guest/Header.jsp</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/src/java/controller/ResetPassword.java</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/web/views/Register.jsp</file>
@@ -23,10 +25,8 @@
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/src/java/controller/ChangePass.java</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/src/java/controller/AdminAddAccount.java</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/src/java/controller/RegisterController.java</file>
+            <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/web/META-INF/context.xml</file>
             <file>file:/M:/SWP02/SWP391_M_BL5_G3_SU25/src/java/controller/ViewTop3Mentor.java</file>
-
-            <file>file:/D:/FULearning/SWP391_M_BL5_G3_SU25/web/views/MyRequest.jsp</file>
-
         </group>
     </open-files>
 </project-private>
