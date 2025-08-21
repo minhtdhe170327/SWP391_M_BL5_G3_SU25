@@ -2,13 +2,8 @@ package dao;
 
 import dbcontext.DBContext;
 import entity.*;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.sql.*;
+import java.util.*;
 public class MenteeDAO extends DBContext {
 
     public Mentee getMenteebyAccID(int accid) {
@@ -222,6 +217,52 @@ public class MenteeDAO extends DBContext {
         } catch (Exception e) {
         }
         return skill;
+    }
+    
+    public void updatecoderequest(int requestid, String title, String deadline, String content) {
+        query = "UPDATE coderequest SET title=?,content=?,deadline=? WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, title);
+            ps.setString(2, content);
+            ps.setDate(3, java.sql.Date.valueOf(deadline));
+            ps.setInt(4, requestid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public boolean checkMentorCodeRequest(int requestid, int mentorid) {
+        List<MentorRequest> mr = new ArrayList<>();
+        query = "SELECT * FROM mentorcoderequest WHERE coderequestid=? AND mentorid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, requestid);
+            ps.setInt(2, mentorid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int requesti = rs.getInt("coderequestid");
+                int mentori = rs.getInt("mentorid");
+                mr.add(new MentorRequest(id, requesti, mentori));
+            }
+        } catch (Exception e) {
+        }
+        if (mr.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public void deletecoderequestskill(int requestid) {
+        query = "DELETE FROM coderequestskill WHERE coderequestid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, requestid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
     }
 
 }
