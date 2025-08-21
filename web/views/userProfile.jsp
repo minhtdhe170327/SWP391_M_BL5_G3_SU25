@@ -79,7 +79,7 @@
                             <strong>Date of Birth:</strong> <span><fmt:formatDate value="${sessionScope.getmentee.birthday}" pattern="dd/MM/yyyy" /></span>
                         </div>
                         <div class="info-item">
-                            <strong>Gender:</strong> <span>${sessionScope.getmentee.sex}</span>
+                            <strong>Gender:</strong> <span>${sessionScope.getmentee.sex == 'M' ? 'Male' : 'Female'}</span>
                         </div>
                         <div class="info-item">
                             <strong>Introduction:</strong> <span>${sessionScope.getmentee.introduce}</span>
