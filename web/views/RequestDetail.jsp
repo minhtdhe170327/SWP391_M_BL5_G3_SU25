@@ -43,7 +43,7 @@
     </head>
     <body>
         <c:if test="${sessionScope.account.roleid==1}">
-            <jsp:include page="guest/Header.jsp" />
+            <jsp:include page="../guest/Header.jsp" />
             <main id="main" style="position: relative">
                 <section class="breadcrumbs">
                     <div class="container">
@@ -137,7 +137,7 @@
             <jsp:include page="../guest/Footer.jsp" />
         </c:if>
             <c:if test="${sessionScope.account.roleid==2}">
-                <jsp:include page="guest/Header.jsp" />
+                <jsp:include page="../guest/Header.jsp" />
             <main id="main" style="position: relative">
                 <section class="breadcrumbs">
                     <div class="container">
