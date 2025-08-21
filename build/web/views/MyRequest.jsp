@@ -64,7 +64,7 @@
                             <button type="submit" class="btn btn-secondary" ><i class="bi-search"></i></button>  
                         </div> 
                     </form>
-                    <form action="CreateRequest.jsp" method="post">
+                    <form action="CreateRequest" method="post">
                         <button type="submit" class="btn btn-outline-primary btn-lg" style="margin-top: 10px;margin-right: 50px;font-size: 15px;float: right; width: 300px;height: 50px;" >Add new Request</button>
                     </form>
                 </div>

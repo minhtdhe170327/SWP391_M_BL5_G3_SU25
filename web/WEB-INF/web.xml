@@ -40,6 +40,10 @@
         <servlet-name>ViewAllRequest</servlet-name>
         <servlet-class>controller.ViewAllRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateRequest</servlet-name>
+        <servlet-class>controller.CreateRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -79,5 +83,9 @@
     <servlet-mapping>
         <servlet-name>ViewAllRequest</servlet-name>
         <url-pattern>/ViewAllRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRequest</servlet-name>
+        <url-pattern>/CreateRequest</url-pattern>
     </servlet-mapping>
 </web-app>
