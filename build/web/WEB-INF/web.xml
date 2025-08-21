@@ -48,6 +48,10 @@
         <servlet-name>ViewRequestDetail</servlet-name>
         <servlet-class>controller.ViewRequestDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateRequest</servlet-name>
+        <servlet-class>controller.UpdateRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -95,5 +99,9 @@
     <servlet-mapping>
         <servlet-name>ViewRequestDetail</servlet-name>
         <url-pattern>/ViewRequestDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRequest</servlet-name>
+        <url-pattern>/UpdateRequest</url-pattern>
     </servlet-mapping>
 </web-app>
