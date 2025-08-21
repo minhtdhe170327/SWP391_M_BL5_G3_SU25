@@ -36,6 +36,10 @@
         <servlet-name>AdminEditAccount</servlet-name>
         <servlet-class>controller.AdminEditAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAllRequest</servlet-name>
+        <servlet-class>controller.ViewAllRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -71,5 +75,9 @@
     <servlet-mapping>
         <servlet-name>AdminEditAccount</servlet-name>
         <url-pattern>/AdminEditAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllRequest</servlet-name>
+        <url-pattern>/ViewAllRequest</url-pattern>
     </servlet-mapping>
 </web-app>
