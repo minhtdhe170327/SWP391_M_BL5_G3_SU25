@@ -22,7 +22,7 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <body>
     <jsp:include page="../guest/Header.jsp" />
     <div class="container mt-5">
-      <h2 class="mb-4">Add Account</h2>
+      <h2 class="mb-4">Add new Account</h2>
       <c:if test="${error != null}">
         <div class="alert alert-danger">${error}</div>
       </c:if>
