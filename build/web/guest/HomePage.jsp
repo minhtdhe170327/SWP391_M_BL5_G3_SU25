@@ -164,7 +164,7 @@
 
                                     <div class="icon-box">
                                         <div class="icon"><i class="bx bx-fingerprint"></i></div>
-                                        <h4 class="title"><a href=""><%=m.getName()%></a></h4>
+                                        <h4 class="title"><a href=""><%=m.getFullname()%></a></h4>
                                         <p class="description"><%=m.getIntroduce()%></p>
                                     </div>
 

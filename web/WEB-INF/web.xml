@@ -36,6 +36,38 @@
         <servlet-name>AdminEditAccount</servlet-name>
         <servlet-class>controller.AdminEditAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>controller.ResetPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>JobManager</servlet-name>
+        <servlet-class>controller.JobManager</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllRequest</servlet-name>
+        <servlet-class>controller.ViewAllRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateRequest</servlet-name>
+        <servlet-class>controller.CreateRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewRequestDetail</servlet-name>
+        <servlet-class>controller.ViewRequestDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRequest</servlet-name>
+        <servlet-class>controller.UpdateRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewAllPost</servlet-name>
+        <servlet-class>controller.ViewAllPost</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewPostDetail</servlet-name>
+        <servlet-class>controller.ViewPostDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -71,5 +103,37 @@
     <servlet-mapping>
         <servlet-name>AdminEditAccount</servlet-name>
         <url-pattern>/AdminEditAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/ResetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JobManager</servlet-name>
+        <url-pattern>/JobManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllRequest</servlet-name>
+        <url-pattern>/ViewAllRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRequest</servlet-name>
+        <url-pattern>/CreateRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewRequestDetail</servlet-name>
+        <url-pattern>/ViewRequestDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRequest</servlet-name>
+        <url-pattern>/UpdateRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllPost</servlet-name>
+        <url-pattern>/ViewAllPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPostDetail</servlet-name>
+        <url-pattern>/ViewPostDetail</url-pattern>
     </servlet-mapping>
 </web-app>

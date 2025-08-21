@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Statement;
+import entity.Job;
 
 /**
  *
@@ -389,5 +390,118 @@ public void insertMentor(int accountid, String firstname, String lastname,
         e.printStackTrace();
     }
 }
+    public boolean updateTempPassword(String email, String temporaryPassword) {
+        String query = "UPDATE Account SET password = ?, forgoted = ? WHERE email = ?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, temporaryPassword); // Lưu mật khẩu dạng plain text
+        ps.setBoolean(2, true); // Đặt forgoted = 1
+        ps.setString(3, email);
+        int rowsAffected = ps.executeUpdate();
+        return rowsAffected > 0;
+    } catch (Exception e) {
+        System.err.println("Lỗi trong updateTempPasswordWithForgoted: " + e.getMessage());
+        e.printStackTrace();
+        return false;
+    }
+    }
+   public List<Job> pagingJob(String search, String statusFilter, int page, int pageSize) {
+    List<Job> list = new ArrayList<>();
+    String sql = "SELECT * FROM Job WHERE jobname LIKE ? ";
+    if (!"all".equalsIgnoreCase(statusFilter)) {
+         sql += "AND LOWER(status) = LOWER(?) ";
+    }
+    sql += "ORDER BY id OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setString(1, "%" + (search == null ? "" : search) + "%");
+        int index = 2;
+        if (!"all".equalsIgnoreCase(statusFilter)) {
+            st.setString(index++, statusFilter);
+        }
+        st.setInt(index++, (page - 1) * pageSize);
+        st.setInt(index, pageSize);
+
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            Job job = new Job(
+                rs.getInt("id"),
+                rs.getString("jobname"),
+                rs.getString("description"),
+                rs.getString("status")
+            );
+            list.add(job);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
+
+
+    public int countJob(String search, String statusFilter) {
+    int count = 0;
+    String sql = "SELECT COUNT(*) FROM Job WHERE jobname LIKE ? ";
+    if (!"all".equalsIgnoreCase(statusFilter)) {
+         sql += "AND LOWER(status) = LOWER(?) ";
+    }
+
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setString(1, "%" + (search == null ? "" : search) + "%");
+        if (!"all".equalsIgnoreCase(statusFilter)) {
+            st.setString(2, statusFilter);
+        }
+        ResultSet rs = st.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt(1);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return count;
+}
+
+    public void addJobAdmin(String name, String description, String status) {
+    String sql = "INSERT INTO Job (jobname, description, status) VALUES (?, ?, ?)";
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setString(1, name);
+        st.setString(2, description);
+        st.setString(3, status);
+        st.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+public void updateJobAdmin(int id, String name, String description, String status) {
+    String sql = "UPDATE Job SET jobname = ?, description = ?, status = ? WHERE id = ?";
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setString(1, name);
+        st.setString(2, description);
+        st.setString(3, status);
+        st.setInt(4, id);
+        st.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+public void deleteJobAdmin(int id) {
+    String sql = "DELETE FROM Job WHERE id = ?";
+    try {
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setInt(1, id);
+        st.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 
 }
+
+
