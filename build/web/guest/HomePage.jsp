@@ -92,7 +92,8 @@
 
                                     <c:if test="${sessionScope.account.roleid==3}">
                                         <li><a href="AdminDashboard">Dashboard</a></li>    
-                                        <li><a href="ViewAllAccount">Account List</a></li>
+                                        <li><a href="ViewMentorAccount">Mentor Account List</a></li>
+                                        <li><a href="ViewMenteeAccount">Mentee Account List</a></li>
                                         <li><a href="ViewAllMentee">Mentee List</a></li>
                                         <li><a href="AdminSkillManager">Skill Manager</a></li>
                                         <li><a href="JobManager">Job Manager</a></li>
