@@ -41,8 +41,7 @@ public class MenteeDAO extends DBContext {
         List<CodeRequest> list = new ArrayList<>();
         query = "SELECT cr.id, cr.title, cr.content, cr.deadline, cr.menteeID "
                 + "FROM coderequest cr "
-                + "JOIN mentee m ON cr.menteeID = m.id "
-                + "WHERE m.accountid = ? "
+                + "WHERE cr.menteeID = ? "
                 + "ORDER BY cr.id "
                 + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
         try {
@@ -67,8 +66,7 @@ public class MenteeDAO extends DBContext {
     public int getTotalMenteeRequest(int menteeid) {
         query = "SELECT COUNT(*) count "
                 + "FROM coderequest cr "
-                + "JOIN mentee m ON cr.menteeID = m.id "
-                + "WHERE m.accountid = ?";
+                + "WHERE cr.menteeID = ?";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, menteeid);
