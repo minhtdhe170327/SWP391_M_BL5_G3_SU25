@@ -3,6 +3,9 @@ package dao;
 import dbcontext.DBContext;
 import entity.*;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +59,7 @@ public class MenteeDAO extends DBContext {
                 list.add(new CodeRequest(id, title, content, deadline, menteeid));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }
@@ -74,7 +78,67 @@ public class MenteeDAO extends DBContext {
                 return x;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return 0;
     }
+    
+    public void inserCodeRequest(int mid, String title, String content, java.sql.Date deadline) {
+        query = "INSERT INTO coderequest (title, content, deadline, menteeID) VALUES (?,?,?,?);";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, title);
+            ps.setString(2, content);
+            ps.setDate(3, deadline);
+            ps.setInt(4, mid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public CodeRequest getNewInsertReqeust() {
+        query = "SELECT TOP 1 * FROM coderequest ORDER BY id DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                java.sql.Date deadline = rs.getDate("deadline");
+                int menteeid = rs.getInt("menteeID");
+                return new CodeRequest(id, title, content, deadline, menteeid);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public void inserMentorCodeRequest(int requestid, int mentorid) {
+        query = "INSERT INTO mentorcoderequest (coderequestid, mentorid) VALUES(?,?);";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, requestid);
+            ps.setInt(2, mentorid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void inserCodeRequestSkill(int requestid, int skillid) {
+        query = "INSERT INTO coderequestskill (coderequestid, skillid) VALUES(?,?);";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, requestid);
+            ps.setInt(2, skillid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
 }
