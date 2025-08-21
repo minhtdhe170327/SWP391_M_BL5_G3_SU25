@@ -114,7 +114,7 @@
 
                                             <td class="text-nowrap">
                                     <!-- View -->
-                                    <a href="ViewMenteeAccountDetail?id=${c.id}"
+                                    <a href="ViewMentorAccountDetail?id=${c.id}"
                                        class="btn btn-outline-info btn-sm me-2"
                                        title="View" aria-label="View" data-bs-toggle="tooltip">
                                         <i class="bi bi-eye"></i>

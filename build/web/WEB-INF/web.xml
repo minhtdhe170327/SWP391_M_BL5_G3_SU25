@@ -80,6 +80,10 @@
         <servlet-name>ViewMenteeAccountDetail</servlet-name>
         <servlet-class>controller.ViewMenteeAccountDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewMentorAccountDetail</servlet-name>
+        <servlet-class>controller.ViewMentorAccountDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -159,5 +163,9 @@
     <servlet-mapping>
         <servlet-name>ViewMenteeAccountDetail</servlet-name>
         <url-pattern>/ViewMenteeAccountDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMentorAccountDetail</servlet-name>
+        <url-pattern>/ViewMentorAccountDetail</url-pattern>
     </servlet-mapping>
 </web-app>
