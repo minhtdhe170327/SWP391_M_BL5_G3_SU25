@@ -16,6 +16,67 @@ import java.util.List;
  * @author Asus TUF
  */
 public class MentorDAO extends DBContext {
+
+    public void updateMentorProfile(int mentorId, String name, String sex, String address, String phone, java.sql.Date birthday, String introduce, String achievement, float costHire) {
+        String query = "UPDATE Mentor SET name=?, sex=?, address=?, phone=?, birthday=?, introduce=?, achievement=?, costHire=? WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, name);
+            ps.setString(2, sex);
+            ps.setString(3, address);
+            ps.setString(4, phone);
+            ps.setDate(5, birthday);
+            ps.setString(6, introduce);
+            ps.setString(7, achievement);
+            ps.setFloat(8, costHire);
+            ps.setInt(9, mentorId);
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    public List<Mentor> searchMentor(String name, int index) {
+        List<Mentor> list = new ArrayList<>();
+        query = "SELECT * FROM Mentor m WHERE m.name LIKE ?\n"
+                + "ORDER BY id\n"
+                + "OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, "%" + name + "%");
+            ps.setInt(2, (index - 1) * 3);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int accountid = rs.getInt("accountid");
+                String mentorname = rs.getString("name");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                Date birthday = rs.getDate("birthday");
+                String sex = rs.getString("sex");
+                String introduce = rs.getString("introduce");
+                String achievement = rs.getString("achievement");
+                String avatar = rs.getString("avatar");
+                float costHire = rs.getFloat("costHire");
+                list.add(new Mentor(id, accountid, mentorname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public List<Mentor> getTop3Mentor() {
         List<Mentor> list = new ArrayList<>();
         query = "WITH t AS(SELECT mc.mentorid id,AVG(CAST (f.star AS FLOAT(2))) averageStar FROM Feedback f, feedbackanswer fa, answer a, mentorcoderequest mc\n"
@@ -49,7 +110,7 @@ public class MentorDAO extends DBContext {
         }
         return list;
     }
-    
+
     public Mentor getMentorbyAccID(int accid) {
         query = "SELECT * FROM Mentor WHERE accountid=?";
         try {
@@ -74,8 +135,8 @@ public class MentorDAO extends DBContext {
         }
         return null;
     }
-    
-     public Mentor getMentorDetail(int mentorid) {
+
+    public Mentor getMentorDetail(int mentorid) {
         Mentor mentor = new Mentor();
         query = "SELECT * FROM Mentor WHERE id=?";
         try {
@@ -100,7 +161,8 @@ public class MentorDAO extends DBContext {
         }
         return mentor;
     }
-     public List<Mentor> getAllMentor() {
+
+    public List<Mentor> getAllMentor() {
         List<Mentor> list = new ArrayList<>();
         query = "SELECT * FROM Mentor";
         try {
@@ -125,7 +187,7 @@ public class MentorDAO extends DBContext {
         return list;
     }
 
-     public int getTotalMentor() {
+    public int getTotalMentor() {
         query = "SELECT COUNT(*) count FROM Mentor";
         try {
             ps = connection.prepareStatement(query);
@@ -138,8 +200,8 @@ public class MentorDAO extends DBContext {
         }
         return 0;
     }
-     
-     public List<Mentor> pagingMentor(int index) {
+
+    public List<Mentor> pagingMentor(int index) {
         List<Mentor> list = new ArrayList<>();
         query = "SELECT * FROM Mentor\n"
                 + "ORDER BY id\n"
@@ -166,7 +228,7 @@ public class MentorDAO extends DBContext {
         }
         return list;
     }
-     
+
     public List<Skill> getallskill() {
         List<Skill> list = new ArrayList<>();
         query = "SELECT * FROM skill";
