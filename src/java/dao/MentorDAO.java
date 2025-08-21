@@ -182,4 +182,72 @@ public class MentorDAO extends DBContext {
         }
         return list;
     }
+    
+    public List<CodeRequest> searchRequest(String name, int index, int mid) {
+        List<CodeRequest> list = new ArrayList<>();
+        query = "SELECT c.id,c.title,c.content,c.deadline,c.menteeID FROM coderequest c,mentorcoderequest mc "
+                + "WHERE c.id=mc.coderequestid AND mc.mentorid=? AND (c.title LIKE ? OR c.content LIKE ?)\n"
+                + "ORDER BY id\n"
+                + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mid);
+            ps.setString(2, "%" + name + "%");
+            ps.setString(3, "%" + name + "%");
+            ps.setInt(4, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                java.sql.Date deadline = rs.getDate("deadline");
+                int menteeid = rs.getInt("menteeID");
+                list.add(new CodeRequest(id, title, content, deadline, menteeid));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    public List<CodeRequest> pagingMentorRequest(int mid, int index) {
+        List<CodeRequest> list = new ArrayList<>();
+        query = "SELECT c.id,c.title,c.content,c.deadline,c.menteeID "
+                 + "FROM coderequest c,mentorcoderequest mc WHERE c.id=mc.coderequestid AND mc.mentorid=?\n"
+                 + "ORDER BY c.id\n"
+                 + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+        try {
+
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mid);
+            ps.setInt(2, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                java.sql.Date deadline = rs.getDate("deadline");
+                int menteeid = rs.getInt("menteeID");
+                list.add(new CodeRequest(id, title, content, deadline, menteeid));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int getTotalMentorRequest(int mentorId) {
+        query = "SELECT COUNT(*) count "
+                + "FROM mentorcoderequest mc "
+                + "JOIN coderequest c ON c.id = mc.coderequestid "
+                + "WHERE mc.mentorid = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mentorId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt("count");
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
 }
