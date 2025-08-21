@@ -44,6 +44,10 @@
         <servlet-name>CreateRequest</servlet-name>
         <servlet-class>controller.CreateRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewRequestDetail</servlet-name>
+        <servlet-class>controller.ViewRequestDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -87,5 +91,9 @@
     <servlet-mapping>
         <servlet-name>CreateRequest</servlet-name>
         <url-pattern>/CreateRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewRequestDetail</servlet-name>
+        <url-pattern>/ViewRequestDetail</url-pattern>
     </servlet-mapping>
 </web-app>
