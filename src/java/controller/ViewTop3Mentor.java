@@ -38,7 +38,7 @@ public class ViewTop3Mentor extends HttpServlet {
         List<Role> listrole=acc.getRole();
         List<Mentor> list = dao.getTop3Mentor();
         HttpSession session = request.getSession();
-        session.setAttribute("listrole", listrole);
+//        session.setAttribute("listrole", listrole);
         request.setAttribute("top3Mentor", list);
         request.getRequestDispatcher("guest/HomePage.jsp").forward(request, response);
     } 
