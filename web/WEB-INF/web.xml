@@ -43,7 +43,8 @@
     <servlet>
         <servlet-name>JobManager</servlet-name>
         <servlet-class>controller.JobManager</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>ViewAllRequest</servlet-name>
         <servlet-class>controller.ViewAllRequest</servlet-class>
     </servlet>
@@ -103,6 +104,8 @@
     <servlet-mapping>
         <servlet-name>JobManager</servlet-name>
         <url-pattern>/JobManager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ViewAllRequest</servlet-name>
         <url-pattern>/ViewAllRequest</url-pattern>
     </servlet-mapping>
