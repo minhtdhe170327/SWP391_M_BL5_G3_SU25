@@ -6,6 +6,32 @@ import java.sql.*;
 import java.util.*;
 public class MenteeDAO extends DBContext {
 
+    public void updateMenteeProfile(int menteeId, String name, String sex, String address, String phone, java.sql.Date birthday, String introduce) {
+    String query = "UPDATE Mentee SET name=?, sex=?, address=?, phone=?, birthday=?, introduce=? WHERE id=?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setString(1, name);
+        ps.setString(2, sex);
+        ps.setString(3, address);
+        ps.setString(4, phone);
+        ps.setDate(5, birthday);
+        ps.setString(6, introduce);
+        ps.setInt(7, menteeId);
+
+        ps.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (ps != null) ps.close();
+            if (connection != null) connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+
+
     public Mentee getMenteebyAccID(int accid) {
         query = "SELECT * FROM Mentee WHERE accountid=?";
         try {
@@ -265,5 +291,6 @@ public class MenteeDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+
 
 }

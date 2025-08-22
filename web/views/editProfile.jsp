@@ -65,114 +65,111 @@
 
         <main class="container profile-container">
             <div class="profile-card">
-
-                <c:set var="displayName">
-                    <c:choose>
-                        <c:when test="${sessionScope.account.roleid == 1}">${sessionScope.getmentee.name}</c:when>
-                        <c:when test="${sessionScope.account.roleid == 2}">${sessionScope.getmentor.name}</c:when>
-                        <c:when test="${sessionScope.account.roleid == 3}">${sessionScope.account.accountname}</c:when>
-                    </c:choose>
-                </c:set>
-
-                <div class="profile-header">
-                    <h2>${displayName}</h2>
-                    <p>${sessionScope.account.email}</p>
-                </div>
-
-                <div class="profile-body">
+                <form action="${contextPath}/editProfile" method="post" class="profile-body">
 
                     <c:choose>
                         <%-- ***** TRƯỜNG HỢP 1: MENTEE ***** --%>
                         <c:when test="${sessionScope.account.roleid == 1}">
-                            <h4>My Mentee Profile</h4>
+                            <h4>Edit Mentee Profile</h4>
                             <div class="info-item">
-                                <strong>Full Name:</strong> <span>${sessionScope.getmentee.name}</span>
+                                <strong>Full Name:</strong>
+                                <input type="text" name="name" value="${sessionScope.getmentee.name}" class="form-control"/>
                             </div>
                             <div class="info-item">
-                                <strong>Email Address:</strong> <span>${sessionScope.account.email}</span>
+                                <strong>Email Address:</strong>
+                                <input type="email" name="email" value="${sessionScope.account.email}" class="form-control" readonly/>
                             </div>
                             <div class="info-item">
-                                <strong>Phone Number:</strong> <span>${sessionScope.getmentee.phone}</span>
+                                <strong>Phone Number:</strong>
+                                <input type="text" name="phone" value="${sessionScope.getmentee.phone}" class="form-control"/>
                             </div>
                             <div class="info-item">
-                                <strong>Address:</strong> <span>${sessionScope.getmentee.address}</span>
+                                <strong>Address:</strong>
+                                <input type="text" name="address" value="${sessionScope.getmentee.address}" class="form-control"/>
                             </div>
                             <div class="info-item">
-                                <strong>Date of Birth:</strong> <span><fmt:formatDate value="${sessionScope.getmentee.birthday}" pattern="dd/MM/yyyy" /></span>
+                                <strong>Date of Birth:</strong>
+                                <input type="date" name="birthday" value="<fmt:formatDate value='${sessionScope.getmentee.birthday}' pattern='yyyy-MM-dd'/>" class="form-control"/>
                             </div>
                             <div class="info-item">
-                                <strong>Gender:</strong> <span>${sessionScope.getmentee.sex == 'M' ? 'Male' : 'Female'}</span>
+                                <strong>Gender:</strong>
+                                <select name="sex" class="form-select">
+                                    <option value="M" ${sessionScope.getmentee.sex == 'M' ? 'selected' : ''}>Male</option>
+                                    <option value="F" ${sessionScope.getmentee.sex == 'F' ? 'selected' : ''}>Female</option>
+                                </select>
                             </div>
                             <div class="info-item">
-                                <strong>Introduction:</strong> <span>${sessionScope.getmentee.introduce}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Role:</strong> <span class="badge bg-primary">Mentee</span>
+                                <strong>Introduction:</strong>
+                                <textarea name="introduce" class="form-control">${sessionScope.getmentee.introduce}</textarea>
                             </div>
                         </c:when>
 
                         <%-- ***** TRƯỜNG HỢP 2: MENTOR ***** --%>
                         <c:when test="${sessionScope.account.roleid == 2}">
-                            <h4>My Mentor Profile</h4>
+                            <h4>Edit Mentor Profile</h4>
                             <div class="info-item">
-                                <strong>Full Name:</strong> <span>${sessionScope.getmentor.name}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Email Address:</strong> <span>${sessionScope.account.email}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Phone Number:</strong> <span>${sessionScope.getmentor.phone}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Address:</strong> <span>${sessionScope.getmentor.address}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Date of Birth:</strong> <span><fmt:formatDate value="${sessionScope.getmentor.birthday}" pattern="dd/MM/yyyy" /></span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Gender:</strong> <span>${sessionScope.getmentor.sex}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Introduction:</strong> <span>${sessionScope.getmentor.introduce}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Achievement:</strong> <span>${sessionScope.getmentor.achievement}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Cost / Hire:</strong>
-                                <span><fmt:formatNumber value="${sessionScope.getmentor.cost}" type="currency" currencySymbol="" maxFractionDigits="0" /></span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Role:</strong> <span class="badge bg-success">Mentor</span>
-                            </div>
-                        </c:when>
-
-                        <%-- ========================================================= --%>
-                        <%-- ***** TRƯỜNG HỢP 3: ADMIN (ĐÃ CẬP NHẬT)              ***** --%>
-                        <%-- ========================================================= --%>
-                        <c:when test="${sessionScope.account.roleid == 3}">
-                            <h4>Administrator Profile</h4>
-                            <div class="info-item">
-                                <strong>Account Name:</strong>
-                                <span>${sessionScope.account.accountname}</span>
+                                <strong>Full Name:</strong>
+                                <input type="text" name="name" value="${sessionScope.getmentor.name}" class="form-control"/>
                             </div>
                             <div class="info-item">
                                 <strong>Email Address:</strong>
-                                <span>${sessionScope.account.email}</span>
+                                <input type="email" name="email" value="${sessionScope.account.email}" class="form-control" readonly/>
                             </div>
                             <div class="info-item">
-                                <strong>Role:</strong>
-                                <span class="badge bg-danger">Administrator</span>
+                                <strong>Phone Number:</strong>
+                                <input type="text" name="phone" value="${sessionScope.getmentor.phone}" class="form-control"/>
                             </div>
-                            <hr/>
-                            <a href="${contextPath}/AdminDashboard" class="btn btn-danger">Go to Dashboard</a>
+                            <div class="info-item">
+                                <strong>Address:</strong>
+                                <input type="text" name="address" value="${sessionScope.getmentor.address}" class="form-control"/>
+                            </div>
+                            <div class="info-item">
+                                <strong>Date of Birth:</strong>
+                                <input type="date" name="birthday" value="<fmt:formatDate value='${sessionScope.getmentor.birthday}' pattern='yyyy-MM-dd'/>" class="form-control"/>
+                            </div>
+                            <div class="info-item">
+                                <strong>Gender:</strong>
+                                <select name="sex" class="form-select">
+                                    <option value="M" ${sessionScope.getmentor.sex == 'M' ? 'selected' : ''}>Male</option>
+                                    <option value="F" ${sessionScope.getmentor.sex == 'F' ? 'selected' : ''}>Female</option>
+                                </select>
+                            </div>
+                            <div class="info-item">
+                                <strong>Introduction:</strong>
+                                <textarea name="introduce" class="form-control">${sessionScope.getmentor.introduce}</textarea>
+                            </div>
+                            <div class="info-item">
+                                <strong>Achievement:</strong>
+                                <textarea name="achievement" class="form-control">${sessionScope.getmentor.achievement}</textarea>
+                            </div>
+                            <div class="info-item">
+                                <strong>Cost / Hire:</strong>
+                                <input type="number" name="cost" value="${sessionScope.getmentor.cost}" class="form-control"/>
+                            </div>
+                        </c:when>
+
+                        <%-- ***** TRƯỜNG HỢP 3: ADMIN ***** --%>
+                        <c:when test="${sessionScope.account.roleid == 3}">
+                            <h4>Edit Administrator Profile</h4>
+                            <div class="info-item">
+                                <strong>Account Name:</strong>
+                                <input type="text" name="accountname" value="${sessionScope.account.accountname}" class="form-control"/>
+                            </div>
+                            <div class="info-item">
+                                <strong>Email Address:</strong>
+                                <input type="email" name="email" value="${sessionScope.account.email}" class="form-control" readonly/>
+                            </div>
                         </c:when>
                     </c:choose>
+
+                    <!-- Nút Save chung -->
                     <div class="mt-4 text-center">
-                        <a href="${contextPath}/editProfile" class="btn btn-warning">Edit Profile</a>
+                        <button type="submit" class="btn btn-warning">Save</button>
                     </div>
-                </div>
+                </form>
+
             </div>
+
         </main>
 
         <footer>
