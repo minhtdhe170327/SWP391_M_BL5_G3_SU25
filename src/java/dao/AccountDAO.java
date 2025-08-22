@@ -40,7 +40,26 @@ public class AccountDAO extends DBContext {
         }
         return account;
     }
-
+public Account getAccountByEmail(String email) {
+        Account account = null;
+        query = "SELECT * FROM Account WHERE email = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("accountname");
+                String pass = rs.getString("password");
+                int roleid = rs.getInt("roleid");
+                String emailFound = rs.getString("email");
+                account = new Account(id, name, pass, roleid, emailFound);
+            }
+        } catch (Exception e) {
+            System.out.println("Error at getAccountByEmail: " + e.getMessage());
+        }
+        return account;
+    }
 
     public List<Role> getRole() {
         List<Role> role = new ArrayList<>();
