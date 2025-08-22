@@ -68,6 +68,14 @@
         <servlet-name>ViewPostDetail</servlet-name>
         <servlet-class>controller.ViewPostDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAllHireRequest</servlet-name>
+        <servlet-class>controller.ViewMentorHireRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMentorHireRequest</servlet-name>
+        <servlet-class>controller.ViewMentorHireRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -135,5 +143,13 @@
     <servlet-mapping>
         <servlet-name>ViewPostDetail</servlet-name>
         <url-pattern>/ViewPostDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllHireRequest</servlet-name>
+        <url-pattern>/ViewAllHireRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMentorHireRequest</servlet-name>
+        <url-pattern>/ViewMentorHireRequest</url-pattern>
     </servlet-mapping>
 </web-app>
