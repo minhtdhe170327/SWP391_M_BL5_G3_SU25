@@ -81,7 +81,7 @@
                             </div>
                             <div class="info-item">
                                 <strong>Phone Number:</strong>
-                                <input type="text" name="phone" value="${sessionScope.getmentee.phone}" class="form-control"/>
+                                <input type="text" name="phone" value="${sessionScope.getmentee.phone}" class="form-control" pattern="0[0-9]{9}" />
                             </div>
                             <div class="info-item">
                                 <strong>Address:</strong>
@@ -115,9 +115,9 @@
                                 <strong>Email Address:</strong>
                                 <input type="email" name="email" value="${sessionScope.account.email}" class="form-control" readonly/>
                             </div>
-                            <div class="info-item">
+                             <div class="info-item">
                                 <strong>Phone Number:</strong>
-                                <input type="text" name="phone" value="${sessionScope.getmentor.phone}" class="form-control"/>
+                                <input type="text" name="phone" value="${sessionScope.getmentor.phone}" class="form-control" pattern="0[0-9]{9}" />
                             </div>
                             <div class="info-item">
                                 <strong>Address:</strong>
