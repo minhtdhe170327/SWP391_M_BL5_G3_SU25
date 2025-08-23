@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import util.GoogleUtils;
 import util.PasswordUtil;
 
 public class LoginController extends HttpServlet {
@@ -38,10 +39,39 @@ public class LoginController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        throws ServletException, IOException {
+    String code = request.getParameter("code");
+
+    if (code != null) {
+        // Người dùng đăng nhập qua Google
+        String accessToken = GoogleUtils.getToken(code);
+        GoogleUser googleUser = GoogleUtils.getUserInfo(accessToken);
+
+        AccountDAO dao = new AccountDAO();
+        Account acc = dao.getAccountByEmail(googleUser.getEmail());
+
+if (acc == null) {
+    // Nếu chưa có tài khoản -> tạo mới bằng hàm insertAccountAndGetId
+    int newId = dao.insertAccountAndGetId(
+        googleUser.getEmail(),   // accountname = email luôn
+        "",                      // password rỗng vì login bằng Google
+        2,                       // roleid mặc định (user)
+        googleUser.getEmail()    // email
+    );
+
+    // Sau khi insert, tạo đối tượng Account để lưu session
+    acc = new Account(newId, googleUser.getEmail(), "", 2, googleUser.getEmail());
+}
+
+// Lưu session và redirect
+HttpSession session = request.getSession();
+session.setAttribute("account", acc);
+        response.sendRedirect("ViewTop3Mentor");
+    } else {
+        // Nếu không có code => vào trang login thường
         request.getRequestDispatcher("views/Login.jsp").forward(request, response);
     }
+}
 
     /**
      * Handles the HTTP <code>POST</code> method.

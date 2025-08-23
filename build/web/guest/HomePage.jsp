@@ -67,22 +67,22 @@
                             </c:if>
                             <c:if test="${sessionScope.account!=null}">
                                 <c:if test="${sessionScope.getmentee!=null}">
-                                <li class="dropdown"><a href="#"><span>Hello ${sessionScope.getmentee.name} </span> <i class="bi bi-chevron-down"></i></a>
+                                <li class="dropdown"><a href="#"><span>Hello ${sessionScope.getmentee.fullname} </span> <i class="bi bi-chevron-down"></i></a>
                                     </c:if>
                                     <c:if test="${sessionScope.getmentor!=null}">
-                                <li class="dropdown"><a href="#"><span>Hello ${sessionScope.getmentor.name} </span> <i class="bi bi-chevron-down"></i></a>
+                                <li class="dropdown"><a href="#"><span>Hello ${sessionScope.getmentor.fullname} </span> <i class="bi bi-chevron-down"></i></a>
                                     </c:if>
                                 <ul>
-                                    <li><a href="ChangePassword.jsp">Change Pasword</a></li>
+                                    <li><a href="<%=request.getContextPath()%>/ChangePass">Change Pasword</a></li>
                                         <c:if test="${sessionScope.getmentee!=null}">
-                                        <li><a href="ViewMenteeProfile?accmenteeid=${sessionScope.getmentee.accountid}">Profile</a></li>
+                                        <li><a href="views/userProfile.jsp">Profile</a></li>
                                         <li><a href="ViewAllRequest?menteeid=${sessionScope.getmentee.id}">My Request</a></li>
                                         <li><a href="ViewAllHireRequest?menteeid=${sessionScope.getmentee.id}">My Hire Request</a></li>
                                         <li><a href="MyPost">My Posts</a></li>
                                         <li><a href="SavedPost">Favorite Post</a></li>
                                         </c:if>
                                         <c:if test="${sessionScope.getmentor!=null}">
-                                        <li><a href="ViewMentorProfile?accmentorid=${sessionScope.getmentor.accountid}">Profile</a></li>
+                                        <li><a href="views/userProfile.jsp">Profile</a></li>
                                         <li><a href="ViewAllRequest?mentorid=${sessionScope.getmentor.id}">My Request</a></li>
                                         <li><a href="ViewMentorHireRequest?mentorid=${sessionScope.getmentor.id}">Hire Requests</a></li>
                                         <li><a href="mentor-analytics?mentorid=${sessionScope.getmentor.id}">Analytics Dashboard</a></li>
@@ -92,7 +92,8 @@
 
                                     <c:if test="${sessionScope.account.roleid==3}">
                                         <li><a href="AdminDashboard">Dashboard</a></li>    
-                                        <li><a href="ViewAllAccount">Account List</a></li>
+                                        <li><a href="ViewMentorAccount">Mentor Account List</a></li>
+                                        <li><a href="ViewMenteeAccount">Mentee Account List</a></li>
                                         <li><a href="ViewAllMentee">Mentee List</a></li>
                                         <li><a href="AdminSkillManager">Skill Manager</a></li>
                                         <li><a href="JobManager">Job Manager</a></li>
@@ -164,7 +165,7 @@
 
                                     <div class="icon-box">
                                         <div class="icon"><i class="bx bx-fingerprint"></i></div>
-                                        <h4 class="title"><a href=""><%=m.getName()%></a></h4>
+                                        <h4 class="title"><a href=""><%=m.getFullname()%></a></h4>
                                         <p class="description"><%=m.getIntroduce()%></p>
                                     </div>
 
