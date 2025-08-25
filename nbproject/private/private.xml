@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/ViewAllRequest.java</file>
-            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/web/views/AdminViewAllRequest.jsp</file>
-            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/AdminViewAllRequest.java</file>
+            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/src/java/entity/HireRequestlist.java</file>
+            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/AdminViewAllHireRequest.java</file>
             <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/web/views/AdminDashboard.jsp</file>
-            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/web/views/MyRequest.jsp</file>
+            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/src/java/dao/MenteeDAO.java</file>
+            <file>file:/C:/Users/DN_Turbo/Desktop/FPT/SWP/SWP391_M_BL5_G3_SU25/web/views/AdminViewAllHireRequest.jsp</file>
         </group>
     </open-files>
 </project-private>
