@@ -19,6 +19,8 @@ public class AdminAddAccount extends HttpServlet {
     }
 
     @Override
+    
+    //post
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {

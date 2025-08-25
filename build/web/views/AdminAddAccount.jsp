@@ -66,6 +66,8 @@ prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
             title="Password must be at least 6 characters"
           />
         </div>
+          
+          
         <div class="mb-3">
           <label class="form-label"
             >Role <span class="text-danger">*</span></label
