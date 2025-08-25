@@ -70,7 +70,7 @@
                                 <li class="dropdown"><a href="#"><span>Hello ${sessionScope.getmentee.fullname} </span> <i class="bi bi-chevron-down"></i></a>
                                     </c:if>
                                     <c:if test="${sessionScope.getmentor!=null}">
-                                <li class="dropdown"><a href="#"><span>Hello ${sessionScope.getmentor.fullname} </span> <i class="bi bi-chevron-down"></i></a>
+                                <li class="dropdown"><a href="#"><span>Hello Mentor ${sessionScope.getmentor.fullname} </span> <i class="bi bi-chevron-down"></i></a>
                                     </c:if>
                                 <ul>
                                     <li><a href="<%=request.getContextPath()%>/ChangePass">Change Pasword</a></li>
