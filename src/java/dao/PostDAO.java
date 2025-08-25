@@ -309,5 +309,24 @@ public class PostDAO extends DBContext{
         return posts;
     }
     
+    public void savePost(int accountId, int postId) {
+        String query = "INSERT INTO SavedPost (accountId, postId, savedAt) VALUES (?, ?, GETDATE())";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            ps.setInt(2, postId);
+            ps.executeUpdate();
+        } catch (Exception e) {}
+    }
+
+    public void unsavePost(int accountId, int postId) {
+        String query = "DELETE FROM SavedPost WHERE accountId=? AND postId=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            ps.setInt(2, postId);
+            ps.executeUpdate();
+        } catch (Exception e) {}
+    }
     
 }
