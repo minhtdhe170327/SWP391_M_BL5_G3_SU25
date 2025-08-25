@@ -216,6 +216,31 @@ public class PostDAO extends DBContext{
         } catch (Exception e) {
         }
     }
-
+    
+    
+    
+    public void updatePost(Post post) {
+        query = "UPDATE Post SET title=?, content=?, modifiedDate=GETDATE(), status=?, featured=? WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, post.getTitle());
+            ps.setString(2, post.getContent());
+            ps.setInt(3, post.getStatus());
+            ps.setBoolean(4, post.isFeatured());
+            ps.setInt(5, post.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void deletePostImage(int imageid) {
+        query = "DELETE FROM PostImage WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, imageid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
     
 }
