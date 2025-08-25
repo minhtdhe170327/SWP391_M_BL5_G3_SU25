@@ -140,6 +140,10 @@
         <servlet-name>SavePost</servlet-name>
         <servlet-class>controller.SavePost</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminDashboard</servlet-name>
+        <servlet-class>controller.AdminDashboard</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -279,5 +283,9 @@
     <servlet-mapping>
         <servlet-name>SavePost</servlet-name>
         <url-pattern>/SavePost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDashboard</servlet-name>
+        <url-pattern>/AdminDashboard</url-pattern>
     </servlet-mapping>
 </web-app>
