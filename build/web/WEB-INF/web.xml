@@ -144,6 +144,10 @@
         <servlet-name>AdminDashboard</servlet-name>
         <servlet-class>controller.AdminDashboard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminViewAllRequest</servlet-name>
+        <servlet-class>controller.AdminViewAllRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -287,5 +291,9 @@
     <servlet-mapping>
         <servlet-name>AdminDashboard</servlet-name>
         <url-pattern>/AdminDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminViewAllRequest</servlet-name>
+        <url-pattern>/AdminViewAllRequest</url-pattern>
     </servlet-mapping>
 </web-app>
