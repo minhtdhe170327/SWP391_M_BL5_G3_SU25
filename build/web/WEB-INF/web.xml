@@ -152,6 +152,10 @@
         <servlet-name>AdminViewAllPost</servlet-name>
         <servlet-class>controller.AdminViewAllPost</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminViewAllHireRequest</servlet-name>
+        <servlet-class>controller.AdminViewAllHireRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -303,5 +307,9 @@
     <servlet-mapping>
         <servlet-name>AdminViewAllPost</servlet-name>
         <url-pattern>/AdminViewAllPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminViewAllHireRequest</servlet-name>
+        <url-pattern>/AdminViewAllHireRequest</url-pattern>
     </servlet-mapping>
 </web-app>
