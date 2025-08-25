@@ -136,6 +136,10 @@
         <servlet-name>SavedPost</servlet-name>
         <servlet-class>controller.SavedPost</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SavePost</servlet-name>
+        <servlet-class>controller.SavePost</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -271,5 +275,9 @@
     <servlet-mapping>
         <servlet-name>SavedPost</servlet-name>
         <url-pattern>/SavedPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SavePost</servlet-name>
+        <url-pattern>/SavePost</url-pattern>
     </servlet-mapping>
 </web-app>
