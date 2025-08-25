@@ -91,7 +91,7 @@ public class SearchRequest extends HttpServlet {
          if(mentorid!=null){
              int id=Integer.parseInt(mentorid);
          if(infor.trim().equals("")){
-             request.getRequestDispatcher("ViewAllRequest?mentorid="+id).forward(request, response);
+             request.getRequestDispatcher("ViewMentorRequest?mentorid="+id).forward(request, response);
          }
         if(index==null) index="1";
         int indexp=Integer.parseInt(index);
@@ -111,7 +111,7 @@ public class SearchRequest extends HttpServlet {
         
         request.setAttribute("coderequest", list);
         request.setAttribute("searchtext", infor);
-        request.getRequestDispatcher("MyRequest.jsp").forward(request, response);
+        request.getRequestDispatcher("views/MentorRequest.jsp").forward(request, response);
          }
     }
 

@@ -84,7 +84,7 @@
                                     <%-- Links cho Mentor (dựa trên roleid hoặc session object) --%>
                                     <c:if test="${sessionScope.account.roleid == 2 and not empty sessionScope.getmentor}">
                                         <li><a href="viewProfile">Profile</a></li>
-                                        <li><a href="${contextPath}/ViewAllRequest?mentorid=${sessionScope.getmentor.id}">My Request</a></li>
+                                        <li><a href="${contextPath}/ViewMentorRequest?mentorid=${sessionScope.getmentor.id}">My Request</a></li>
                                         <li><a href="${contextPath}/ViewMentorHireRequest?mentorid=${sessionScope.getmentor.id}">Hire Requests</a></li>
                                         <li><a href="${contextPath}/mentor-analytics?mentorid=${sessionScope.getmentor.id}">Analytics Dashboard</a></li>
                                         <li><a href="${contextPath}/MyPost">My Posts</a></li>
