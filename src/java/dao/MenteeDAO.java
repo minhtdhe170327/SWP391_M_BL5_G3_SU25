@@ -18,7 +18,6 @@ public class MenteeDAO extends DBContext {
         ps.setDate(6, birthday);
         ps.setString(7, introduce);
         ps.setInt(8, menteeId);
-
         ps.executeUpdate();
     } catch (Exception e) {
         e.printStackTrace();
@@ -53,7 +52,9 @@ public class MenteeDAO extends DBContext {
 
                 return new Mentee(id, accountid, firstname, lastname, address, phone, birthday, sex, introduce, avatar);
             }
-        } catch (SQLException e) {
+        } 
+        
+        catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
