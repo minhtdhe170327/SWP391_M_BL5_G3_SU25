@@ -285,7 +285,29 @@ public class PostDAO extends DBContext{
         return 0;
     }
 
-    
+    public List<Post> getSavedPostsByAccountId(int accountId) {
+        List<Post> posts = new ArrayList<>();
+        String query = "SELECT p.* FROM SavedPost s JOIN Post p ON s.postId = p.id WHERE s.accountId=? ORDER BY s.savedAt DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Post post = new Post();
+                post.setId(rs.getInt("id"));
+                post.setAccountId(rs.getInt("accountid"));
+                post.setTitle(rs.getString("title"));
+                post.setContent(rs.getString("content"));
+                post.setCreatedDate(rs.getDate("createdDate"));
+                post.setModifiedDate(rs.getDate("modifiedDate"));
+                post.setViewCount(rs.getInt("viewCount"));
+                post.setStatus(rs.getInt("status"));
+                post.setFeatured(rs.getBoolean("featured"));
+                posts.add(post);
+            }
+        } catch (Exception e) {}
+        return posts;
+    }
     
     
 }
