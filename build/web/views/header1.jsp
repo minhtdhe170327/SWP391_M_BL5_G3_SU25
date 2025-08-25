@@ -61,8 +61,8 @@
                                     <span>
                                         Hello
                                         <c:choose>
-                                            <c:when test="${not empty sessionScope.getmentee}">${sessionScope.getmentee.name}</c:when>
-                                            <c:when test="${not empty sessionScope.getmentor}">${sessionScope.getmentor.name}</c:when>
+                                            <c:when test="${not empty sessionScope.getmentee}">${sessionScope.getmentee.firstname}</c:when>
+                                            <c:when test="${not empty sessionScope.getmentor}">${sessionScope.getmentor.firstname}</c:when>
                                             <c:otherwise>User</c:otherwise>
                                         </c:choose>
                                     </span>
@@ -84,7 +84,7 @@
                                     <%-- Links cho Mentor (dựa trên roleid hoặc session object) --%>
                                     <c:if test="${sessionScope.account.roleid == 2 and not empty sessionScope.getmentor}">
                                         <li><a href="viewProfile">Profile</a></li>
-                                        <li><a href="${contextPath}/ViewAllRequest?mentorid=${sessionScope.getmentor.id}">My Request</a></li>
+                                        <li><a href="${contextPath}/ViewMentorRequest?mentorid=${sessionScope.getmentor.id}">My Request</a></li>
                                         <li><a href="${contextPath}/ViewMentorHireRequest?mentorid=${sessionScope.getmentor.id}">Hire Requests</a></li>
                                         <li><a href="${contextPath}/mentor-analytics?mentorid=${sessionScope.getmentor.id}">Analytics Dashboard</a></li>
                                         <li><a href="${contextPath}/MyPost">My Posts</a></li>

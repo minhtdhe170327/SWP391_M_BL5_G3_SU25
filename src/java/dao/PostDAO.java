@@ -186,6 +186,147 @@ public class PostDAO extends DBContext{
     }
     return list;
 }
+       public int createPost(Post post) {
+        query = "INSERT INTO Post (accountid, title, content, createdDate, status, featured) VALUES (?,?,?,GETDATE(),?,?)";
+        try {
+            ps = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, post.getAccountId());
+            ps.setString(2, post.getTitle());
+            ps.setString(3, post.getContent());
+            ps.setInt(4, post.getStatus());
+            ps.setBoolean(5, post.isFeatured());
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return -1;
+    }
+    
+    public void addPostImage(PostImage image) {
+        query = "INSERT INTO PostImage (postId, imageUrl, isThumbnail) VALUES (?,?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, image.getPostId());
+            ps.setString(2, image.getImageUrl());
+            ps.setBoolean(3, image.isThumbnail());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    
+    
+    public void updatePost(Post post) {
+        query = "UPDATE Post SET title=?, content=?, modifiedDate=GETDATE(), status=?, featured=? WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, post.getTitle());
+            ps.setString(2, post.getContent());
+            ps.setInt(3, post.getStatus());
+            ps.setBoolean(4, post.isFeatured());
+            ps.setInt(5, post.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void deletePostImage(int imageid) {
+        query = "DELETE FROM PostImage WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, imageid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    public List<Post> getPostsByAccountId(int accountId, int page, int pageSize) {
+        List<Post> posts = new ArrayList<>();
+        query = "SELECT * FROM Post WHERE accountid=? ORDER BY createdDate DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            ps.setInt(2, (page - 1) * pageSize);
+            ps.setInt(3, pageSize);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Post post = new Post();
+                post.setId(rs.getInt("id"));
+                post.setAccountId(rs.getInt("accountid"));
+                post.setTitle(rs.getString("title"));
+                post.setContent(rs.getString("content"));
+                post.setCreatedDate(rs.getDate("createdDate"));
+                post.setModifiedDate(rs.getDate("modifiedDate"));
+                post.setViewCount(rs.getInt("viewCount"));
+                post.setStatus(rs.getInt("status"));
+                post.setFeatured(rs.getBoolean("featured"));
+                posts.add(post);
+            }
+        } catch (Exception e) {
+        }
+        return posts;
+    }
 
+    public int getTotalPostsByAccountId(int accountId) {
+        query = "SELECT COUNT(*) FROM Post WHERE accountid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count;
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<Post> getSavedPostsByAccountId(int accountId) {
+        List<Post> posts = new ArrayList<>();
+        String query = "SELECT p.* FROM SavedPost s JOIN Post p ON s.postId = p.id WHERE s.accountId=? ORDER BY s.savedAt DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Post post = new Post();
+                post.setId(rs.getInt("id"));
+                post.setAccountId(rs.getInt("accountid"));
+                post.setTitle(rs.getString("title"));
+                post.setContent(rs.getString("content"));
+                post.setCreatedDate(rs.getDate("createdDate"));
+                post.setModifiedDate(rs.getDate("modifiedDate"));
+                post.setViewCount(rs.getInt("viewCount"));
+                post.setStatus(rs.getInt("status"));
+                post.setFeatured(rs.getBoolean("featured"));
+                posts.add(post);
+            }
+        } catch (Exception e) {}
+        return posts;
+    }
+    
+    public void savePost(int accountId, int postId) {
+        String query = "INSERT INTO SavedPost (accountId, postId, savedAt) VALUES (?, ?, GETDATE())";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            ps.setInt(2, postId);
+            ps.executeUpdate();
+        } catch (Exception e) {}
+    }
+
+    public void unsavePost(int accountId, int postId) {
+        String query = "DELETE FROM SavedPost WHERE accountId=? AND postId=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            ps.setInt(2, postId);
+            ps.executeUpdate();
+        } catch (Exception e) {}
+    }
     
 }

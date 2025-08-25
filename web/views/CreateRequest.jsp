@@ -109,10 +109,10 @@
 
                                 <div class="testimonials-carousel swiper">
                                     <div class="swiper-wrapper">
-                                        <c:forEach items="${sessionScope.listallmentor}" var="l">
+                                        <c:forEach items="${listallmentor}" var="l">
                                             <div class="testimonial-item swiper-slide">
                                                 <img src="assets/img/mentor/${l.avatar}" class="testimonial-img" alt="">
-                                                <h3>${l.name}</h3>
+                                                <h3>${l.fullname}</h3>
                                                 <h4>Introduce:</h4>
                                                 <p>
                                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>

@@ -92,8 +92,8 @@ public class editProfile extends HttpServlet {
             if (role == 1) { // Mentee
                 Mentee mentee = (Mentee) session.getAttribute("getmentee");
                 if (mentee != null) {
-                    String firstname = request.getParameter("firstname");
-                    String lastname = request.getParameter("lastname");
+                    String firstName = request.getParameter("firstname");
+                    String lastName = request.getParameter("lastname");
                     String phone = request.getParameter("phone");
                     String address = request.getParameter("address");
                     String introduce = request.getParameter("introduce");
@@ -106,14 +106,14 @@ public class editProfile extends HttpServlet {
                         birthday = new java.sql.Date(parsedDate.getTime());
                     }
 
-//                    System.out.println("Updating mentee: " + name + ", phone: " + phone);
 
+//                    System.out.println("Updating mentee: " + firstName + ", phone: " + phone);
                     // Gọi phương thức update mới với tham số
-                    menteeDAO.updateMenteeProfile(mentee.getId(), firstname,lastname, sex, address, phone, birthday, introduce);
+                    menteeDAO.updateMenteeProfile(mentee.getId(), firstName, lastName, sex, address, phone, birthday, introduce);
 
                     // Cập nhật lại session
-                    mentee.setFirstname(firstname);
-                    mentee.setLastname(lastname);
+                    mentee.setFirstname(firstName);
+                    mentee.setLastname(lastName);
                     mentee.setPhone(phone);
                     mentee.setAddress(address);
                     mentee.setSex(sex);

@@ -78,28 +78,7 @@ public class ViewAllRequest extends HttpServlet {
             request.getRequestDispatcher("views/MyRequest.jsp").forward(request, response);
             return;
         }
-        if(mentorid!=null){
-            int id = Integer.parseInt(mentorid);
-            if (index == null) {
-                index = "1";
-            }
-            int indexp = Integer.parseInt(index);
 
-            MentorDAO mdao = new MentorDAO();
-            List<CodeRequest> list = mdao.pagingMentorRequest(id, indexp);
-
-            int total = mdao.getTotalMentorRequest(id);
-            int end = total / 4;
-            if (total % 4 != 0) {
-                end++;
-            }
-
-            request.setAttribute("endpage", end);
-            request.setAttribute("tag", indexp);
-            request.setAttribute("coderequest", list);
-            request.getRequestDispatcher("views/MyRequest.jsp").forward(request, response);
-            return;
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

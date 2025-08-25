@@ -3,7 +3,6 @@
     Created on : Aug 21, 2025, 8:44:10 PM
     Author     : Asus TUF
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -11,26 +10,27 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <base href="${pageContext.request.contextPath}/">
         <title>Edit Request</title>
 
         <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="${pageContext.request.contextPath}/assets/img/favicon.png" rel="icon">
+        <link href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
-        <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-        <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/aos/aos.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
         <!-- Template Main CSS File -->
-        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
 
         <style>
             .cr {
@@ -63,13 +63,13 @@
                             </p>
                         </c:if>
                         <c:if test="${error !=null}">
-                            <p class="text-danger"style="text-align: center;margin: 10px">
+                            <p class="text-danger" style="text-align: center;margin: 10px">
                                 ${error}
                             </p>
                         </c:if>  
-                            <form class="" action="UpdateRequest?menteeid=${sessionScope.getmentee.id}&requestid=${sessionScope.coderequest.id}" method="post" style="position: relative">
+                            <form class="" action="${pageContext.request.contextPath}/UpdateRequest?menteeid=${sessionScope.getmentee.id}&requestid=${sessionScope.coderequest.id}" method="post" style="position: relative">
                     <div class="cr" >
-                        <div class="col-md-6 col-lg-6 col-xl-4 offset-xl-1" style="height: 600px; mae">
+                        <div class="col-md-6 col-lg-6 col-xl-4 offset-xl-1" style="height: 600px;">
                             <h2 class="text-center text-primary fw-bold">Edit Request</h2>                                   
                         <!-- Username input -->
                         <div class="form-outline mb-4">
@@ -79,7 +79,7 @@
                         <!-- Password input -->
                         <div class="form-outline mb-3">
                             <label class="form-label">Deadline</label>
-                            <input name="deadline" type="date" class="form-control form-control-lg"value="${sessionScope.coderequest.deadline}">
+                            <input name="deadline" type="date" class="form-control form-control-lg" value="${sessionScope.coderequest.deadline}">
                         </div>
                         <div class="form-outline mb-3">
                             <label class="form-label">Your Skill :</label>
@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2 mb-4">
-                            <button type="submit" class="btn btn-outline-primary btn-lg"style="padding-left: 2.5rem; padding-right: 2.5rem;">
+                            <button type="submit" class="btn btn-outline-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">
                                 Save
                             </button>
                         </div>            
@@ -111,10 +111,10 @@
 
                                 <div class="testimonials-carousel swiper">
                                     <div class="swiper-wrapper">
-                                        <c:forEach items="${sessionScope.listallmentor}" var="l">
+                                        <c:forEach items="${listallmentor}" var="l">
                                             <div class="testimonial-item swiper-slide">
-                                                <img src="assets/img/mentor/${l.avatar}" class="testimonial-img" alt="">
-                                                <h3>${l.name}</h3>
+                                                <img src="${pageContext.request.contextPath}/assets/img/mentor/${l.avatar}" class="testimonial-img" alt="">
+                                                <h3>${l.fullname}</h3>
                                                 <h4>Introduce:</h4>
                                                 <p>
                                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
@@ -139,16 +139,16 @@
         </c:if>
 
         <!-- Vendor JS Files -->
-        <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-        <script src="assets/vendor/aos/aos.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-        <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/aos/aos.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/waypoints/noframework.waypoints.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/vendor/php-email-form/validate.js"></script>
 
         <!-- Template Main JS File -->
-        <script src="assets/js/main.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
     </body>
 </html>

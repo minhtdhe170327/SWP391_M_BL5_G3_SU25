@@ -65,7 +65,7 @@
                                         </div>
                                     </div>
                                     <div class="member-info">
-                                        <h4>${m.name}</h4>
+                                        <h4>${m.lastname} ${m.firstname}</h4>
                                         <span>Developer, Tester</span>
                                         <p>${m.introduce}</p>
                                     </div>

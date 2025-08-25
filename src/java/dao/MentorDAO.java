@@ -51,7 +51,7 @@ public class MentorDAO extends DBContext {
     }
     public List<Mentor> searchMentor(String name, int index) {
         List<Mentor> list = new ArrayList<>();
-        query = "SELECT * FROM Mentor m WHERE (m.lastname + m.firstname) LIKE ?\n"
+        query = "SELECT * FROM Mentor m WHERE (m.firstname + ' ' + m.lastname) LIKE ?\n"
                 + "ORDER BY id\n"
                 + "OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
         try {
@@ -62,8 +62,8 @@ public class MentorDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int accountid = rs.getInt("accountid");
-                String firstname = rs.getString("firstname");
-                String lastname = rs.getString("lastname");
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 Date birthday = rs.getDate("birthday");
@@ -72,7 +72,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                list.add(new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+                list.add(new Mentor(id, accountid, firstName,lastName, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
             }
         } catch (Exception e) {
         }
@@ -338,5 +338,44 @@ public class MentorDAO extends DBContext {
         } catch (Exception e) {
         }
         return null;
+    }
+    public MentorRequest getMentorcoderequest(int mid, int rid){
+        query = "SELECT * FROM mentorcoderequest WHERE mentorid=? AND coderequestid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mid);
+            ps.setInt(2, rid);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                int id=rs.getInt("id");
+                int coderequestid=rs.getInt("coderequestid");
+                int mentorid=rs.getInt("mentorid");
+                return new MentorRequest(id, coderequestid, mentorid);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void CreateAnswer(int mrid, String content){
+        query = "INSERT INTO answer VALUES (?,?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mrid);
+            ps.setString(2, content);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+    
+    public void updateAnswer(int aid, String content){
+        query = "UPDATE answer SET content=? WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, content);
+            ps.setInt(2, aid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
     }
 } 

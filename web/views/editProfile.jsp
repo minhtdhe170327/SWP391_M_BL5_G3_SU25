@@ -72,11 +72,11 @@
                         <c:when test="${sessionScope.account.roleid == 1}">
                             <h4>Edit Mentee Profile</h4>
                             <div class="info-item">
-                                <strong>First Name:</strong>
+                                <strong>First Name:</strong> 
                                 <input type="text" name="firstname" value="${sessionScope.getmentee.firstname}" class="form-control"/>
                             </div>
                             <div class="info-item">
-                                <strong>Last Name:</strong>
+                                <strong>Last Name:</strong> 
                                 <input type="text" name="lastname" value="${sessionScope.getmentee.lastname}" class="form-control"/>
                             </div>
                             <div class="info-item">
@@ -112,11 +112,11 @@
                         <c:when test="${sessionScope.account.roleid == 2}">
                             <h4>Edit Mentor Profile</h4>
                             <div class="info-item">
-                                <strong>First Name:</strong>
+                                <strong>First Name:</strong> 
                                 <input type="text" name="firstname" value="${sessionScope.getmentor.firstname}" class="form-control"/>
                             </div>
                             <div class="info-item">
-                                <strong>Last Name:</strong>
+                                <strong>Last Name:</strong> 
                                 <input type="text" name="lastname" value="${sessionScope.getmentor.lastname}" class="form-control"/>
                             </div>
                             <div class="info-item">

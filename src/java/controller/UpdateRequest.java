@@ -56,7 +56,15 @@ public class UpdateRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        // Load skills for the form
+        MentorDAO mdao = new MentorDAO();
+        request.setAttribute("listallskill", mdao.getallskill());
+        
+        // Load all mentors for selection
+        request.setAttribute("listallmentor", mdao.getAllMentor());
+        
+        // Forward to the form
+        request.getRequestDispatcher("views/UpdateRequest.jsp").forward(request, response);
     } 
 
     /** 
@@ -82,6 +90,10 @@ public class UpdateRequest extends HttpServlet {
         MenteeDAO dao = new MenteeDAO();
         if (title == null || content == null || deadline == null) {
             request.setAttribute("error", "you can't set title, content is empty");
+            // Reload skills and mentors for the form rendering after validation error
+            MentorDAO mdao = new MentorDAO();
+            request.setAttribute("listallskill", mdao.getallskill());
+            request.setAttribute("listallmentor", mdao.getAllMentor());
             request.getRequestDispatcher("views/UpdateRequest.jsp").forward(request, response);
         } else {
             dao.updatecoderequest(rid, title, deadline, content);
@@ -103,7 +115,7 @@ public class UpdateRequest extends HttpServlet {
 
             }
             request.setAttribute("done", "update successful");
-            request.getRequestDispatcher("viewss/ViewRequestDetail?reid=" + rid).forward(request, response);
+            request.getRequestDispatcher("views/ViewRequestDetail?reid=" + rid).forward(request, response);
         }
     }
 
