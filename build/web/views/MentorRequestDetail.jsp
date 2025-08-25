@@ -29,7 +29,7 @@
                 </form>
             </c:if>
             <c:if test="${answer == null}">
-                <form action="CreateAnswer.jsp" method="post">
+                <form action="<%=request.getContextPath()%>/views/CreateAnswer.jsp" method="post">
                     <button type="submit" class="btn btn-primary">New Answer</button>
                 </form>
             </c:if>
