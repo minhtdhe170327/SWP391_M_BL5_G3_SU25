@@ -72,8 +72,12 @@
                         <c:when test="${sessionScope.account.roleid == 1}">
                             <h4>Edit Mentee Profile</h4>
                             <div class="info-item">
-                                <strong>Full Name:</strong>
-                                <input type="text" name="name" value="${sessionScope.getmentee.name}" class="form-control"/>
+                                <strong>First Name:</strong> 
+                                <input type="text" name="firstname" value="${sessionScope.getmentee.firstname}" class="form-control"/>
+                            </div>
+                            <div class="info-item">
+                                <strong>Last Name:</strong> 
+                                <input type="text" name="lastname" value="${sessionScope.getmentee.lastname}" class="form-control"/>
                             </div>
                             <div class="info-item">
                                 <strong>Email Address:</strong>
@@ -81,7 +85,7 @@
                             </div>
                             <div class="info-item">
                                 <strong>Phone Number:</strong>
-                                <input type="text" name="phone" value="${sessionScope.getmentee.phone}" class="form-control"/>
+                                <input type="text" name="phone" value="${sessionScope.getmentee.phone}" class="form-control" pattern="0[0-9]{9}" />
                             </div>
                             <div class="info-item">
                                 <strong>Address:</strong>
@@ -108,16 +112,20 @@
                         <c:when test="${sessionScope.account.roleid == 2}">
                             <h4>Edit Mentor Profile</h4>
                             <div class="info-item">
-                                <strong>Full Name:</strong>
-                                <input type="text" name="name" value="${sessionScope.getmentor.name}" class="form-control"/>
+                                <strong>First Name:</strong> 
+                                <input type="text" name="firstname" value="${sessionScope.getmentor.firstname}" class="form-control"/>
+                            </div>
+                            <div class="info-item">
+                                <strong>Last Name:</strong> 
+                                <input type="text" name="lastname" value="${sessionScope.getmentor.lastname}" class="form-control"/>
                             </div>
                             <div class="info-item">
                                 <strong>Email Address:</strong>
                                 <input type="email" name="email" value="${sessionScope.account.email}" class="form-control" readonly/>
                             </div>
-                            <div class="info-item">
+                             <div class="info-item">
                                 <strong>Phone Number:</strong>
-                                <input type="text" name="phone" value="${sessionScope.getmentor.phone}" class="form-control"/>
+                                <input type="text" name="phone" value="${sessionScope.getmentor.phone}" class="form-control" pattern="0[0-9]{9}" />
                             </div>
                             <div class="info-item">
                                 <strong>Address:</strong>

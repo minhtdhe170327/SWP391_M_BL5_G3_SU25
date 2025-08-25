@@ -100,6 +100,10 @@
         <servlet-name>ViewMentorAccountDetail</servlet-name>
         <servlet-class>controller.ViewMentorAccountDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchRequest</servlet-name>
+        <servlet-class>controller.SearchRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -199,5 +203,9 @@
     <servlet-mapping>
         <servlet-name>ViewMentorAccountDetail</servlet-name>
         <url-pattern>/ViewMentorAccountDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchRequest</servlet-name>
+        <url-pattern>/SearchRequest</url-pattern>
     </servlet-mapping>
 </web-app>
