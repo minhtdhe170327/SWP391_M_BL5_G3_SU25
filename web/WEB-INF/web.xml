@@ -100,6 +100,22 @@
         <servlet-name>ViewMentorAccountDetail</servlet-name>
         <servlet-class>controller.ViewMentorAccountDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchRequest</servlet-name>
+        <servlet-class>controller.SearchRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMentorRequest</servlet-name>
+        <servlet-class>controller.ViewMentorRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMentorRequestDetail</servlet-name>
+        <servlet-class>controller.ViewMentorRequestDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateAnswer</servlet-name>
+        <servlet-class>controller.CreateAnswer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -199,5 +215,21 @@
     <servlet-mapping>
         <servlet-name>ViewMentorAccountDetail</servlet-name>
         <url-pattern>/ViewMentorAccountDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchRequest</servlet-name>
+        <url-pattern>/SearchRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMentorRequest</servlet-name>
+        <url-pattern>/ViewMentorRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMentorRequestDetail</servlet-name>
+        <url-pattern>/ViewMentorRequestDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateAnswer</servlet-name>
+        <url-pattern>/CreateAnswer</url-pattern>
     </servlet-mapping>
 </web-app>

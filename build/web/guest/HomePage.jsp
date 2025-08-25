@@ -83,7 +83,7 @@
                                         </c:if>
                                         <c:if test="${sessionScope.getmentor!=null}">
                                         <li><a href="views/userProfile.jsp">Profile</a></li>
-                                        <li><a href="ViewAllRequest?mentorid=${sessionScope.getmentor.id}">My Request</a></li>
+                                        <li><a href="ViewMentorRequest?mentorid=${sessionScope.getmentor.id}">My Request</a></li>
                                         <li><a href="ViewMentorHireRequest?mentorid=${sessionScope.getmentor.id}">Hire Requests</a></li>
                                         <li><a href="mentor-analytics?mentorid=${sessionScope.getmentor.id}">Analytics Dashboard</a></li>
                                         <li><a href="MyPost">My Posts</a></li>

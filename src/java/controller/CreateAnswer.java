@@ -2,66 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+
 package controller;
 
 import dao.*;
 import entity.*;
-import entity.Account;
+import java.sql.Date;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.*;
 
 /**
  *
- * @author DN_Turbo
+ * @author Asus TUF
  */
-public class ViewMenteeAccount extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+public class CreateAnswer extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        AccountDAO dao = new AccountDAO();        
-        String index = request.getParameter("index");
-        if (index == null) {
-            index = "1";
-        }
         
-        
-        int indexp = Integer.parseInt(index);
-
-        List<Account> list = dao.pagingAccount(indexp);
-
-        int total = dao.getTotalAccount();
-        int end = total / 4;
-        if (total % 4 != 0) {
-            end++;
-        }
-
-        List<Role> role = dao.getRole();
-
-        request.setAttribute("endpage", end);
-        request.setAttribute("allaccount", list);
-        request.setAttribute("role", role);
-        request.getRequestDispatcher("/views/MenteeAccountList.jsp").forward(request, response);
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -69,13 +44,12 @@ public class ViewMenteeAccount extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
-    }
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -83,13 +57,23 @@ public class ViewMenteeAccount extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
+        String mentorid = request.getParameter("mentorid");
+        String reuqestid = request.getParameter("requestid");
+        int rid = Integer.parseInt(reuqestid);
+        int mid = Integer.parseInt(mentorid);
+        String content = request.getParameter("content");
+        MentorDAO dao=new MentorDAO();
+        MentorRequest x=dao.getMentorcoderequest(mid, rid);
+        dao.CreateAnswer(x.getId(),content );
+        request.getSession().setAttribute("x", x);
+        request.getSession().setAttribute("done", "update successful");
+        response.sendRedirect(request.getContextPath()+"/ViewMentorRequestDetail?reid=" + rid+"&mentorid="+mid);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

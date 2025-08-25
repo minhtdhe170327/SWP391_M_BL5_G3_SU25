@@ -45,11 +45,11 @@
 
                         <div class="col-lg-4">
                             <div class="portfolio-info">
-                                <h3>${Mentor.name}</h3>
+                                <h3>${Mentor.lastname} ${Mentor.firstname}</h3>
                                 <ul>
-                                    <li><strong>Sex</strong>: 
-                                        <c:if test="${sessionScope.Mentor.sex.equals('M')}">Male</c:if>
-                                        <c:if test="${sessionScope.Mentor.sex.equals('F')}">Female</c:if>
+                                    <li><strong>Gender</strong>: 
+                                        <c:if test="${Mentor.sex.equals('M')}">Male</c:if>
+                                        <c:if test="${Mentor.sex.equals('F')}">Female</c:if>
                                     </li>
                                     <li><strong>Address</strong>: ${Mentor.address}</li>
                                     <li><strong>Introduce</strong>: ${Mentor.introduce}</li>
@@ -57,10 +57,10 @@
                                 </ul>
                             </div>
                             <div class="portfolio-description">
-                                <h2>More Information</h2>
+<!--                                <h2>More Information</h2>
                                 <div>
                                     <button class="btn btn-primary"><a href="ViewMentorInformation?mentorid=${Mentor.id}">More Information</a></button><br>
-                                </div>
+                                </div>-->
                                 <p>I hope we will have lively discussions after you choose me as your mentor. Thank you very much </p>
                             </div>
                         </div>

@@ -47,6 +47,10 @@ public class CreateRequest extends HttpServlet {
         // Load skills for the form
         MentorDAO mdao = new MentorDAO();
         request.setAttribute("listallskill", mdao.getallskill());
+        
+        // Load all mentors for selection
+        request.setAttribute("listallmentor", mdao.getAllMentor());
+        
         // Forward to the form
         request.getRequestDispatcher("views/CreateRequest.jsp").forward(request, response);
     } 
@@ -73,6 +77,8 @@ public class CreateRequest extends HttpServlet {
              // Reload skills for the form rendering after validation error
              MentorDAO mdao = new MentorDAO();
              request.setAttribute("listallskill", mdao.getallskill());
+             // Reload mentors for the form rendering after validation error
+             request.setAttribute("listallmentor", mdao.getAllMentor());
              request.getRequestDispatcher("views/CreateRequest.jsp").forward(request, response);
         }else{
         int id=Integer.parseInt(menteeid);
@@ -93,6 +99,8 @@ public class CreateRequest extends HttpServlet {
         // Reload skills for the form after success to allow creating another request
         MentorDAO mdao2 = new MentorDAO();
         request.setAttribute("listallskill", mdao2.getallskill());
+        // Reload mentors for the form after success
+        request.setAttribute("listallmentor", mdao2.getAllMentor());
         request.getRequestDispatcher("views/CreateRequest.jsp").forward(request, response);
         }
     }

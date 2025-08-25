@@ -92,7 +92,8 @@ public class editProfile extends HttpServlet {
             if (role == 1) { // Mentee
                 Mentee mentee = (Mentee) session.getAttribute("getmentee");
                 if (mentee != null) {
-                    String name = request.getParameter("name");
+                    String firstName = request.getParameter("firstname");
+                    String lastName = request.getParameter("lastname");
                     String phone = request.getParameter("phone");
                     String address = request.getParameter("address");
                     String introduce = request.getParameter("introduce");
@@ -105,13 +106,13 @@ public class editProfile extends HttpServlet {
                         birthday = new java.sql.Date(parsedDate.getTime());
                     }
 
-                    System.out.println("Updating mentee: " + name + ", phone: " + phone);
-
+//                    System.out.println("Updating mentee: " + firstName + ", phone: " + phone);
                     // Gọi phương thức update mới với tham số
-                    menteeDAO.updateMenteeProfile(mentee.getId(), name, sex, address, phone, birthday, introduce);
+                    menteeDAO.updateMenteeProfile(mentee.getId(), firstName, lastName, sex, address, phone, birthday, introduce);
 
                     // Cập nhật lại session
-                    mentee.setName(name);
+                    mentee.setFirstname(firstName);
+                    mentee.setLastname(lastName);
                     mentee.setPhone(phone);
                     mentee.setAddress(address);
                     mentee.setSex(sex);
@@ -125,7 +126,8 @@ public class editProfile extends HttpServlet {
             } else if (role == 2) { // Mentor
                 Mentor mentor = (Mentor) session.getAttribute("getmentor");
                 if (mentor != null) {
-                    mentor.setName(request.getParameter("name"));
+                    mentor.setFirstname(request.getParameter("firstname"));
+                    mentor.setLastname(request.getParameter("lastname"));
                     mentor.setPhone(request.getParameter("phone"));
                     mentor.setAddress(request.getParameter("address"));
                     mentor.setIntroduce(request.getParameter("introduce"));
@@ -150,7 +152,8 @@ public class editProfile extends HttpServlet {
                     // Gọi hàm update mới
                     mentorDAO.updateMentorProfile(
                             mentor.getId(),
-                            mentor.getName(),
+                            mentor.getFirstname(),
+                            mentor.getLastname(),
                             mentor.getSex(),
                             mentor.getAddress(),
                             mentor.getPhone(),
