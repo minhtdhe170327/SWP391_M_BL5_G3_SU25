@@ -42,6 +42,8 @@ public class AccountDAO extends DBContext {
         }
         return account;
     }
+    
+    
 public Account getAccountByEmail(String email) {
         Account account = null;
         query = "SELECT * FROM Account WHERE email = ?";
