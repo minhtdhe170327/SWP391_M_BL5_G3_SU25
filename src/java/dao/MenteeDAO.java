@@ -387,6 +387,7 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
 
 
 // Đếm tổng số request toàn hệ thống
+
     public int countAllRequest() {
         int count = 0;
         try {
@@ -404,6 +405,7 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
     }
 
     // Đếm tổng số hire request toàn hệ thống
+    
     public int countAllHireRequest() {
         int count = 0;
         try {
