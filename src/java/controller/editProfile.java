@@ -106,6 +106,7 @@ public class editProfile extends HttpServlet {
                         birthday = new java.sql.Date(parsedDate.getTime());
                     }
 
+
 //                    System.out.println("Updating mentee: " + firstName + ", phone: " + phone);
                     // Gọi phương thức update mới với tham số
                     menteeDAO.updateMenteeProfile(mentee.getId(), firstName, lastName, sex, address, phone, birthday, introduce);
