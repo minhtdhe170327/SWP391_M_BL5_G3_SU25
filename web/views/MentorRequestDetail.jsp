@@ -24,7 +24,7 @@
         <!-- Actions: right aligned -->
         <div class="d-flex justify-content-end mb-3">
             <c:if test="${answer != null}">
-                <form action="UpdateAnswer.jsp" method="post">
+                <form action="<%=request.getContextPath()%>/views/UpdateAnswer.jsp" method="post">
                     <button type="submit" class="btn btn-outline-primary">Edit Answer</button>
                 </form>
             </c:if>
@@ -83,4 +83,5 @@
 </main>
 
 <jsp:include page="footer1.jsp" />
+
 
