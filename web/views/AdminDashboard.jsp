@@ -71,7 +71,7 @@
                 <h3 class="text-center mb-4">
                     <i class="bi bi-speedometer2"></i> Admin Panel
                 </h3>
-                <a href="ViewAllRequest">
+                <a href="AdminViewAllRequest">
                     <i class="bi bi-list-check"></i> Total Request <br>
                 </a>
                 <a href="ViewAllHireRequest">
