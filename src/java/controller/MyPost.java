@@ -68,6 +68,10 @@ public class MyPost extends HttpServlet {
             request.setAttribute("error", "Error loading posts: " + e.getMessage());
             request.getRequestDispatcher("/views/MyPost.jsp").forward(request, response);
         }
+       
+       
+       
+       
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
