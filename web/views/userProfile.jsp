@@ -68,8 +68,8 @@
 
                 <c:set var="displayName">
                     <c:choose>
-                        <c:when test="${sessionScope.account.roleid == 1}">${sessionScope.getmentee.name}</c:when>
-                        <c:when test="${sessionScope.account.roleid == 2}">${sessionScope.getmentor.name}</c:when>
+                        <c:when test="${sessionScope.account.roleid == 1}">${sessionScope.getmentee.firstname}</c:when>
+                        <c:when test="${sessionScope.account.roleid == 2}">${sessionScope.getmentor.firstname}</c:when>
                         <c:when test="${sessionScope.account.roleid == 3}">${sessionScope.account.accountname}</c:when>
                     </c:choose>
                 </c:set>
@@ -86,7 +86,10 @@
                         <c:when test="${sessionScope.account.roleid == 1}">
                             <h4>My Mentee Profile</h4>
                             <div class="info-item">
-                                <strong>Full Name:</strong> <span>${sessionScope.getmentee.name}</span>
+                                <strong>First Name:</strong> <span>${sessionScope.getmentee.firstname}</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Last Name:</strong> <span>${sessionScope.getmentee.lastname}</span>
                             </div>
                             <div class="info-item">
                                 <strong>Email Address:</strong> <span>${sessionScope.account.email}</span>
@@ -115,7 +118,10 @@
                         <c:when test="${sessionScope.account.roleid == 2}">
                             <h4>My Mentor Profile</h4>
                             <div class="info-item">
-                                <strong>Full Name:</strong> <span>${sessionScope.getmentor.name}</span>
+                                <strong>First Name:</strong> <span>${sessionScope.getmentor.firstname}</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Last Name:</strong> <span>${sessionScope.getmentor.lastname}</span>
                             </div>
                             <div class="info-item">
                                 <strong>Email Address:</strong> <span>${sessionScope.account.email}</span>

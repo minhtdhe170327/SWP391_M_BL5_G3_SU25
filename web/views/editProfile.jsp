@@ -72,8 +72,12 @@
                         <c:when test="${sessionScope.account.roleid == 1}">
                             <h4>Edit Mentee Profile</h4>
                             <div class="info-item">
-                                <strong>Full Name:</strong>
-                                <input type="text" name="name" value="${sessionScope.getmentee.name}" class="form-control"/>
+                                <strong>First Name:</strong>
+                                <input type="text" name="firstname" value="${sessionScope.getmentee.firstname}" class="form-control"/>
+                            </div>
+                            <div class="info-item">
+                                <strong>Last Name:</strong>
+                                <input type="text" name="lastname" value="${sessionScope.getmentee.lastname}" class="form-control"/>
                             </div>
                             <div class="info-item">
                                 <strong>Email Address:</strong>
@@ -108,8 +112,12 @@
                         <c:when test="${sessionScope.account.roleid == 2}">
                             <h4>Edit Mentor Profile</h4>
                             <div class="info-item">
-                                <strong>Full Name:</strong>
-                                <input type="text" name="name" value="${sessionScope.getmentor.name}" class="form-control"/>
+                                <strong>First Name:</strong>
+                                <input type="text" name="firstname" value="${sessionScope.getmentor.firstname}" class="form-control"/>
+                            </div>
+                            <div class="info-item">
+                                <strong>Last Name:</strong>
+                                <input type="text" name="lastname" value="${sessionScope.getmentor.lastname}" class="form-control"/>
                             </div>
                             <div class="info-item">
                                 <strong>Email Address:</strong>
