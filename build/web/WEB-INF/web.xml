@@ -68,6 +68,38 @@
         <servlet-name>ViewPostDetail</servlet-name>
         <servlet-class>controller.ViewPostDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAllHireRequest</servlet-name>
+        <servlet-class>controller.ViewMentorHireRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMentorHireRequest</servlet-name>
+        <servlet-class>controller.ViewMentorHireRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAddMenteeAccount</servlet-name>
+        <servlet-class>controller.AdminAddMenteeAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAddMentorAccount</servlet-name>
+        <servlet-class>controller.AdminAddMentorAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMenteeAccount</servlet-name>
+        <servlet-class>controller.ViewMenteeAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMenteeAccountDetail</servlet-name>
+        <servlet-class>controller.ViewMenteeAccountDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMentorAccount</servlet-name>
+        <servlet-class>controller.ViewMentorAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMentorAccountDetail</servlet-name>
+        <servlet-class>controller.ViewMentorAccountDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -135,5 +167,37 @@
     <servlet-mapping>
         <servlet-name>ViewPostDetail</servlet-name>
         <url-pattern>/ViewPostDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllHireRequest</servlet-name>
+        <url-pattern>/ViewAllHireRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMentorHireRequest</servlet-name>
+        <url-pattern>/ViewMentorHireRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAddMenteeAccount</servlet-name>
+        <url-pattern>/AdminAddMenteeAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAddMentorAccount</servlet-name>
+        <url-pattern>/AdminAddMentorAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMenteeAccount</servlet-name>
+        <url-pattern>/ViewMenteeAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMenteeAccountDetail</servlet-name>
+        <url-pattern>/ViewMenteeAccountDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMentorAccount</servlet-name>
+        <url-pattern>/ViewMentorAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMentorAccountDetail</servlet-name>
+        <url-pattern>/ViewMentorAccountDetail</url-pattern>
     </servlet-mapping>
 </web-app>

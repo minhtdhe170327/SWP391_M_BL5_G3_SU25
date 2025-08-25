@@ -130,7 +130,7 @@
                                 <strong>Date of Birth:</strong> <span><fmt:formatDate value="${sessionScope.getmentor.birthday}" pattern="dd/MM/yyyy" /></span>
                             </div>
                             <div class="info-item">
-                                <strong>Gender:</strong> <span>${sessionScope.getmentor.sex}</span>
+                                <strong>Gender:</strong> <span>${sessionScope.getmentee.sex == 'M' ? 'Male' : 'Female'}</span>
                             </div>
                             <div class="info-item">
                                 <strong>Introduction:</strong> <span>${sessionScope.getmentor.introduce}</span>
@@ -168,9 +168,12 @@
                             <a href="${contextPath}/AdminDashboard" class="btn btn-danger">Go to Dashboard</a>
                         </c:when>
                     </c:choose>
-                    <div class="mt-4 text-center">
-                        <a href="${contextPath}/editProfile" class="btn btn-warning">Edit Profile</a>
-                    </div>
+                    <c:if test="${sessionScope.account.roleid != 3}">
+                        <div class="mt-4 text-center">
+                            <a href="${contextPath}/editProfile" class="btn btn-warning">Edit Profile</a>
+                        </div>
+                    </c:if>
+
                 </div>
             </div>
         </main>
