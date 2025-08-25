@@ -61,8 +61,8 @@
                                     <span>
                                         Hello
                                         <c:choose>
-                                            <c:when test="${not empty sessionScope.getmentee}">${sessionScope.getmentee.name}</c:when>
-                                            <c:when test="${not empty sessionScope.getmentor}">${sessionScope.getmentor.name}</c:when>
+                                            <c:when test="${not empty sessionScope.getmentee}">${sessionScope.getmentee.firstname}</c:when>
+                                            <c:when test="${not empty sessionScope.getmentor}">${sessionScope.getmentor.firstname}</c:when>
                                             <c:otherwise>User</c:otherwise>
                                         </c:choose>
                                     </span>

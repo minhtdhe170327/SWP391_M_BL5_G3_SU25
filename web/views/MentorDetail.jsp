@@ -45,7 +45,7 @@
 
                         <div class="col-lg-4">
                             <div class="portfolio-info">
-                                <h3>${Mentor.name}</h3>
+                                <h3>${Mentor.lastname} ${Mentor.firstname}</h3>
                                 <ul>
                                     <li><strong>Sex</strong>: 
                                         <c:if test="${sessionScope.Mentor.sex.equals('M')}">Male</c:if>

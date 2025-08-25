@@ -6,17 +6,18 @@ import java.sql.*;
 import java.util.*;
 public class MenteeDAO extends DBContext {
 
-    public void updateMenteeProfile(int menteeId, String name, String sex, String address, String phone, java.sql.Date birthday, String introduce) {
-    String query = "UPDATE Mentee SET name=?, sex=?, address=?, phone=?, birthday=?, introduce=? WHERE id=?";
+    public void updateMenteeProfile(int menteeId, String firstname,String lastname, String sex, String address, String phone, java.sql.Date birthday, String introduce) {
+    String query = "UPDATE Mentee SET firstname=?,lastname=?, sex=?, address=?, phone=?, birthday=?, introduce=? WHERE id=?";
     try {
         ps = connection.prepareStatement(query);
-        ps.setString(1, name);
-        ps.setString(2, sex);
-        ps.setString(3, address);
-        ps.setString(4, phone);
-        ps.setDate(5, birthday);
-        ps.setString(6, introduce);
-        ps.setInt(7, menteeId);
+        ps.setString(1, firstname);
+        ps.setString(2, lastname);
+        ps.setString(3, sex);
+        ps.setString(4, address);
+        ps.setString(5, phone);
+        ps.setDate(6, birthday);
+        ps.setString(7, introduce);
+        ps.setInt(8, menteeId);
 
         ps.executeUpdate();
     } catch (Exception e) {

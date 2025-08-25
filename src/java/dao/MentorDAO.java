@@ -17,19 +17,20 @@ import java.util.List;
  */
 public class MentorDAO extends DBContext {
 
-    public void updateMentorProfile(int mentorId, String name, String sex, String address, String phone, java.sql.Date birthday, String introduce, String achievement, float costHire) {
-        String query = "UPDATE Mentor SET name=?, sex=?, address=?, phone=?, birthday=?, introduce=?, achievement=?, costHire=? WHERE id=?";
+    public void updateMentorProfile(int mentorId, String firstname,String lastname, String sex, String address, String phone, java.sql.Date birthday, String introduce, String achievement, float costHire) {
+        String query = "UPDATE Mentor SET firstname=?,lastname=?, sex=?, address=?, phone=?, birthday=?, introduce=?, achievement=?, costHire=? WHERE id=?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setString(1, name);
-            ps.setString(2, sex);
-            ps.setString(3, address);
-            ps.setString(4, phone);
-            ps.setDate(5, birthday);
-            ps.setString(6, introduce);
-            ps.setString(7, achievement);
-            ps.setFloat(8, costHire);
-            ps.setInt(9, mentorId);
+            ps.setString(1, firstname);
+            ps.setString(2, lastname);
+            ps.setString(3, sex);
+            ps.setString(4, address);
+            ps.setString(5, phone);
+            ps.setDate(6, birthday);
+            ps.setString(7, introduce);
+            ps.setString(8, achievement);
+            ps.setFloat(9, costHire);
+            ps.setInt(10, mentorId);
 
             ps.executeUpdate();
 
@@ -50,7 +51,7 @@ public class MentorDAO extends DBContext {
     }
     public List<Mentor> searchMentor(String name, int index) {
         List<Mentor> list = new ArrayList<>();
-        query = "SELECT * FROM Mentor m WHERE m.name LIKE ?\n"
+        query = "SELECT * FROM Mentor m WHERE (m.firstname + ' ' + m.lastname) LIKE ?\n"
                 + "ORDER BY id\n"
                 + "OFFSET ? ROWS FETCH NEXT 3 ROWS ONLY";
         try {
@@ -61,7 +62,8 @@ public class MentorDAO extends DBContext {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int accountid = rs.getInt("accountid");
-                String mentorname = rs.getString("name");
+                String firstName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
                 Date birthday = rs.getDate("birthday");
@@ -70,7 +72,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                list.add(new Mentor(id, accountid, mentorname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+                list.add(new Mentor(id, accountid, firstName,lastName, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
             }
         } catch (Exception e) {
         }
