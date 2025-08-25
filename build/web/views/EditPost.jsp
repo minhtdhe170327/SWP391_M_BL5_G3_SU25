@@ -29,6 +29,8 @@
                 <c:if test="${not empty success}">
                     <div class="alert alert-success mb-3">${success}</div>
                 </c:if>
+                    
+                    
                 <h2 class="mb-4">Edit Post</h2>
                 <form action="${pageContext.request.contextPath}/EditPost" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="${post.id}" />
