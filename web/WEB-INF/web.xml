@@ -112,6 +112,10 @@
         <servlet-name>ViewMentorRequestDetail</servlet-name>
         <servlet-class>controller.ViewMentorRequestDetail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateAnswer</servlet-name>
+        <servlet-class>controller.CreateAnswer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -223,5 +227,9 @@
     <servlet-mapping>
         <servlet-name>ViewMentorRequestDetail</servlet-name>
         <url-pattern>/ViewMentorRequestDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateAnswer</servlet-name>
+        <url-pattern>/CreateAnswer</url-pattern>
     </servlet-mapping>
 </web-app>
