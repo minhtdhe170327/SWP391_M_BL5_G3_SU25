@@ -200,7 +200,7 @@ public class MenteeDAO extends DBContext {
     
     public List<Mentor> getMentorOfRequest(int rid) {
         List<Mentor> list = new ArrayList<>();
-        query = "SELECT m.id,m.accountid,m.name,m.address,m.phone,m.birthday,m.sex\n"
+        query = "SELECT m.id,m.accountid,m.firstname,m.lastname,m.address,m.phone,m.birthday,m.sex\n"
                 + ",m.introduce,m.achievement,m.avatar,m.costHire\n"
                 + "FROM coderequest c, mentor m, mentorcoderequest mc\n"
                 + "WHERE c.id=mc.coderequestid AND m.id=mc.mentorid AND c.id=?";
@@ -221,9 +221,10 @@ public class MenteeDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                list.add(new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+                list.add(new Mentor(id, accountid, firstname, lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return list;
     }
@@ -358,6 +359,29 @@ public class MenteeDAO extends DBContext {
         return 0;
     }
     
-
+public List<CodeRequest> searchRequest(String name, int index, int mid) {
+        List<CodeRequest> list = new ArrayList<>();
+        query = "SELECT * FROM coderequest c WHERE menteeid=? AND (c.title LIKE ? OR c.content LIKE ?)\n"
+                + "ORDER BY id\n"
+                + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mid);
+            ps.setString(2, "%" + name + "%");
+            ps.setString(3, "%" + name + "%");
+            ps.setInt(4, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                java.sql.Date deadline = rs.getDate("deadline");
+                int menteeid = rs.getInt("menteeid");
+                list.add(new CodeRequest(id, title, content, deadline, menteeid));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
 }

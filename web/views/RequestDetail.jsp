@@ -16,23 +16,23 @@
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="${pageContext.request.contextPath}/assets/img/favicon.png" rel="icon">
+        <link href="${pageContext.request.contextPath}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
-        <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-        <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/aos/aos.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
         <!-- Template Main CSS File -->
-        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet">
 
         <!-- =======================================================
         * Template Name: Moderna - v4.11.0
@@ -70,7 +70,7 @@
                 <!-- comment -->
                 <section id="portfolio-details" class="portfolio-details">
                     <div class="container">
-                        <form action="UpdateRequest.jsp" method="post">
+                        <form action="views/UpdateRequest.jsp" method="post">
                             <button type="submit" class="btn btn-outline-primary btn-lg" style="margin-top: 10px;margin-right: 50px;font-size: 15px;float: right; width: 200px;height: 50px;" >Edit Request</button>
                         </form>
                         <div class="row gy-4">
@@ -105,7 +105,7 @@
                                                         <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
                                                             <div class="member">
                                                                 <div class="member-img">
-                                                                    <a href="ViewDetailAnswer?mentorid=${me.id}&coderequestid=${coderequest.id}&menteeid=${sessionScope.getmentee.id}"><img src="assets/img/mentor/${me.avatar}" class="img-fluid" alt=""></a>
+                                                                    <a href="ViewDetailAnswer?mentorid=${me.id}&coderequestid=${coderequest.id}&menteeid=${sessionScope.getmentee.id}"><img src="${pageContext.request.contextPath}/assets/img/mentor/${me.avatar}" class="img-fluid" alt=""></a>
                                                                     <div class="social">
                                                                         <a href=""><i class="bi bi-twitter"></i></a>
                                                                         <a href=""><i class="bi bi-facebook"></i></a>
@@ -114,7 +114,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="member-info">
-                                                                    <h4>${me.name}</h4>
+                                                                    <h4>${me.firstname} ${me.lastname}</h4>
                                                                     <span>Introduce:</span>
                                                                     <p>${me.introduce}</p>
                                                                 </div>
@@ -219,17 +219,16 @@
             <jsp:include page="../guest/Footer.jsp" />
             </c:if>
             <!-- Vendor JS Files -->
-            <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-            <script src="assets/vendor/aos/aos.js"></script>
-            <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-            <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-            <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-            <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-            <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-            <script src="assets/vendor/php-email-form/validate.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/aos/aos.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/glightbox/js/glightbox.min.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/swiper/swiper-bundle.min.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/waypoints/noframework.waypoints.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/vendor/php-email-form/validate.js"></script>
 
             <!-- Template Main JS File -->
-            <script src="assets/js/main.js"></script>
+            <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
     </body>
 </html>
-
