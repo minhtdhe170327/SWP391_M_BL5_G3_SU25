@@ -165,12 +165,12 @@
                 <section id="portfolio-details" class="portfolio-details">
                     <div class="container">
                         <c:if test="${answer!=null}">
-                        <form action="UpdateAnswer.jsp" method="post">
+                        <form action="<%=request.getContextPath()%>/views/UpdateAnswer.jsp" method="post">
                             <button type="submit" class="btn btn-outline-primary btn-lg" style="margin-top: 10px;margin-right: 50px;font-size: 15px;float: right; width: 200px;height: 50px;" >Edit Answer</button>
                             </form>
                          </c:if>
                         <c:if test="${answer==null}">
-                        <form action="CreateAnswer.jsp" method="post">
+                        <form action="<%=request.getContextPath()%>/views/CreateAnswer.jsp" method="post">
                             <button type="submit" class="btn btn-outline-primary btn-lg" style="margin-top: 10px;margin-right: 50px;font-size: 15px;float: right; width: 200px;height: 50px;" >New Answer</button>
                             </form>
                          </c:if>
