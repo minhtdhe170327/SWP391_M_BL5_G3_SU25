@@ -243,4 +243,46 @@ public class PostDAO extends DBContext{
         }
     }
     
+    public List<Post> getPostsByAccountId(int accountId, int page, int pageSize) {
+        List<Post> posts = new ArrayList<>();
+        query = "SELECT * FROM Post WHERE accountid=? ORDER BY createdDate DESC OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            ps.setInt(2, (page - 1) * pageSize);
+            ps.setInt(3, pageSize);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Post post = new Post();
+                post.setId(rs.getInt("id"));
+                post.setAccountId(rs.getInt("accountid"));
+                post.setTitle(rs.getString("title"));
+                post.setContent(rs.getString("content"));
+                post.setCreatedDate(rs.getDate("createdDate"));
+                post.setModifiedDate(rs.getDate("modifiedDate"));
+                post.setViewCount(rs.getInt("viewCount"));
+                post.setStatus(rs.getInt("status"));
+                post.setFeatured(rs.getBoolean("featured"));
+                posts.add(post);
+            }
+        } catch (Exception e) {
+        }
+        return posts;
+    }
+
+    public int getTotalPostsByAccountId(int accountId) {
+        query = "SELECT COUNT(*) FROM Post WHERE accountid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, accountId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count;
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
 }
