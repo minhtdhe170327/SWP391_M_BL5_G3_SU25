@@ -385,4 +385,39 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
         return list;
     }
 
+
+// Đếm tổng số request toàn hệ thống
+    public int countAllRequest() {
+        int count = 0;
+        try {
+            query = "SELECT COUNT(*) FROM coderequest";
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return count;
+    }
+
+    // Đếm tổng số hire request toàn hệ thống
+    public int countAllHireRequest() {
+        int count = 0;
+        try {
+            query = "SELECT COUNT(*) FROM hirerequest";
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+        }
+        return count;
+    }
+
 }
