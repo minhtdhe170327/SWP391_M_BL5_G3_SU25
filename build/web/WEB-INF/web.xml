@@ -120,6 +120,10 @@
         <servlet-name>UpdateAnswer</servlet-name>
         <servlet-class>controller.UpdateAnswer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreatePost</servlet-name>
+        <servlet-class>controller.CreatePost</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -239,5 +243,9 @@
     <servlet-mapping>
         <servlet-name>UpdateAnswer</servlet-name>
         <url-pattern>/UpdateAnswer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreatePost</servlet-name>
+        <url-pattern>/CreatePost</url-pattern>
     </servlet-mapping>
 </web-app>
