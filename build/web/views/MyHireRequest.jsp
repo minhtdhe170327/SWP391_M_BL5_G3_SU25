@@ -65,9 +65,13 @@
                             <button type="submit" class="btn btn-secondary"><i class="bi-search"></i></button>  
                         </div> 
                     </form>
-                    <form action="CreateHireRequest.jsp" method="post">
-                        <button type="submit" class="btn btn-outline-primary btn-lg" style="margin-top: 10px;margin-right: 50px;font-size: 15px;float: right; width: 300px;height: 50px;">Add new Hire Request</button>
-                    </form>
+                   <form action="CreateHireRequest" method="get">
+    <button type="submit" 
+            class="btn btn-outline-primary btn-lg" 
+            style="margin-top: 10px;margin-right: 50px;font-size: 15px;float: right; width: 300px;height: 50px;">
+        Add new Hire Request
+    </button>
+</form>
                 </div>
                 <div class="container-fluid h-custom">
                     <div class="row d-flex justify-content-start align-items-center h-100">
