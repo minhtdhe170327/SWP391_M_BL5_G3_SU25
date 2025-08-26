@@ -10,7 +10,8 @@ package entity;
  */
 public class HireRequestlist {
     private int id;
-    private String mentorname;
+    private String firstname;
+    private String lastname;
     private String title;
     private String content;
     private float costhire;
@@ -19,9 +20,10 @@ public class HireRequestlist {
     public HireRequestlist() {
     }
 
-    public HireRequestlist(int id, String mentorname, String title, String content, float costhire, String status) {
+    public HireRequestlist(int id, String firstname,String lastname, String title, String content, float costhire, String status) {
         this.id = id;
-        this.mentorname = mentorname;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.title = title;
         this.content = content;
         this.costhire = costhire;
@@ -36,12 +38,26 @@ public class HireRequestlist {
         this.id = id;
     }
 
-    public String getMentorname() {
-        return mentorname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setMentorname(String mentorname) {
-        this.mentorname = mentorname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getFullname() {
+        return (firstname != null ? firstname : "") 
+             + " " 
+             + (lastname != null ? lastname : "");
     }
 
     public String getTitle() {

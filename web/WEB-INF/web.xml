@@ -65,12 +65,12 @@
         <servlet-class>controller.ViewAllPost</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewPostDetail</servlet-name>
-        <servlet-class>controller.ViewPostDetail</servlet-class>
+        <servlet-name>ViewAllHireRequest</servlet-name>
+        <servlet-class>controller.ViewAllHireRequest</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewAllHireRequest</servlet-name>
-        <servlet-class>controller.ViewMentorHireRequest</servlet-class>
+        <servlet-name>ViewPostDetail</servlet-name>
+        <servlet-class>controller.ViewPostDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewMentorHireRequest</servlet-name>
@@ -149,12 +149,18 @@
         <servlet-class>controller.AdminViewAllRequest</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>CreateHireRequest</servlet-name>
+        <servlet-class>controller.CreateHireRequest</servlet-class>
+</servlet>
+<servlet>
         <servlet-name>AdminViewAllPost</servlet-name>
         <servlet-class>controller.AdminViewAllPost</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminViewAllHireRequest</servlet-name>
         <servlet-class>controller.AdminViewAllHireRequest</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
@@ -305,11 +311,17 @@
         <url-pattern>/AdminViewAllRequest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
+        <servlet-name>CreateHireRequest</servlet-name>
+        <url-pattern>/CreateHireRequest</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
         <servlet-name>AdminViewAllPost</servlet-name>
         <url-pattern>/AdminViewAllPost</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminViewAllHireRequest</servlet-name>
         <url-pattern>/AdminViewAllHireRequest</url-pattern>
+
     </servlet-mapping>
 </web-app>
