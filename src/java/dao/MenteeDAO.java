@@ -530,6 +530,37 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
         } catch (Exception e) {
         }
     }
-
+public HireRequest getHireRequestbyid(int requestid){
+        query = "SELECT * FROM hirerequest WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1,requestid);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                int id=rs.getInt("id");
+                int idmentee=rs.getInt("menteeid");
+                int mentorid=rs.getInt("mentorid");
+                String title=rs.getString("title");
+                String content=rs.getString("content");
+                int statusid=rs.getInt("statusid");
+                return new HireRequest(id, idmentee, mentorid, title, content, statusid);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+public void updateHireRequest(int id, int menteeid, int mentorid,String title,String content) {
+        query = "UPDATE hirerequest SET menteeid=?, mentorid=?, title=?,content=? WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, menteeid);
+            ps.setInt(2, mentorid);
+            ps.setString(3,title);
+            ps.setString(4, content);
+            ps.setInt(5, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 
 }
