@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class MentorDAO extends DBContext {
 
-    public void updateMentorProfile(int mentorId, String firstname,String lastname, String sex, String address, String phone, java.sql.Date birthday, String introduce, String achievement, float costHire) {
+    public void updateMentorProfile(int mentorId, String firstname, String lastname, String sex, String address, String phone, java.sql.Date birthday, String introduce, String achievement, float costHire) {
         String query = "UPDATE Mentor SET firstname=?,lastname=?, sex=?, address=?, phone=?, birthday=?, introduce=?, achievement=?, costHire=? WHERE id=?";
         try {
             ps = connection.prepareStatement(query);
@@ -49,6 +49,7 @@ public class MentorDAO extends DBContext {
             }
         }
     }
+
     public List<Mentor> searchMentor(String name, int index) {
         List<Mentor> list = new ArrayList<>();
         query = "SELECT * FROM Mentor m WHERE (m.firstname + ' ' + m.lastname) LIKE ?\n"
@@ -72,7 +73,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                list.add(new Mentor(id, accountid, firstName,lastName, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+                list.add(new Mentor(id, accountid, firstName, lastName, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
             }
         } catch (Exception e) {
         }
@@ -107,7 +108,7 @@ public class MentorDAO extends DBContext {
                 float costHire = rs.getFloat("costHire");
                 float averageStar = rs.getFloat("averageStar");
                 list.add(new Mentor(id, accountid, firstname, lastname, address, phone, birthday,
-            sex, introduce, achievement, avatar, costHire, averageStar));
+                        sex, introduce, achievement, avatar, costHire, averageStar));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,7 +135,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                return new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire);
+                return new Mentor(id, accountid, firstname, lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire);
             }
         } catch (Exception e) {
         }
@@ -161,7 +162,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                mentor = new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire);
+                mentor = new Mentor(id, accountid, firstname, lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire);
             }
         } catch (Exception e) {
         }
@@ -187,7 +188,31 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                list.add(new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+                list.add(new Mentor(id, accountid, firstname, lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+     public List<Mentee> getAllMentee() {
+        List<Mentee> list = new ArrayList<>();
+        query = "SELECT * FROM Mentee";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int accountid = rs.getInt("accountid");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                Date birthday = rs.getDate("birthday");
+                String sex = rs.getString("sex");
+                String introduce = rs.getString("introduce");
+                String avatar = rs.getString("avatar");
+                list.add(new Mentee(id, accountid, firstname, lastname, address, phone, birthday, sex, introduce, avatar));
             }
         } catch (Exception e) {
         }
@@ -230,7 +255,7 @@ public class MentorDAO extends DBContext {
                 String achievement = rs.getString("achievement");
                 String avatar = rs.getString("avatar");
                 float costHire = rs.getFloat("costHire");
-                list.add(new Mentor(id, accountid, firstname,lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
+                list.add(new Mentor(id, accountid, firstname, lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire));
             }
         } catch (Exception e) {
         }
@@ -252,7 +277,7 @@ public class MentorDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<CodeRequest> searchRequest(String name, int index, int mid) {
         List<CodeRequest> list = new ArrayList<>();
         query = "SELECT c.id,c.title,c.content,c.deadline,c.menteeID FROM coderequest c,mentorcoderequest mc "
@@ -278,13 +303,13 @@ public class MentorDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<CodeRequest> pagingMentorRequest(int mid, int index) {
         List<CodeRequest> list = new ArrayList<>();
         query = "SELECT c.id,c.title,c.content,c.deadline,c.menteeID "
-                 + "FROM coderequest c,mentorcoderequest mc WHERE c.id=mc.coderequestid AND mc.mentorid=?\n"
-                 + "ORDER BY c.id\n"
-                 + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+                + "FROM coderequest c,mentorcoderequest mc WHERE c.id=mc.coderequestid AND mc.mentorid=?\n"
+                + "ORDER BY c.id\n"
+                + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
         try {
 
             ps = connection.prepareStatement(query);
@@ -304,6 +329,59 @@ public class MentorDAO extends DBContext {
         return list;
     }
 
+//    public List<Feedback> pagingFeedBack(int mid, int index) {
+    public List<Feedback> pagingFeedBack(int mid) {
+        List<Feedback> list = new ArrayList<>();
+        query = "SELECT  f.menteeid, f.star, f.comment,mcq.coderequestid\n"
+                + "FROM feedback f\n"
+                + "INNER JOIN feedbackanswer fa ON f.id = fa.feedbackid\n"
+                + "INNER JOIN answer a ON fa.answerid = a.id\n"
+                + "INNER JOIN mentorcoderequest mcq ON a.mentorcoderequestid = mcq.id\n"
+                + "WHERE mcq.mentorid = ?\n";
+//                + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+        try {
+
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mid);
+//            ps.setInt(2, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id= rs.getInt("coderequestid");
+                int menteeid= rs.getInt("menteeid");
+                int star= rs.getInt("star");
+                String comment= rs.getString("comment");
+                list.add(new Feedback(id, menteeid, star, comment));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+     public List<Feedback>  getTotalFeedback(int mid) {
+         List<Feedback> list = new ArrayList<>();
+        query ="SELECT mcq.mentorid, f.star, f.comment,mcq.coderequestid\n"
+                + "FROM feedback f\n"
+                + "INNER JOIN feedbackanswer fa ON f.id = fa.feedbackid\n"
+                + "INNER JOIN answer a ON fa.answerid = a.id\n"
+                + "INNER JOIN mentorcoderequest mcq ON a.mentorcoderequestid = mcq.id\n"
+                + "WHERE f.menteeid = ?\n";
+        try {
+
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mid);
+//            ps.setInt(2, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id= rs.getInt("coderequestid");
+                int menteeid= rs.getInt("mentorid");
+                int star= rs.getInt("star");
+                String comment= rs.getString("comment");
+                list.add(new Feedback(id, menteeid, star, comment));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
     public int getTotalMentorRequest(int mentorId) {
         query = "SELECT COUNT(*) count "
                 + "FROM mentorcoderequest mc "
@@ -320,36 +398,37 @@ public class MentorDAO extends DBContext {
         }
         return 0;
     }
-    
-    public Answer getAnswer(int mentorid,int requestid){
+
+    public Answer getAnswer(int mentorid, int requestid) {
         query = "SELECT a.id,a.mentorcoderequestid,a.content FROM answer a, mentorcoderequest mc \n"
                 + "WHERE a.mentorcoderequestid=mc.id AND mc.mentorid=? AND mc.coderequestid=?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1,mentorid);
-            ps.setInt(2,requestid);
-            rs=ps.executeQuery();
-            while(rs.next()){
-                int id=rs.getInt("id");
-                int mcrid=rs.getInt("mentorcoderequestid");
-                String content=rs.getString("content");
+            ps.setInt(1, mentorid);
+            ps.setInt(2, requestid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int mcrid = rs.getInt("mentorcoderequestid");
+                String content = rs.getString("content");
                 return new Answer(id, mcrid, content);
             }
         } catch (Exception e) {
         }
         return null;
     }
-    public MentorRequest getMentorcoderequest(int mid, int rid){
+
+    public MentorRequest getMentorcoderequest(int mid, int rid) {
         query = "SELECT * FROM mentorcoderequest WHERE mentorid=? AND coderequestid=?";
         try {
             ps = connection.prepareStatement(query);
             ps.setInt(1, mid);
             ps.setInt(2, rid);
-            rs=ps.executeQuery();
-            while(rs.next()){
-                int id=rs.getInt("id");
-                int coderequestid=rs.getInt("coderequestid");
-                int mentorid=rs.getInt("mentorid");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int coderequestid = rs.getInt("coderequestid");
+                int mentorid = rs.getInt("mentorid");
                 return new MentorRequest(id, coderequestid, mentorid);
             }
         } catch (Exception e) {
@@ -357,7 +436,7 @@ public class MentorDAO extends DBContext {
         return null;
     }
 
-    public void CreateAnswer(int mrid, String content){
+    public void CreateAnswer(int mrid, String content) {
         query = "INSERT INTO answer VALUES (?,?)";
         try {
             ps = connection.prepareStatement(query);
@@ -367,8 +446,8 @@ public class MentorDAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    
-    public void updateAnswer(int aid, String content){
+
+    public void updateAnswer(int aid, String content) {
         query = "UPDATE answer SET content=? WHERE id=?";
         try {
             ps = connection.prepareStatement(query);
@@ -378,4 +457,4 @@ public class MentorDAO extends DBContext {
         } catch (Exception e) {
         }
     }
-} 
+}
