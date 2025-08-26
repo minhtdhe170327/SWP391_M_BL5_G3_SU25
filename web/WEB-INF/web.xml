@@ -65,12 +65,12 @@
         <servlet-class>controller.ViewAllPost</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewPostDetail</servlet-name>
-        <servlet-class>controller.ViewPostDetail</servlet-class>
+        <servlet-name>ViewAllHireRequest</servlet-name>
+        <servlet-class>controller.ViewAllHireRequest</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewAllHireRequest</servlet-name>
-        <servlet-class>controller.ViewMentorHireRequest</servlet-class>
+        <servlet-name>ViewPostDetail</servlet-name>
+        <servlet-class>controller.ViewPostDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ViewMentorHireRequest</servlet-name>
@@ -145,8 +145,10 @@
         <servlet-class>controller.AdminDashboard</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>AdminViewAllRequest</servlet-name>
         <servlet-class>controller.AdminViewAllRequest</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
@@ -293,7 +295,9 @@
         <url-pattern>/AdminDashboard</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>AdminViewAllRequest</servlet-name>
         <url-pattern>/AdminViewAllRequest</url-pattern>
+
     </servlet-mapping>
 </web-app>

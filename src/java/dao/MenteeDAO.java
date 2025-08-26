@@ -421,5 +421,86 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
         }
         return count;
     }
+    
+     public List<HireRequestlist> getAllHireRequests(int index) {
+        List<HireRequestlist> list = new ArrayList<>();
+        query = "SELECT h.id,  m.firstname, m.lastname, h.title, h.content, m.costHire, s.[Status] " +
+                "FROM hirerequest h, [status] s, mentor m " +
+                "WHERE h.mentorid = m.id AND h.statusid = s.id " +
+                "ORDER BY h.id " +
+                "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                float cost = rs.getFloat("costHire");
+                String status = rs.getString("Status");
+                list.add(new HireRequestlist(id, firstname,lastname, title, content, cost, status));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+      public int getTotalAllHireRequests() {
+        query = "SELECT COUNT(*) count FROM hirerequest";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int x = rs.getInt("count");
+                return x;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+      public List<HireRequestlist> pagingMenteeHireRequest(int mid, int index) {
+         List<HireRequestlist> list = new ArrayList<>();
+         query = "SELECT h.id, m.firstname, m.lastname,h.title,h.content,m.costHire,s.[Status] FROM hirerequest h, [status] s,mentor m \n"
+                 + "WHERE h.mentorid=m.id AND h.statusid=s.id AND menteeid=?\n"
+                 + "ORDER BY id\n"
+                 + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+         try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mid);
+            ps.setInt(2, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                float cost=rs.getFloat("costhire");
+                String status = rs.getString("status");
+                list.add(new HireRequestlist(id, firstname,lastname, title, content, cost, status));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int getTotalMenteeHireRequest(int menteeid) {
+        query = "SELECT COUNT(*) count FROM hirerequest WHERE menteeid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, menteeid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int x = rs.getInt("count");
+                return x;
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
 
 }
