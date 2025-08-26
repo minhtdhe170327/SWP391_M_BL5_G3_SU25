@@ -77,6 +77,7 @@
                                         <li><a href="viewProfile">Profile</a></li>
                                         <li><a href="${contextPath}/ViewAllRequest?menteeid=${sessionScope.getmentee.id}">My Request</a></li>
                                         <li><a href="${contextPath}/ViewAllHireRequest?menteeid=${sessionScope.getmentee.id}">My Hire Request</a></li>
+                                        <li><a href="${contextPath}/listFeedback?fbid=${sessionScope.getmentee.id}">My Feedback</a></li>
                                         <li><a href="${contextPath}/MyPost">My Posts</a></li>
                                         <li><a href="${contextPath}/SavedPost">Favorite Post</a></li>
                                         </c:if>
@@ -86,7 +87,7 @@
                                         <li><a href="viewProfile">Profile</a></li>
                                         <li><a href="${contextPath}/ViewMentorRequest?mentorid=${sessionScope.getmentor.id}">My Request</a></li>
                                         <li><a href="${contextPath}/ViewMentorHireRequest?mentorid=${sessionScope.getmentor.id}">Hire Requests</a></li>
-                                        <li><a href="${contextPath}/mentor-analytics?mentorid=${sessionScope.getmentor.id}">Analytics Dashboard</a></li>
+                                        <li><a href="${contextPath}/listFeedback?fbid=${sessionScope.getmentor.id}">Feedback</a></li>
                                         <li><a href="${contextPath}/MyPost">My Posts</a></li>
                                         <li><a href="${contextPath}/SavedPost">Favorite Post</a></li>
                                         </c:if>

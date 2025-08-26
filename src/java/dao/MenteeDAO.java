@@ -4,33 +4,127 @@ import dbcontext.DBContext;
 import entity.*;
 import java.sql.*;
 import java.util.*;
+
 public class MenteeDAO extends DBContext {
 
-    public void updateMenteeProfile(int menteeId, String firstname,String lastname, String sex, String address, String phone, java.sql.Date birthday, String introduce) {
-    String query = "UPDATE Mentee SET firstname=?,lastname=?, sex=?, address=?, phone=?, birthday=?, introduce=? WHERE id=?";
-    try {
-        ps = connection.prepareStatement(query);
-        ps.setString(1, firstname);
-        ps.setString(2, lastname);
-        ps.setString(3, sex);
-        ps.setString(4, address);
-        ps.setString(5, phone);
-        ps.setDate(6, birthday);
-        ps.setString(7, introduce);
-        ps.setInt(8, menteeId);
-        ps.executeUpdate();
-    } catch (Exception e) {
-        e.printStackTrace();
-    } finally {
+    public void updateMenteeProfile(int menteeId, String firstname, String lastname, String sex, String address, String phone, java.sql.Date birthday, String introduce) {
+        String query = "UPDATE Mentee SET firstname=?,lastname=?, sex=?, address=?, phone=?, birthday=?, introduce=? WHERE id=?";
         try {
-            if (ps != null) ps.close();
-            if (connection != null) connection.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            ps = connection.prepareStatement(query);
+            ps.setString(1, firstname);
+            ps.setString(2, lastname);
+            ps.setString(3, sex);
+            ps.setString(4, address);
+            ps.setString(5, phone);
+            ps.setDate(6, birthday);
+            ps.setString(7, introduce);
+            ps.setInt(8, menteeId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
-}
+ public void updateFeedback(int id,int star,String comment){
+        query = "UPDATE feedback SET star=?, comment=? WHERE id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1,star);
+            ps.setString(2,comment);
+            ps.setInt(3,id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    } 
 
+    public Feedback getfeedbackbyid(int fid) {
+        query = "SELECT f.id,f.menteeid,f.star,f.comment from feedback f WHERE f.id=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, fid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int menteeid = rs.getInt("menteeid");
+                int star = rs.getInt("star");
+                String comment = rs.getString("comment");
+                return new Feedback(id, menteeid, star, comment);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void createFeedbackAnswer(int fid, int aid) {
+        query = "INSERT INTO feedbackanswer VALUES(?,?) ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, fid);
+            ps.setInt(2, aid);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public void createFeedback(int id, int star, String comment) {
+        query = "INSERT INTO feedback VALUES(?,?,?) ";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.setInt(2, star);
+            ps.setString(3, comment);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+
+    public Feedback getfeedbackadd() {
+        query = "SELECT TOP 1 * FROM feedback ORDER BY id DESC";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int menteeid = rs.getInt("menteeid");
+                int star = rs.getInt("star");
+                String comment = rs.getString("comment");
+                return new Feedback(id, menteeid, star, comment);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public Feedback getfeedback(int mentorid, int requestid) {
+        query = "SELECT f.id,f.menteeid,f.star,f.comment from feedback f, feedbackanswer fa,answer a, mentorcoderequest mcq \n"
+                + "where f.id=fa.feedbackid  and fa.answerid=a.id and a.mentorcoderequestid=mcq.id\n"
+                + "AND mcq.coderequestid=? AND mcq.mentorid=?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, requestid);
+            ps.setInt(2, mentorid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int menteeid = rs.getInt("menteeid");
+                int star = rs.getInt("star");
+                String comment = rs.getString("comment");
+                return new Feedback(id, menteeid, star, comment);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
 
     public Mentee getMenteebyAccID(int accid) {
         query = "SELECT * FROM Mentee WHERE accountid=?";
@@ -52,14 +146,12 @@ public class MenteeDAO extends DBContext {
 
                 return new Mentee(id, accountid, firstname, lastname, address, phone, birthday, sex, introduce, avatar);
             }
-        } 
-        
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+
     public List<CodeRequest> pagingMenteeRequest(int mid, int index) {
         List<CodeRequest> list = new ArrayList<>();
         query = "SELECT cr.id, cr.title, cr.content, cr.deadline, cr.menteeID "
@@ -103,7 +195,7 @@ public class MenteeDAO extends DBContext {
         }
         return 0;
     }
-    
+
     public void inserCodeRequest(int mid, String title, String content, java.sql.Date deadline) {
         query = "INSERT INTO coderequest (title, content, deadline, menteeID) VALUES (?,?,?,?);";
         try {
@@ -117,7 +209,7 @@ public class MenteeDAO extends DBContext {
             e.printStackTrace();
         }
     }
-    
+
     public CodeRequest getNewInsertReqeust() {
         query = "SELECT TOP 1 * FROM coderequest ORDER BY id DESC";
         try {
@@ -136,7 +228,7 @@ public class MenteeDAO extends DBContext {
         }
         return null;
     }
-    
+
     public void inserMentorCodeRequest(int requestid, int mentorid) {
         query = "INSERT INTO mentorcoderequest (coderequestid, mentorid) VALUES(?,?);";
         try {
@@ -180,25 +272,25 @@ public class MenteeDAO extends DBContext {
         return null;
     }
 
-    public Answer getAnswer(int mentorid,int requestid){
+    public Answer getAnswer(int mentorid, int requestid) {
         query = "SELECT a.id,a.mentorcoderequestid,a.content FROM answer a, mentorcoderequest mc \n"
                 + "WHERE a.mentorcoderequestid=mc.id AND mc.mentorid=? AND mc.coderequestid=?";
         try {
             ps = connection.prepareStatement(query);
-            ps.setInt(1,mentorid);
-            ps.setInt(2,requestid);
-            rs=ps.executeQuery();
-            while(rs.next()){
-                int id=rs.getInt("id");
-                int mcrid=rs.getInt("mentorcoderequestid");
-                String content=rs.getString("content");
+            ps.setInt(1, mentorid);
+            ps.setInt(2, requestid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int mcrid = rs.getInt("mentorcoderequestid");
+                String content = rs.getString("content");
                 return new Answer(id, mcrid, content);
             }
         } catch (Exception e) {
         }
         return null;
     }
-    
+
     public List<Mentor> getMentorOfRequest(int rid) {
         List<Mentor> list = new ArrayList<>();
         query = "SELECT m.id,m.accountid,m.firstname,m.lastname,m.address,m.phone,m.birthday,m.sex\n"
@@ -229,7 +321,7 @@ public class MenteeDAO extends DBContext {
         }
         return list;
     }
-    
+
     public List<Skill> getSkillARequest(int rid) {
         List<Skill> skill = new ArrayList<>();
         query = "SELECT s.id,s.name\n"
@@ -248,7 +340,7 @@ public class MenteeDAO extends DBContext {
         }
         return skill;
     }
-    
+
     public void updatecoderequest(int requestid, String title, String deadline, String content) {
         query = "UPDATE coderequest SET title=?,content=?,deadline=? WHERE id=?";
         try {
@@ -294,47 +386,51 @@ public class MenteeDAO extends DBContext {
         } catch (Exception e) {
         }
     }
-    
-   public List<HireRequestlist> pagingMentorHireRequest(int mentorid, int index) {
-    List<HireRequestlist> list = new ArrayList<>();
-    query = "SELECT h.id, h.menteeid, h.mentorid, h.title, h.content, h.statusid, " +
-            "s.[Status] as statusname, m.firstname, m.lastname, mt.costHire " +
-            "FROM hirerequest h " +
-            "JOIN mentee m ON h.menteeid = m.id " +
-            "JOIN [status] s ON h.statusid = s.id " +
-            "JOIN mentor mt ON h.mentorid = mt.id " +
-            "WHERE h.mentorid = ? " +
-            "ORDER BY h.id " +
-            "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
-    try {
-        ps = connection.prepareStatement(query);
-        ps.setInt(1, mentorid);
-        ps.setInt(2, (index - 1) * 4);
-        rs = ps.executeQuery();
-        while (rs.next()) {
-            int id = rs.getInt("id");
-            String firstname = rs.getString("firstname");
-            String lastname = rs.getString("lastname");
-            String title = rs.getString("title");
-            String content = rs.getString("content");
-            float costhire = rs.getFloat("costHire");
-            String status = rs.getString("statusname");
 
-            list.add(new HireRequestlist(id, firstname, lastname, title, content, costhire, status));
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-        System.err.println("Error in pagingMentorHireRequest: " + e.getMessage());
-    } finally {
+    public List<HireRequestlist> pagingMentorHireRequest(int mentorid, int index) {
+        List<HireRequestlist> list = new ArrayList<>();
+        query = "SELECT h.id, h.menteeid, h.mentorid, h.title, h.content, h.statusid, "
+                + "s.[Status] as statusname, m.firstname, m.lastname, mt.costHire "
+                + "FROM hirerequest h "
+                + "JOIN mentee m ON h.menteeid = m.id "
+                + "JOIN [status] s ON h.statusid = s.id "
+                + "JOIN mentor mt ON h.mentorid = mt.id "
+                + "WHERE h.mentorid = ? "
+                + "ORDER BY h.id "
+                + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
         try {
-            if (rs != null) rs.close();
-            if (ps != null) ps.close();
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mentorid);
+            ps.setInt(2, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstname = rs.getString("firstname");
+                String lastname = rs.getString("lastname");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                float costhire = rs.getFloat("costHire");
+                String status = rs.getString("statusname");
+
+                list.add(new HireRequestlist(id, firstname, lastname, title, content, costhire, status));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.err.println("Error in pagingMentorHireRequest: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return list;
     }
-    return list;
-}
 
     public int getTotalMentorHireRequest(int mentorid) {
         query = "SELECT COUNT(*) count FROM hirerequest WHERE mentorid = ?";
@@ -351,16 +447,20 @@ public class MenteeDAO extends DBContext {
             System.err.println("Error in getTotalMentorHireRequest: " + e.getMessage());
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         return 0;
     }
-    
-public List<CodeRequest> searchRequest(String name, int index, int mid) {
+
+    public List<CodeRequest> searchRequest(String name, int index, int mid) {
         List<CodeRequest> list = new ArrayList<>();
         query = "SELECT * FROM coderequest c WHERE menteeid=? AND (c.title LIKE ? OR c.content LIKE ?)\n"
                 + "ORDER BY id\n"
@@ -385,9 +485,7 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
         return list;
     }
 
-
 // Đếm tổng số request toàn hệ thống
-
     public int countAllRequest() {
         int count = 0;
         try {
@@ -405,7 +503,6 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
     }
 
     // Đếm tổng số hire request toàn hệ thống
-    
     public int countAllHireRequest() {
         int count = 0;
         try {
