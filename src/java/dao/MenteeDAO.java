@@ -422,7 +422,7 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
         return count;
     }
     
-     public List<HireRequestlist> getAllHireRequests(int index) {
+  public List<HireRequestlist> getAllHireRequests(int index) {
         List<HireRequestlist> list = new ArrayList<>();
         query = "SELECT h.id,  m.firstname, m.lastname, h.title, h.content, m.costHire, s.[Status] " +
                 "FROM hirerequest h, [status] s, mentor m " +
@@ -530,5 +530,6 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
         } catch (Exception e) {
         }
     }
+
 
 }

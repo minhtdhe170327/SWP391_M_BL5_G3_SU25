@@ -74,10 +74,10 @@
                 <a href="AdminViewAllRequest">
                     <i class="bi bi-list-check"></i> Total Request <br>
                 </a>
-                <a href="ViewAllHireRequest">
+                <a href="AdminViewAllHireRequest">
                     <i class="bi bi-briefcase"></i> Total Hire Request <br>
                 </a>
-                <a href="ViewAllPost">
+                <a href="AdminViewAllPost">
                     <i class="bi bi-file-earmark-text"></i> Total Post <br>
                 </a>
                 <a href="ViewRegisterMentorRequest">

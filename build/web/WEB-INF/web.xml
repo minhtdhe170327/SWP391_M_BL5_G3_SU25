@@ -145,9 +145,21 @@
         <servlet-class>controller.AdminDashboard</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>AdminViewAllRequest</servlet-name>
         <servlet-class>controller.AdminViewAllRequest</servlet-class>
+    </servlet>
+    <servlet>
+
+        <servlet-name>CreateHireRequest</servlet-name>
+        <servlet-class>controller.CreateHireRequest</servlet-class>
+</servlet>
+<servlet>
+        <servlet-name>AdminViewAllPost</servlet-name>
+        <servlet-class>controller.AdminViewAllPost</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminViewAllHireRequest</servlet-name>
+        <servlet-class>controller.AdminViewAllHireRequest</servlet-class>
 
     </servlet>
     <servlet-mapping>
@@ -295,9 +307,21 @@
         <url-pattern>/AdminDashboard</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>AdminViewAllRequest</servlet-name>
         <url-pattern>/AdminViewAllRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+
+        <servlet-name>CreateHireRequest</servlet-name>
+        <url-pattern>/CreateHireRequest</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+        <servlet-name>AdminViewAllPost</servlet-name>
+        <url-pattern>/AdminViewAllPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminViewAllHireRequest</servlet-name>
+        <url-pattern>/AdminViewAllHireRequest</url-pattern>
 
     </servlet-mapping>
 </web-app>
