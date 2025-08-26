@@ -72,7 +72,7 @@ public class EditHireRequest extends HttpServlet {
         if (menteeid == null && title == null && content == null && mentorid == null) {
             HireRequest list = dao.getHireRequestbyid(id);  
             request.setAttribute("requesthire", list);
-            request.getRequestDispatcher("EditHireRequest.jsp").forward(request, response);
+            request.getRequestDispatcher("views/EditHireRequest.jsp").forward(request, response);
         } else {
             HireRequest list = dao.getHireRequestbyid(id);
             if (mentorid == null) {

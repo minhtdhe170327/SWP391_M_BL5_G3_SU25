@@ -82,11 +82,13 @@
                         </div>
 
                         <div class="text-center text-lg-start mt-4 pt-2 mb-4" style="position: relative">
-                            <button type="submit" class="btn btn-outline-primary btn-lg"style="padding-left: 2.5rem; padding-right: 2.5rem;">
-                                Save
-                            </button>
-                            <button onclick='window.history.go(-1);' class="btn btn-outline-primary btn-lg" style="position: absolute; margin-left: 20px">Back</button>
-                        </div>            
+    <button type="submit" class="btn btn-outline-primary btn-lg"
+            style="padding-left: 2.5rem; padding-right: 2.5rem;">
+        Save
+    </button>
+    <a href="ViewAllHireRequest" class="btn btn-outline-primary btn-lg" 
+       style="position: absolute; margin-left: 20px">Back</a>
+</div>         
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-4 offset-xl-1" style="height: 600px; margin-right: 100px">
                         <section class="testimonials" data-aos="fade-up">
@@ -101,7 +103,7 @@
                                         <c:forEach items="${sessionScope.listallmentor}" var="l">
                                             <div class="testimonial-item swiper-slide">
                                                 <img src="assets/img/mentor/${l.avatar}" class="testimonial-img" alt="">
-                                                <h3>${l.name}</h3>
+                                                <h3>${l.fullname}</h3>
                                                 <h4>Cost Hire:</h4>
                                                 <p>
                                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>

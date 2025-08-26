@@ -549,18 +549,19 @@ public HireRequest getHireRequestbyid(int requestid){
         }
         return null;
     }
-public void updateHireRequest(int id, int menteeid, int mentorid,String title,String content) {
-        query = "UPDATE hirerequest SET menteeid=?, mentorid=?, title=?,content=? WHERE id=?";
-        try {
-            ps = connection.prepareStatement(query);
-            ps.setInt(1, menteeid);
-            ps.setInt(2, mentorid);
-            ps.setString(3,title);
-            ps.setString(4, content);
-            ps.setInt(5, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-        }
+public void updateHireRequest(int id, int menteeid, int mentorid, String title, String content) {
+    String query = "UPDATE hirerequest SET menteeid=?, mentorid=?, title=?, content=? WHERE id=?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, menteeid);
+        ps.setInt(2, mentorid);
+        ps.setString(3, title);
+        ps.setString(4, content);
+        ps.setInt(5, id);
+        ps.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 
 }
