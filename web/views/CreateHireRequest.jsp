@@ -100,6 +100,7 @@
                                             <div class="testimonial-item swiper-slide">
                                                 <img src="assets/img/mentor/${l.avatar}" class="testimonial-img" alt="">
                                                 <h3>${l.lastname} ${l.firstname}</h3>
+                                                
                                                 <h4>Cost Hire:</h4>
                                                 <p>
                                                     <i class="bx bxs-quote-alt-left quote-icon-left"></i>
