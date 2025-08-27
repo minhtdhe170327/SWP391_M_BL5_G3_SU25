@@ -87,13 +87,7 @@
                                         <li><a href="MyPost">My Posts</a></li>
                                         <li><a href="SavedPost">Favorite Post</a></li>
                                         </c:if>
-                                        <c:if test="${sessionScope.account.roleid==3}">
-                                        <li><a href="ViewMentorAccount">Mentor Account List</a></li>
-                                        <li><a href="ViewMenteeAccount">Mentee Account List</a></li>
-                                        <li><a href="ViewAllMentee">Mentee List</a></li>
-                                        <li><a href="AdminSkillManager">Skill Manager</a></li>
-                                        <li><a href="JobManager">Job Manager</a></li>
-                                        </c:if>
+                                        
                                     <li><a href="LogOut?accountid=${sessionScope.account.id}">Sign Out</a></li>
 
                                 </ul>

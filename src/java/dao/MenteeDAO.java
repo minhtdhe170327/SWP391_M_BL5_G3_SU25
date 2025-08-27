@@ -505,5 +505,128 @@ public List<CodeRequest> searchRequest(String name, int index, int mid) {
         }
         return 0;
     }
+    
+    public void deleteHireRequest(int id) {
+        query = "DELETE FROM hirerequest WHERE id = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) ps.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+        
+        
+    public List<CodeRequest> getAllRequests(int index) {
+    List<CodeRequest> list = new ArrayList<>();
+    query = "SELECT c.id, c.title, c.content, c.deadline, c.menteeid, " +
+            "m.firstname, m.lastname, m.avatar " +
+            "FROM coderequest c " +
+            "JOIN mentee m ON c.menteeid = m.id " +
+            "ORDER BY c.id " +
+            "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, (index - 1) * 4);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String title = rs.getString("title");
+            String content = rs.getString("content");
+            java.sql.Date deadline = rs.getDate("deadline");
+            int menteeid = rs.getInt("menteeid");
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            String menteeAvatar = rs.getString("avatar");
+
+            Mentee mentee = new Mentee();
+            mentee.setId(menteeid);
+            mentee.setFirstname(firstname);
+            mentee.setLastname(lastname);
+            mentee.setAvatar(menteeAvatar);
+
+            CodeRequest request = new CodeRequest(id, title, content, deadline, menteeid);
+            request.setMentee(mentee);
+            list.add(request);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
+
+    public int getTotalAllRequests() {
+        query = "SELECT COUNT(*) count FROM coderequest";
+        try {
+            ps = connection.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int x = rs.getInt("count");
+                return x;
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    
+        public void deleteCodeRequest(int id) {
+        query = "DELETE FROM coderequest WHERE id = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) ps.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+        
+        
+    public int getTotalFeedback() {
+        int total = 0;
+        String sql = "SELECT COUNT(*) FROM Feedback";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+    
+    
+    public int getTotalAnswer() {
+    int total = 0;
+    String sql = "SELECT COUNT(*) FROM answer";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            total = rs.getInt(1);
+        }
+        rs.close();
+        ps.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return total;
+}
 
 }

@@ -156,6 +156,10 @@
         <servlet-name>AdminViewAllHireRequest</servlet-name>
         <servlet-class>controller.AdminViewAllHireRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminViewAllFeedback</servlet-name>
+        <servlet-class>controller.AdminViewAllFeedback</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -311,5 +315,9 @@
     <servlet-mapping>
         <servlet-name>AdminViewAllHireRequest</servlet-name>
         <url-pattern>/AdminViewAllHireRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminViewAllFeedback</servlet-name>
+        <url-pattern>/AdminViewAllFeedback</url-pattern>
     </servlet-mapping>
 </web-app>
