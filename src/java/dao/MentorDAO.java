@@ -470,6 +470,40 @@ public class MentorDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+    
+    
+    public Mentor getMentorDetailByAccountId(int accountId) {
+    query = "SELECT m.*, a.accountname, a.email " +
+            "FROM Mentor m JOIN Account a ON m.accountid = a.id " +
+            "WHERE m.accountid = ?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, accountId);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            Mentor mentor = new Mentor();
+            mentor.setId(rs.getInt("id"));
+            mentor.setAccountid(rs.getInt("accountid"));
+            mentor.setAccountname(rs.getString("accountname"));
+            mentor.setEmail(rs.getString("email"));
+            mentor.setFirstname(rs.getString("firstname"));
+            mentor.setLastname(rs.getString("lastname"));
+            mentor.setAddress(rs.getString("address"));
+            mentor.setPhone(rs.getString("phone"));
+            mentor.setBirthday(rs.getDate("birthday"));
+            mentor.setSex(rs.getString("sex"));
+            mentor.setIntroduce(rs.getString("introduce"));
+            mentor.setAchievement(rs.getString("achievement"));
+            mentor.setAvatar(rs.getString("avatar"));
+            mentor.setCost(rs.getFloat("costHire"));
+            return mentor;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+
 
     
 } 

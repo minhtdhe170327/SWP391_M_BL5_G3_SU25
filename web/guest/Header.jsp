@@ -71,7 +71,7 @@
                                 <li class="dropdown"><a href="#"><span>Hello ${sessionScope.getmentor.fullname} </span> <i class="bi bi-chevron-down"></i></a>
                                     </c:if>
                                 <ul>
-                                    <li><a href="<%=request.getContextPath()%>/ChangePass">Change Pasword</a></li>
+                                    <li>
                                         <c:if test="${sessionScope.getmentee!=null}">
                                         <li><a href="ViewMenteeProfile?accmenteeid=${sessionScope.getmentee.accountid}">Profile</a></li>
                                         <li><a href="ViewAllRequest?menteeid=${sessionScope.getmentee.id}">My Request</a></li>
@@ -87,11 +87,7 @@
                                         <li><a href="SavedPost">Favorite Post</a></li>
                                         </c:if>
                                         <c:if test="${sessionScope.account.roleid==3}">
-                                        <li><a href="ViewMentorAccount">Mentor Account List</a></li>
-                                        <li><a href="ViewMenteeAccount">Mentee Account List</a></li>
-                                       
-                                        <li><a href="AdminSkillManager">Skill Manager</a></li>
-                                        <li><a href="JobManager">Job Manager</a></li>
+                                        <li><a href="AdminDashboard">Dashboard</a></li> 
                                         </c:if>
                                     <li><a href="LogOut?accountid=${sessionScope.account.id}">Sign Out</a></li>
 
