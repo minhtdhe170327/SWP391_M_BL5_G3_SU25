@@ -61,13 +61,30 @@ public class UpdateAnswer extends HttpServlet {
         processRequest(request, response);
          String mentorid = request.getParameter("mentorid");
         String answerid = request.getParameter("answerid");
-        int aid = Integer.parseInt(answerid);
-        int mid = Integer.parseInt(mentorid);
+        String coderequestid = request.getParameter("coderequestid");
+		// Validate and safely parse IDs to avoid NumberFormatException on empty input
+        if (answerid == null || answerid.trim().isEmpty() || mentorid == null || mentorid.trim().isEmpty() || coderequestid == null || coderequestid.trim().isEmpty()) {
+            request.setAttribute("error", "Missing required identifiers to update the answer.");
+            request.getRequestDispatcher("views/UpdateAnswer.jsp").forward(request, response);
+            return;
+        }
+        int aid;
+        int mid;
+        int rid;
+        try {
+            aid = Integer.parseInt(answerid.trim());
+            mid = Integer.parseInt(mentorid.trim());
+            rid = Integer.parseInt(coderequestid.trim());
+        } catch (NumberFormatException ex) {
+            request.setAttribute("error", "Invalid identifier format.");
+            request.getRequestDispatcher("views/UpdateAnswer.jsp").forward(request, response);
+            return;
+        }
         String content = request.getParameter("content");
         MentorDAO dao=new MentorDAO();
             dao.updateAnswer(aid,content );
-            request.setAttribute("done", "update successful");
-            request.getRequestDispatcher("/ViewMentorRequestDetail?reid=" + aid+"&mentorid="+mid).forward(request, response);
+            // Use redirect so the target controller receives the query parameters and loads fresh data
+            response.sendRedirect(request.getContextPath()+"/ViewMentorRequestDetail?reid=" + rid+"&mentorid="+mid);
     }
 
     /** 

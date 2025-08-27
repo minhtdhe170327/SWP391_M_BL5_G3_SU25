@@ -25,6 +25,8 @@
         <div class="d-flex justify-content-end mb-3">
             <c:if test="${answer != null}">
                 <form action="<%=request.getContextPath()%>/views/UpdateAnswer.jsp" method="post">
+                    <input type="hidden" name="mentorid" value="${sessionScope.getmentor.id}"/>
+                    <input type="hidden" name="answerid" value="${answer.id}"/>
                     <button type="submit" class="btn btn-outline-primary">Edit Answer</button>
                 </form>
             </c:if>

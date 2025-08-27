@@ -66,7 +66,7 @@
                                 ${error}
                             </p>
                         </c:if>  
-                            <form class="" action="<%=request.getContextPath()%>/UpdateAnswer?mentorid=${sessionScope.getmentor.id}&answerid=${sessionScope.answer.id}" method="post" style="position: relative">
+                            <form class="" action="<%=request.getContextPath()%>/UpdateAnswer" method="post" style="position: relative">
                     <div class="cr" >
                         <div class="col-md-6 col-lg-6 col-xl-4 offset-xl-1" style="height: 600px; mae">
                             <h2 class="text-center text-primary fw-bold">Edit Answer</h2>                                   
@@ -92,6 +92,10 @@
                             <label class="form-label">Content<strong style="color: red">*</strong></label>
                             <textarea name="content" rows="4" class="form-control form-control-lg" required>${sessionScope.answer.content}</textarea>
                         </div>
+                        <!-- Hidden identifiers to ensure servlet receives required parameters -->
+                        <input type="hidden" name="mentorid" value="${empty param.mentorid ? sessionScope.getmentor.id : param.mentorid}"/>
+                        <input type="hidden" name="answerid" value="${empty param.answerid ? sessionScope.answer.id : param.answerid}"/>
+                        <input type="hidden" name="coderequestid" value="${empty param.coderequestid ? sessionScope.coderequest.id : param.coderequestid}"/>
 
                         <div class="text-center text-lg-start mt-4 pt-2 mb-4">
                             <button type="submit" class="btn btn-outline-primary btn-lg"style="padding-left: 2.5rem; padding-right: 2.5rem;">

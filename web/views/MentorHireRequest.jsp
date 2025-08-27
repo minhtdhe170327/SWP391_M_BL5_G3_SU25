@@ -51,12 +51,7 @@
                 </c:if>
 
                 <div class="d-flex">
-                    <form action="SearchHireRequest?mentorid=${sessionScope.getmentor.id}" method="post">
-                        <div class="input-group" style="margin: 10px; padding-right: 500px;padding-left: 100px;">
-                            <input value="${searchtext}" type="text" class="form-control" placeholder="Search" name="name">
-                            <button type="submit" class="btn btn-secondary"><i class="bi-search"></i></button>  
-                        </div> 
-                    </form>
+                 
                 </div>
 
                 <div class="container-fluid h-custom">
