@@ -57,7 +57,7 @@
     </style>
 </head>
 <body>
-    <jsp:include page="../guest/Header.jsp" />
+    
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->

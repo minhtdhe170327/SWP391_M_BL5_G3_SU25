@@ -8,6 +8,7 @@
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/dao/AccountDAO.java</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/entity/Skill.java</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/SearchHireRequest.java</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/AdminDashboard.jsp</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/EditHireRequest.jsp</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/guest/HomePage.jsp</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/EditHireRequest.java</file>
@@ -15,6 +16,7 @@
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/ViewAllHireRequest.java</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/MyHireRequest.jsp</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/MentorList.jsp</file>
+            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/LoginController.java</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/entity/Mentor.java</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/DeleteHireRequest.java</file>
             <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/ViewAllMentorHireRequest.jsp</file>
