@@ -18,7 +18,7 @@ public class AdminEditAccount extends HttpServlet {
             MentorDAO mentorDao = new MentorDAO();
             Account editAccount = accDao.getAccountByid(id);
             if (editAccount == null) {
-                response.sendRedirect("ViewAllAccount");
+                response.sendRedirect("ViewMenteeAccount");
                 return;
             }
             request.setAttribute("editAccount", editAccount);
@@ -32,7 +32,7 @@ public class AdminEditAccount extends HttpServlet {
             request.getRequestDispatcher("/views/AdminEditAccount.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("ViewAllAccount");
+            response.sendRedirect("ViewMenteeAccount");
         }
     }
 
@@ -50,7 +50,7 @@ public class AdminEditAccount extends HttpServlet {
             MentorDAO mentorDao = new MentorDAO();
             Account acc = accDao.getAccountByid(id);
             if (acc == null) {
-                response.sendRedirect("ViewAllAccount");
+                response.sendRedirect("ViewMenteeAccount");
                 return;
             }
             if (password != null && !password.trim().isEmpty()) {
@@ -98,10 +98,10 @@ public class AdminEditAccount extends HttpServlet {
                     );
                 }
             }
-            response.sendRedirect("ViewAllAccount");
+            response.sendRedirect("ViewMenteeAccount");
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("ViewAllAccount");
+            response.sendRedirect("ViewMenteeAccount");
         }
     }
 }

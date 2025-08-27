@@ -53,13 +53,12 @@
                             <strong>Email:</strong>
                             <input type="email" name="email" value="${editAccount.email}" class="form-control"/>
                         </div>
+                        
                         <div class="info-item">
                             <strong>Password:</strong>
-                            <div class="input-group">
-                                <input type="password" id="passwordField1" name="password" value="${editAccount.password}" class="form-control"/>
-                                <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('passwordField1', this)">Show</button>
-                            </div>
+                            <input type="password" name="password" value="" class="form-control"/>
                         </div>
+                        
                         <div class="info-item">
                             <strong>Phone:</strong>
                             <input type="text" name="phone" value="${mentee.phone}" class="form-control"/>
@@ -103,13 +102,12 @@
                             <strong>Email:</strong>
                             <input type="email" name="email" value="${editAccount.email}" class="form-control"/>
                         </div>
+                        
                         <div class="info-item">
                             <strong>Password:</strong>
-                            <div class="input-group">
-                                <input type="password" id="passwordField2" name="password" value="${editAccount.password}" class="form-control"/>
-                                <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('passwordField2', this)">Show</button>
-                            </div>
+                            <input type="password" name="password" value="" placeholder="Nhập mật khẩu mới nếu muốn đổi" class="form-control"/>
                         </div>
+                        
                         <div class="info-item">
                             <strong>Phone:</strong>
                             <input type="text" name="phone" value="${mentor.phone}" class="form-control"/>

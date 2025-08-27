@@ -104,7 +104,7 @@
                                        title="View">
                                         <i class="bi bi-eye me-1"></i> View
                                     </a>
-                                    <a href="AdminEditAccount?id=${c.id}" 
+                                    <a href="AdminEditMentorAccount?id=${c.id}" 
                                        class="btn btn-warning btn-sm me-1 text-white fw-bold d-inline-flex align-items-center" 
                                        title="Edit">
                                         <i class="bi bi-pencil-square me-1"></i> Edit
