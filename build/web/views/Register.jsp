@@ -22,7 +22,7 @@
         </div>
         <div class="nav-button">
             <button class="btn" id="loginBtn" onclick="window.location.href='Login'">Sign in</button>
-            <button class="btn white-button" id="registerBtn" onclick="window.location.href='Register.jsp'">Sign up</button>
+            <button class="btn white-button" id="registerBtn" onclick="window.location.href='Register'">Sign up</button>
         </div>
         <div class="nav-menu-btn">
             <i id="navMenuBtn" class="bx bx-menu" onclick="myMenuFunction()"></i>
@@ -66,7 +66,6 @@
                             <option value="">Gender</option>
                             <option value="M" ${param.sex == 'M' ? 'selected' : ''}>Male</option>
                             <option value="F" ${param.sex == 'F' ? 'selected' : ''}>Female</option>
-                            <option value="O" ${param.sex == 'O' ? 'selected' : ''}>Other</option>
                         </select>
                         <i class="bx bx-male-female"></i>
                     </div>

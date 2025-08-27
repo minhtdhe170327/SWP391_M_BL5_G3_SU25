@@ -21,7 +21,7 @@
                     </ul>
                 </div>
                 <div class="nav-button">
-                    <button class="btn white-button" id="loginBtn" onclick="window.location.href='Login.jsp'">
+                    <button class="btn white-button" id="loginBtn" onclick="window.location.href='<%=request.getContextPath()%>/Login'">
                         Sign in
                     </button>
                     <button class="btn" id="registerBtn" onclick="window.location.href='<%=request.getContextPath()%>/Register'">

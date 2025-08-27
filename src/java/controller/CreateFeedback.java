@@ -69,27 +69,36 @@ public class CreateFeedback extends HttpServlet {
         String star = request.getParameter("star");
         String comment = request.getParameter("comment");
         MenteeDAO dao = new MenteeDAO();
-        if (menteeid == null && star == null && comment == null) {
+        // Initial load: no star and no comment selected yet -> show form
+        if ((star == null || star.trim().isEmpty()) && (comment == null)) {
             request.setAttribute("answerid", answeid);
             request.getRequestDispatcher("views/CreateFeedback.jsp").forward(request, response);
-        } else {
-            if (star == null) {
-                request.setAttribute("error", "you don't choose the star");
-                request.getRequestDispatcher("views/CreateFeedback.jsp").forward(request, response);
-            } else {
-                int idmentee = Integer.parseInt(menteeid);
-                int stars = Integer.parseInt(star);
-                int answer = Integer.parseInt(answeid);
-                dao.createFeedback(idmentee, stars, comment);
-                Feedback f = dao.getfeedbackadd();
-                dao.createFeedbackAnswer(f.getId(), answer);
-                request.setAttribute("menteeid", menteeid);
-                request.setAttribute("coderequestid", coderequstid);
-                request.setAttribute("mentorid", mentorid);
-                request.setAttribute("done", "Create success");
-                request.getRequestDispatcher("views/DetailAnswer.jsp").forward(request, response);
-            }
+            return;
         }
+
+        // Validation: require star and required ids
+        if (star == null || star.trim().isEmpty()) {
+            request.setAttribute("error", "you don't choose the star");
+            request.setAttribute("answerid", answeid);
+            request.getRequestDispatcher("views/CreateFeedback.jsp").forward(request, response);
+            return;
+        }
+        if (menteeid == null || menteeid.trim().isEmpty() || answeid == null || answeid.trim().isEmpty()) {
+            request.setAttribute("error", "Missing identifiers to create feedback.");
+            request.setAttribute("answerid", answeid);
+            request.getRequestDispatcher("views/CreateFeedback.jsp").forward(request, response);
+            return;
+        }
+
+        int idmentee = Integer.parseInt(menteeid.trim());
+        int stars = Integer.parseInt(star.trim());
+        int answer = Integer.parseInt(answeid.trim());
+        dao.createFeedback(idmentee, stars, comment);
+        Feedback f = dao.getfeedbackadd();
+        dao.createFeedbackAnswer(f.getId(), answer);
+        // Redirect to load fresh data via controller
+        response.sendRedirect(request.getContextPath() + "/ViewDetailAnswer?mentorid=" + mentorid
+                + "&menteeid=" + menteeid + "&coderequestid=" + coderequstid);
     }
 
     /**

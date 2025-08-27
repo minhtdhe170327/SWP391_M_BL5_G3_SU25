@@ -88,12 +88,9 @@ public class EditFeedback extends HttpServlet {
                 int s = Integer.parseInt(star);
                 dao.updateFeedback(id, s, comment);
                 Feedback b = dao.getfeedbackbyid(id);
-                request.setAttribute("feedback", b);
-                request.setAttribute("done", "Edit Success");
-                request.setAttribute("menteeid", menteeid);
-                request.setAttribute("coderequestid", coderequstid);
-                request.setAttribute("mentorid", mentorid);
-                request.getRequestDispatcher("views/DetailAnswer.jsp").forward(request, response);
+                // Redirect to controller so data reloads from DB
+                response.sendRedirect(request.getContextPath() + "/ViewDetailAnswer?mentorid=" + mentorid
+                        + "&menteeid=" + menteeid + "&coderequestid=" + coderequstid);
             }
 
         }

@@ -126,7 +126,7 @@
                         ${error}
                     </p>
                 </c:if>  
-                    <form action="CreateFeedback?answerid=${answerid}&menteeid=${sessionScope.getmentee.id}" method="post">
+                    <form action="CreateFeedback?answerid=${answerid}&menteeid=${sessionScope.getmentee.id}&mentorid=${param.mentorid}&coderequestid=${param.coderequestid}" method="post">
 
                     <h2 class="text-center text-primary fw-bold">New Feedback</h2>                                   
                         <!-- Username input -->
