@@ -117,23 +117,21 @@ session.setAttribute("account", acc);
                HttpSession session = request.getSession(true);
                 
                 int role = dao.checkrole(acc.getId());
+                
                 if (role == 2) {
-    Mentor mentor = mentordao.getMentorbyAccID(acc.getId());
-    session.setAttribute("getmentor", mentor);
-    response.sendRedirect("ViewTop3Mentor");
-} else if (role == 1) {
-    Mentee mentee = menteedao.getMenteebyAccID(acc.getId());
-    List<Mentor> list = mentordao.getAllMentor();
-    List<Skill> listskill = mentordao.getallskill();
-    session.setAttribute("getmentee", mentee);
-    session.setAttribute("listallmentor", list);
-    session.setAttribute("listallskill", listskill);
-    response.sendRedirect("ViewTop3Mentor");
-} else if (role == 3) {
-    // Nếu là admin
-    session.setAttribute("account", acc);
-    response.sendRedirect("AdminDashboard");
-}
+                    Mentor mentor = mentordao.getMentorbyAccID(acc.getId());
+                    session.setAttribute("getmentor", mentor);
+                }
+                if (role == 1) {
+                    Mentee mentee = menteedao.getMenteebyAccID(acc.getId());
+                    List<Mentor> list = mentordao.getAllMentor();
+                    List<Skill> listskill = mentordao.getallskill();
+                    session.setAttribute("getmentee", mentee);
+                    session.setAttribute("listallmentor", list);
+                    session.setAttribute("listallskill", listskill);
+                }
+                session.setAttribute("account", acc);
+                response.sendRedirect("ViewTop3Mentor");
             }
         } catch (Exception e) {
             request.setAttribute("err", "Đã xảy ra lỗi. Vui lòng thử lại sau.");
