@@ -65,7 +65,7 @@
             <!-- Sidebar -->
             <div class="col-md-2 sidebar">
                 <h3 class="text-center mb-4">
-                    <i class="bi bi-speedometer2"></i> Admin Panel
+                    <i class="bi bi-speedometer2"></i> Admin Dashboard
                 </h3>
                 <a href="ViewMenteeAccount"><i class="bi bi-person-lines-fill"></i> Account Mentee List</a>
                 <a href="ViewMentorAccount"><i class="bi bi-person-badge-fill"></i> Account Mentor List</a>
@@ -75,12 +75,13 @@
                 <a href="AdminViewAllFeedback"><i class="bi bi-chat-dots-fill"></i> Total Feedback</a>
                 <a href="AdminSkillManager"><i class="bi bi-lightning-charge-fill"></i> Skill Manager</a>
                 <a href="JobManager"><i class="bi bi-briefcase"></i> Job Manager</a>
+                <a href="<%=request.getContextPath()%>/ChangePass"><i class="bi bi-key"></i> Change Pasword</a>
                 <a href="LogOut"><i class="bi bi-box-arrow-right"></i> Logout</a>
             </div>
 
             <!-- Main Content -->
             <div class="col-md-10 main-content">
-                <h2 class="mb-4">Welcome to Admin Dashboard</h2>
+                <h2 class="mb-4">Admin Dashboard</h2>
 
                 <!-- Row 1: Total -->
                 <div class="row">
