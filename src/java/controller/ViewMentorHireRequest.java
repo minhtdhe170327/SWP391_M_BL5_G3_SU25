@@ -26,7 +26,7 @@ public class ViewMentorHireRequest extends HttpServlet {
             // Check if user is logged in and is a mentor
             if (request.getSession().getAttribute("account") == null || 
                 request.getSession().getAttribute("getmentor") == null) {
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("views/Login.jsp");
                 return;
             }
 
@@ -34,7 +34,7 @@ public class ViewMentorHireRequest extends HttpServlet {
             String mentorid = request.getParameter("mentorid");
             
             if (mentorid == null) {
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("views/Login.jsp");
                 return;
             }
             
@@ -63,7 +63,7 @@ public class ViewMentorHireRequest extends HttpServlet {
             request.setAttribute("endpage", end);
             request.setAttribute("tag", indexp);
             request.setAttribute("hirerequests", list);
-            request.getRequestDispatcher("MentorHireRequest.jsp").forward(request, response);
+            request.getRequestDispatcher("views/MentorHireRequest.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Invalid mentor ID format");
             request.getRequestDispatcher("error.jsp").forward(request, response);

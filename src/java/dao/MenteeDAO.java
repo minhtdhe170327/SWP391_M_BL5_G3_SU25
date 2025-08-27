@@ -660,6 +660,48 @@ public void updateHireRequest(int id, int menteeid, int mentorid, String title, 
         e.printStackTrace();
     }
 }
+//public void deleteHireRequest(int id) {
+//    String sql = "DELETE FROM hirerequest WHERE id = ?";
+//    try {
+//        PreparedStatement ps = connection.prepareStatement(sql);
+//        ps.setInt(1, id);
+//        ps.executeUpdate();
+//        System.out.println("Deleted hirequest id=" + id + " successfully!");
+//    } catch (Exception e) {
+//        e.printStackTrace();
+//    }
+//}
+
+public List<HireRequestlist> searchHireRequest(String name, int index, int mid) {
+        List<HireRequestlist> list = new ArrayList<>();
+        query = "SELECT h.id,m.firstname, m.lastname,h.title,h.content,m.costhire,s.[Status] FROM hirerequest h, [status] s,mentor m \n"
+                 + "WHERE h.mentorid=m.id AND h.statusid=s.id AND menteeid=?\n"
+                + "AND (h.title LIKE ? OR h.content LIKE ? OR m.name LIKE ?)"
+                 + "ORDER BY id\n"
+                 + "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, mid);
+            ps.setString(2, "%" + name + "%");
+            ps.setString(3, "%" + name + "%");
+            ps.setString(4, "%" + name + "%");
+            ps.setInt(5, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                 String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                float cost=rs.getFloat("costhire");
+                String status = rs.getString("status");
+                list.add(new HireRequestlist(id, firstname,lastname, title, content, cost, status));
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
 
 public int getTotalFeedback() {
         int total = 0;

@@ -83,7 +83,7 @@
                                 <th>Content</th>
                                 <th>Cost Hire</th>
                                 <th>Status</th>
-                                <th>Edit</th>
+                                <th>Action</th>
                             </tr>
                             <c:set var="i" value="1" />
                             <c:forEach items="${hirerequest}" var="c">

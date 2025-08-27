@@ -165,8 +165,22 @@
         <servlet-class>controller.EditHireRequest</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>DeleteHireRequest</servlet-name>
+        <servlet-class>controller.DeleteHireRequest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateHireRequestStatus</servlet-name>
+        <servlet-class>controller.UpdateHireRequestStatus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchHireRequest</servlet-name>
+        <servlet-class>controller.SearchHireRequest</servlet-class>
+</servlet>
+<servlet>
         <servlet-name>AdminViewAllFeedback</servlet-name>
         <servlet-class>controller.AdminViewAllFeedback</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
@@ -333,7 +347,22 @@
         <url-pattern>/EditHireRequest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
+        <servlet-name>DeleteHireRequest</servlet-name>
+        <url-pattern>/DeleteHireRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateHireRequestStatus</servlet-name>
+        <url-pattern>/UpdateHireRequestStatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchHireRequest</servlet-name>
+        <url-pattern>/SearchHireRequest</url-pattern>
+        </servlet-mapping>
+            <servlet-mapping>
+
         <servlet-name>AdminViewAllFeedback</servlet-name>
         <url-pattern>/AdminViewAllFeedback</url-pattern>
+
     </servlet-mapping>
 </web-app>

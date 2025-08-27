@@ -49,7 +49,6 @@ public class MentorDAO extends DBContext {
             }
         }
     }
-
     public List<Mentor> searchMentor(String name, int index) {
         List<Mentor> list = new ArrayList<>();
         query = "SELECT * FROM Mentor m WHERE (m.firstname + ' ' + m.lastname) LIKE ?\n"
@@ -457,4 +456,17 @@ public class MentorDAO extends DBContext {
         } catch (Exception e) {
         }
     }
-}
+
+    public void updateHireRequestStatus(int requestId, int statusId) {
+        query = "UPDATE hirerequest SET statusid = ? WHERE id = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, statusId);
+            ps.setInt(2, requestId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+} 
+
+
