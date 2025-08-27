@@ -208,6 +208,10 @@
         <servlet-name>AdminDeleteAccount</servlet-name>
         <servlet-class>controller.AdminDeleteAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminEditMentorAccount</servlet-name>
+        <servlet-class>controller.AdminEditMentorAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ViewTop3Mentor</servlet-name>
         <url-pattern>/ViewTop3Mentor</url-pattern>
@@ -415,5 +419,9 @@
     <servlet-mapping>
         <servlet-name>AdminDeleteAccount</servlet-name>
         <url-pattern>/AdminDeleteAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminEditMentorAccount</servlet-name>
+        <url-pattern>/AdminEditMentorAccount</url-pattern>
     </servlet-mapping>
 </web-app>
