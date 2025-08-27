@@ -661,4 +661,37 @@ public void updateHireRequest(int id, int menteeid, int mentorid, String title, 
     }
 }
 
+public int getTotalFeedback() {
+        int total = 0;
+        String sql = "SELECT COUNT(*) FROM Feedback";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return total;
+    }
+    
+    
+    public int getTotalAnswer() {
+    int total = 0;
+    String sql = "SELECT COUNT(*) FROM answer";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            total = rs.getInt(1);
+        }
+        rs.close();
+        ps.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return total;
+}
+
 }

@@ -136,7 +136,7 @@
                                 <strong>Date of Birth:</strong> <span><fmt:formatDate value="${sessionScope.getmentor.birthday}" pattern="dd/MM/yyyy" /></span>
                             </div>
                             <div class="info-item">
-                                <strong>Gender:</strong> <span>${sessionScope.getmentee.sex == 'M' ? 'Male' : 'Female'}</span>
+                                <strong>Gender:</strong> <span>${sessionScope.getmentor.sex == 'M' ? 'Male' : 'Female'}</span>
                             </div>
                             <div class="info-item">
                                 <strong>Introduction:</strong> <span>${sessionScope.getmentor.introduce}</span>
