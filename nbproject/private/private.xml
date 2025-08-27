@@ -3,38 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/dao/MenteeDAO.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/MentorHireRequest.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/dao/AccountDAO.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/entity/Skill.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/SearchHireRequest.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/AdminDashboard.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/EditHireRequest.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/guest/HomePage.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/EditHireRequest.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/guest/Header.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/ViewAllHireRequest.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/MyHireRequest.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/MentorList.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/LoginController.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/entity/Mentor.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/DeleteHireRequest.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/ViewAllMentorHireRequest.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/AdminAddAccount.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/ViewMentorRequestDetail.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/ViewAllRequest.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/MentorRequest.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/dao/MentorDAO.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/ViewRequestDetail.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/CreateRequest.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/UpdateHireRequestStatus.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/views/MentorRequestDetail.jsp</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/CreateRequest.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/web/WEB-INF/web.xml</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/SearchRequest.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/AdminAddAccount.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/entity/HireRequest.java</file>
-            <file>file:/M:/SWP/SWP391_M_BL5_G3_SU25/src/java/controller/ViewMentorHireRequest.java</file>
+            <file>file:/D:/New%20folder/SWP391_M_BL5_G3_SU25/web/WEB-INF/web.xml</file>
         </group>
     </open-files>
 </project-private>
