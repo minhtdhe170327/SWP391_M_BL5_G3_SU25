@@ -74,27 +74,29 @@
                             <c:forEach items="${hirerequests}" var="c">
                                 <tr>
                                     <td>${c.id}</td>
-                                    <td>${c.firstname} ${c.lastname}</td>
+                                    <td>${c.fullname}</td>
                                     <td>${c.title}</td>
                                     <td>${c.content}</td>
                                     <td>${c.costhire}$</td>
                                     <td>${c.status}</td>
                                     <td>
-                                        <c:if test="${c.status == 'Pending' || c.status == 'not yet'}">
-                                            <form action="UpdateHireRequestStatus" method="post" style="display: inline;">
-                                                <input type="hidden" name="requestId" value="${c.id}">
-                                                <input type="hidden" name="statusId" value="1">
-                                                <button type="submit" class="btn btn-success">Accept</button>
-                                            </form>
-                                            <form action="UpdateHireRequestStatus" method="post" style="display: inline;">
-                                                <input type="hidden" name="requestId" value="${c.id}">
-                                                <input type="hidden" name="statusId" value="2">
-                                                <button type="submit" class="btn btn-danger">Reject</button>
-                                            </form>
-                                        </c:if>
-                                        <c:if test="${c.status != 'Pending' && c.status != 'not yet'}">
-                                            <span class="badge ${c.status == 'Accepted' ? 'bg-success' : 'bg-danger'}">${c.status}</span>
-                                        </c:if>
+                                        <form action="UpdateHireRequestStatus" method="post" style="display: inline;">
+    <input type="hidden" name="requestId" value="${c.id}">
+    <input type="hidden" name="statusId" value="1">
+    <button type="submit" class="btn btn-success 
+        ${c.status == 'Accepted' ? 'disabled' : ''}">
+        Accept
+    </button>
+</form>
+
+<form action="UpdateHireRequestStatus" method="post" style="display: inline;">
+    <input type="hidden" name="requestId" value="${c.id}">
+    <input type="hidden" name="statusId" value="2">
+    <button type="submit" class="btn btn-danger 
+        ${c.status == 'Rejected' ? 'disabled' : ''}">
+        Reject
+    </button>
+</form>
                                     </td>
                                 </tr>
                             </c:forEach>

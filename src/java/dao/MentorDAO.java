@@ -378,4 +378,14 @@ public class MentorDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+    public void updateHireRequestStatus(int requestId, int statusId) {
+        query = "UPDATE hirerequest SET statusid = ? WHERE id = ?";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, statusId);
+            ps.setInt(2, requestId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 } 
