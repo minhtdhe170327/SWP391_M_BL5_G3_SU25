@@ -5,10 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>All Feedback | Admin Dashboard</title>
-    <meta name="description" content="View and manage all feedback from mentees with ratings and comments.">
-    <meta name="keywords" content="Admin, Feedback, Mentee, Comments, Ratings">
-
+    <title>All Answers | Admin Dashboard</title>
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -45,42 +42,42 @@
     <section class="breadcrumbs">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
-                <h2 class="mb-0">All Feedback</h2>
+                <h2 class="mb-0">All Answers</h2>
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="AdminDashboard">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Feedback</li>
+                    <li class="breadcrumb-item active">Answers</li>
                 </ol>
             </div>
         </div>
     </section>
 
-    <!-- Feedback Table -->
+    <!-- Answer Table -->
     <div class="container mb-5">
         <div class="table-responsive bg-white">
             <table class="table table-striped table-hover mb-0">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Mentee Name</th>
-                        <th>Star</th>
-                        <th>Comment</th>
-                        <th class="text-center">Action</th>
-                    </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Mentee Name</th>
+                    <th>Mentor Name</th>
+                    <th>Request Title</th>
+                    <th>Content</th>
+                    <th class="text-center">Actions</th>
+                </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${feedbackList}" var="f">
+                <c:forEach items="${answerList}" var="a">
                     <tr>
-                        <td>${f.id}</td>
-                        <td>${f.menteeName}</td>
-                        <td>
-                            <span class="text-warning fw-bold">${f.star} <i class="bi bi-star-fill"></i></span>
-                        </td>
-                        <td>${f.comment}</td>
+                        <td>${a.id}</td>
+                        <td>${a.menteeName}</td>
+                        <td>${a.mentorName}</td>
+                        <td>${a.requestTitle}</td>
+                        <td>${a.content}</td>
                         <td class="text-center">
-                            <form action="DeleteFeedback" method="post"
-                                  onsubmit="return confirm('Are you sure you want to delete this feedback?');"
+                            <form action="DeleteAnswer" method="post"
+                                  onsubmit="return confirm('Are you sure you want to delete this answer?');"
                                   class="d-inline">
-                                <input type="hidden" name="id" value="${f.id}">
+                                <input type="hidden" name="id" value="${a.id}">
                                 <button type="submit" class="btn btn-danger btn-sm d-inline-flex align-items-center">
                                     <i class="bi bi-trash me-1"></i> Delete
                                 </button>
@@ -93,25 +90,21 @@
         </div>
 
         <!-- Pagination -->
-        <nav class="mt-4" aria-label="Feedback pagination">
+        <nav class="mt-4" aria-label="Answer pagination">
             <ul class="pagination justify-content-center">
                 <c:if test="${tag>1}">
                     <li class="page-item">
-                        <a class="page-link" href="AdminViewAllFeedback?index=${tag-1}" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
+                        <a class="page-link" href="AdminViewAllAnswer?index=${tag-1}">&laquo;</a>
                     </li>
                 </c:if>
                 <c:forEach begin="1" end="${endpage}" var="i">
                     <li class="page-item ${i==tag?'active':''}">
-                        <a class="page-link" href="AdminViewAllFeedback?index=${i}">${i}</a>
+                        <a class="page-link" href="AdminViewAllAnswer?index=${i}">${i}</a>
                     </li>
                 </c:forEach>
                 <c:if test="${tag<endpage}">
                     <li class="page-item">
-                        <a class="page-link" href="AdminViewAllFeedback?index=${tag+1}" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
+                        <a class="page-link" href="AdminViewAllAnswer?index=${tag+1}">&raquo;</a>
                     </li>
                 </c:if>
             </ul>

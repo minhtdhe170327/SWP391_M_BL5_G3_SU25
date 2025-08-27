@@ -28,11 +28,6 @@
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Role</label>
-        <input type="text" class="form-control" value="${mentor.rolename}" disabled>
-    </div>
-
-    <div class="mb-3">
         <label class="form-label">First Name</label>
         <input type="text" class="form-control" value="${mentor.firstname}" disabled>
     </div>
@@ -75,16 +70,16 @@
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Experience</label>
-        <textarea class="form-control" rows="3" disabled>${mentor.experience}</textarea>
+        <label class="form-label">Achievement</label>
+        <textarea class="form-control" rows="3" disabled>${mentor.achievement}</textarea>
     </div>
 
     <div class="mb-3">
-        <label class="form-label">Skill</label>
-        <input type="text" class="form-control" value="${mentor.skill}" disabled>
+        <label class="form-label">Cost / Hire</label>
+        <input type="text" class="form-control" value="${mentor.cost}" disabled>
     </div>
 
-    <a href="MentorAccountList" class="btn btn-secondary">Back to List</a>
+    <a href="javascript:history.back()" class="btn btn-secondary">Back</a>
 </div>
 
 </body>

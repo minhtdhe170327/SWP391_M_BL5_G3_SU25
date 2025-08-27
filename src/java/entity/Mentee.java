@@ -7,6 +7,7 @@ public class Mentee {
     private int accountid;
     private String firstname;
     private String lastname;
+    private String name;
     private String address;
     private String phone;
     private Date birthday;
@@ -17,11 +18,25 @@ public class Mentee {
     public Mentee() {
     }
 
-    public Mentee(int id, int accountid, String firstname, String lastname, String address, String phone, Date birthday, String sex, String introduce, String avatar) {
+    public Mentee(int id, int accountid, String firstname, String lastname, String address,
+                  String phone, Date birthday, String sex, String introduce, String avatar) {
         this.id = id;
         this.accountid = accountid;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.address = address;
+        this.phone = phone;
+        this.birthday = birthday;
+        this.sex = sex;
+        this.introduce = introduce;
+        this.avatar = avatar;
+    }
+
+    public Mentee(int id, int accountid, String name, String address,
+                  String phone, Date birthday, String sex, String introduce, String avatar) {
+        this.id = id;
+        this.accountid = accountid;
+        this.name = name;
         this.address = address;
         this.phone = phone;
         this.birthday = birthday;
@@ -66,6 +81,14 @@ public class Mentee {
         return (firstname != null ? firstname : "") 
              + " " 
              + (lastname != null ? lastname : "");
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAddress() {

@@ -329,4 +329,28 @@ public class PostDAO extends DBContext{
         } catch (Exception e) {}
     }
     
+    public void deletePost(int postId) {
+    try {
+        PreparedStatement ps1 = connection.prepareStatement("DELETE FROM Comment WHERE postId=?");
+        ps1.setInt(1, postId);
+        ps1.executeUpdate();
+
+        PreparedStatement ps2 = connection.prepareStatement("DELETE FROM [Like] WHERE postId=?");
+        ps2.setInt(1, postId);
+        ps2.executeUpdate();
+
+        PreparedStatement ps3 = connection.prepareStatement("DELETE FROM PostImage WHERE postId=?");
+        ps3.setInt(1, postId);
+        ps3.executeUpdate();
+
+        PreparedStatement ps4 = connection.prepareStatement("DELETE FROM Post WHERE id=?");
+        ps4.setInt(1, postId);
+        ps4.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+
+    
 }

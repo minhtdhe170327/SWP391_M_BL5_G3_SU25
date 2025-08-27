@@ -660,17 +660,17 @@ public void updateHireRequest(int id, int menteeid, int mentorid, String title, 
         e.printStackTrace();
     }
 }
-//public void deleteHireRequest(int id) {
-//    String sql = "DELETE FROM hirerequest WHERE id = ?";
-//    try {
-//        PreparedStatement ps = connection.prepareStatement(sql);
-//        ps.setInt(1, id);
-//        ps.executeUpdate();
-//        System.out.println("Deleted hirequest id=" + id + " successfully!");
-//    } catch (Exception e) {
-//        e.printStackTrace();
-//    }
-//}
+public void deleteHireRequest(int id) {
+    String sql = "DELETE FROM hirerequest WHERE id = ?";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+        System.out.println("Deleted hirequest id=" + id + " successfully!");
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 
 public List<HireRequestlist> searchHireRequest(String name, int index, int mid) {
         List<HireRequestlist> list = new ArrayList<>();
@@ -735,5 +735,238 @@ public int getTotalFeedback() {
     }
     return total;
 }
+    
+    
+public List<CodeRequest> getAllRequests(int index) {
+    List<CodeRequest> list = new ArrayList<>();
+    String sql = "SELECT c.id, c.title, c.content, c.deadline, c.menteeid, " +
+                 "m.firstname, m.lastname, m.avatar " +
+                 "FROM coderequest c " +
+                 "JOIN mentee m ON c.menteeid = m.id " +
+                 "ORDER BY c.id " +
+                 "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+    try {
+        ps = connection.prepareStatement(sql);
+        ps.setInt(1, (index - 1) * 4);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String title = rs.getString("title");
+            String content = rs.getString("content");
+            java.sql.Date deadline = rs.getDate("deadline");
+            int menteeid = rs.getInt("menteeid");
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            String avatar = rs.getString("avatar");
+
+            Mentee mentee = new Mentee();
+            mentee.setId(menteeid);
+            mentee.setFirstname(firstname);
+            mentee.setLastname(lastname);
+            mentee.setAvatar(avatar);
+
+            CodeRequest request = new CodeRequest(id, title, content, deadline, menteeid);
+            request.setMentee(mentee);
+
+            list.add(request);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
+
+    public int getTotalAllRequests() {
+    int total = 0;
+    String sql = "SELECT COUNT(*) FROM coderequest";
+    try {
+        ps = connection.prepareStatement(sql);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            total = rs.getInt(1);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return total;
+}
+
+    
+    
+    // Lấy tất cả answer (admin dùng)
+public List<Answer> getAllAnswers(int index) {
+    List<Answer> list = new ArrayList<>();
+    query = "SELECT a.id, a.content, mc.mentorid, c.menteeid, c.title " +
+            "FROM answer a " +
+            "JOIN mentorcoderequest mc ON a.mentorcoderequestid = mc.id " +
+            "JOIN coderequest c ON mc.coderequestid = c.id " +
+            "ORDER BY a.id " +
+            "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, (index - 1) * 4);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String content = rs.getString("content");
+            int mentorId = rs.getInt("mentorid");
+            int menteeId = rs.getInt("menteeid");
+            String requestTitle = rs.getString("title");
+
+            Answer a = new Answer(id, mentorId, content);
+            // nếu muốn mở rộng có thể tạo AnswerList DTO chứa menteeId, requestTitle
+            list.add(a);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
+public int getTotalAllAnswers() {
+    query = "SELECT COUNT(*) count FROM answer";
+    try {
+        ps = connection.prepareStatement(query);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("count");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
+
+// Lấy answer theo mentee (mentee dùng)
+public List<Answer> getAnswersByMentee(int menteeId, int index) {
+    List<Answer> list = new ArrayList<>();
+    query = "SELECT a.id, a.content, mc.mentorid, c.menteeid, c.title " +
+            "FROM answer a " +
+            "JOIN mentorcoderequest mc ON a.mentorcoderequestid = mc.id " +
+            "JOIN coderequest c ON mc.coderequestid = c.id " +
+            "WHERE c.menteeid=? " +
+            "ORDER BY a.id " +
+            "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, menteeId);
+        ps.setInt(2, (index - 1) * 4);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String content = rs.getString("content");
+            int mentorId = rs.getInt("mentorid");
+            Answer a = new Answer(id, mentorId, content);
+            list.add(a);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
+public int getTotalAnswersByMentee(int menteeId) {
+    query = "SELECT COUNT(*) count " +
+            "FROM answer a " +
+            "JOIN mentorcoderequest mc ON a.mentorcoderequestid = mc.id " +
+            "JOIN coderequest c ON mc.coderequestid = c.id " +
+            "WHERE c.menteeid=?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, menteeId);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("count");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
+
+
+public List<AnswerList> getAllAnswersWithNames(int index) {
+    List<AnswerList> list = new ArrayList<>();
+    query = "SELECT a.id, a.content, " +
+            "me.firstname + ' ' + me.lastname AS menteeName, " +
+            "mt.firstname + ' ' + mt.lastname AS mentorName, " +
+            "c.title " +
+            "FROM answer a " +
+            "JOIN mentorcoderequest mc ON a.mentorcoderequestid = mc.id " +
+            "JOIN coderequest c ON mc.coderequestid = c.id " +
+            "JOIN mentee me ON c.menteeid = me.id " +
+            "JOIN mentor mt ON mc.mentorid = mt.id " +
+            "ORDER BY a.id " +
+            "OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, (index - 1) * 4);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            list.add(new AnswerList(
+                rs.getInt("id"),
+                rs.getString("content"),
+                rs.getString("mentorName"),
+                rs.getString("menteeName"),
+                rs.getString("title")
+            ));
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
+public void deleteAnswer(int id) {
+    query = "DELETE FROM answer WHERE id = ?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+        System.out.println("Deleted answer id=" + id + " successfully!");
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+public void deleteCodeRequest(int id) {
+    try {
+        connection.setAutoCommit(false);
+
+        String sql1 = "DELETE FROM MentorCodeRequestStatus WHERE mentorcoderequestid IN (SELECT id FROM mentorcoderequest WHERE coderequestid=?)";
+        ps = connection.prepareStatement(sql1);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+
+        String sql2 = "DELETE FROM answer WHERE mentorcoderequestid IN (SELECT id FROM mentorcoderequest WHERE coderequestid=?)";
+        ps = connection.prepareStatement(sql2);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+
+        String sql3 = "DELETE FROM mentorcoderequest WHERE coderequestid=?";
+        ps = connection.prepareStatement(sql3);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+
+        String sql4 = "DELETE FROM coderequestskill WHERE coderequestid=?";
+        ps = connection.prepareStatement(sql4);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+
+        String sql5 = "DELETE FROM coderequest WHERE id=?";
+        ps = connection.prepareStatement(sql5);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+
+        connection.commit();
+    } catch (Exception e) {
+        try { connection.rollback(); } catch (Exception ex) { ex.printStackTrace(); }
+        e.printStackTrace();
+    } finally {
+        try { if (ps != null) ps.close(); } catch (Exception e) {}
+    }
+}
+
 
 }

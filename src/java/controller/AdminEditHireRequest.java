@@ -14,7 +14,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.*;
 
-public class AdminViewAllRequest extends HttpServlet {
+/**
+ *
+ * @author legen
+ */
+public class AdminEditHireRequest extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -27,57 +32,6 @@ public class AdminViewAllRequest extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String index = request.getParameter("index");
-        String menteeid = request.getParameter("menteeid");
-        String mentorid = request.getParameter("mentorid");
-        
-        // Handle admin viewing all requests
-        if (menteeid == null && mentorid == null) {
-            if (index == null) {
-                index = "1";
-            }
-            int indexp = Integer.parseInt(index);
-
-            MenteeDAO dao = new MenteeDAO();
-            List<CodeRequest> list = dao.getAllRequests(indexp);
-            
-            int total = dao.getTotalAllRequests();
-            int end = total / 4;
-            if (total % 4 != 0) {
-                end++;
-            }
-
-            request.setAttribute("endpage", end);
-            request.setAttribute("coderequest", list);
-            request.getRequestDispatcher("views/AdminViewAllRequest.jsp").forward(request, response);
-            return;
-        }
-        
-        if (menteeid != null) {
-            int id = Integer.parseInt(menteeid);
-            if (index == null) {
-                index = "1";
-            }
-            int indexp = Integer.parseInt(index);
-
-            MenteeDAO dao = new MenteeDAO();
-            MentorDAO mdao = new MentorDAO();
-            List<Mentor> listmentor = mdao.getAllMentor();
-            List<CodeRequest> list = dao.pagingMenteeRequest(id, indexp);
-
-            int total = dao.getTotalMenteeRequest(id);
-            int end = total / 4;
-            if (total % 4 != 0) {
-                end++;
-            }
-
-            request.setAttribute("endpage", end);
-            request.setAttribute("tag", indexp);
-            request.setAttribute("coderequest", list);
-            request.getSession().setAttribute("listallmentor", listmentor);
-            request.getRequestDispatcher("views/AdminViewAllRequest.jsp").forward(request, response);
-            return;
-        }
 
     }
 
@@ -108,6 +62,38 @@ public class AdminViewAllRequest extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        String hid = request.getParameter("hirereid");
+        String menteeid = request.getParameter("menteeid");
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        String mentorid = request.getParameter("choosementor");
+        int id = Integer.parseInt(hid);
+        MenteeDAO dao = new MenteeDAO();      
+        if (menteeid == null && title == null && content == null && mentorid == null) {
+            HireRequest list = dao.getHireRequestbyid(id);  
+            request.setAttribute("requesthire", list);
+            request.getRequestDispatcher("views/EditHireRequest.jsp").forward(request, response);
+        } else {
+            HireRequest list = dao.getHireRequestbyid(id);
+            if (mentorid == null) {
+                mentorid = String.valueOf(list.getMentorid());
+            }
+            int idmentee = Integer.parseInt(menteeid);
+            int idmentor = Integer.parseInt(mentorid);
+            List<HireRelationship> rela = dao.getHireRelationship();
+            for (HireRelationship h : rela) {
+                if (h.getMenteeid() == id && h.getMentorid() == idmentor) {
+                    request.setAttribute("error", "You are hiring this mentor,so you can't edit");
+                    request.getRequestDispatcher("views/EditHireRequest.jsp").forward(request, response);
+                    return;
+                }
+            }
+            dao.updateHireRequest(id, idmentee, idmentor, title, content);
+            HireRequest list2 = dao.getHireRequestbyid(id); 
+            request.setAttribute("requesthire", list2);
+            request.setAttribute("done", "Edit sucess");
+            request.getRequestDispatcher("views/EditHireRequest.jsp").forward(request, response);
+        }
     }
 
     /**

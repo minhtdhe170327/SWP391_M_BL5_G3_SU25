@@ -142,31 +142,34 @@ public class MentorDAO extends DBContext {
     }
 
     public Mentor getMentorDetail(int mentorid) {
-        Mentor mentor = new Mentor();
-        query = "SELECT * FROM Mentor WHERE id=?";
-        try {
-            ps = connection.prepareStatement(query);
-            ps.setInt(1, mentorid);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                int accountid = rs.getInt("accountid");
-                String firstname = rs.getString("firstname");
-                String lastname = rs.getString("lastname");
-                String address = rs.getString("address");
-                String phone = rs.getString("phone");
-                Date birthday = rs.getDate("birthday");
-                String sex = rs.getString("sex");
-                String introduce = rs.getString("introduce");
-                String achievement = rs.getString("achievement");
-                String avatar = rs.getString("avatar");
-                float costHire = rs.getFloat("costHire");
-                mentor = new Mentor(id, accountid, firstname, lastname, address, phone, birthday, sex, introduce, achievement, avatar, costHire);
-            }
-        } catch (Exception e) {
+    Mentor mentor = new Mentor();
+    query = "SELECT m.*, a.accountname, a.email FROM Mentor m JOIN Account a ON m.accountid = a.id WHERE m.id=?";
+    try {
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, mentorid);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            mentor.setId(rs.getInt("id"));
+            mentor.setAccountid(rs.getInt("accountid"));
+            mentor.setAccountname(rs.getString("accountname"));
+            mentor.setEmail(rs.getString("email"));
+            mentor.setFirstname(rs.getString("firstname"));
+            mentor.setLastname(rs.getString("lastname"));
+            mentor.setAddress(rs.getString("address"));
+            mentor.setPhone(rs.getString("phone"));
+            mentor.setBirthday(rs.getDate("birthday"));
+            mentor.setSex(rs.getString("sex"));
+            mentor.setIntroduce(rs.getString("introduce"));
+            mentor.setAchievement(rs.getString("achievement"));
+            mentor.setAvatar(rs.getString("avatar"));
+            mentor.setCost(rs.getFloat("costHire"));
         }
-        return mentor;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return mentor;
+}
+
 
     public List<Mentor> getAllMentor() {
         List<Mentor> list = new ArrayList<>();
@@ -467,6 +470,8 @@ public class MentorDAO extends DBContext {
         } catch (Exception e) {
         }
     }
+
+    
 } 
 
 

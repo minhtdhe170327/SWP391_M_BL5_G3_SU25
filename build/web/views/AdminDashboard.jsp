@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -44,15 +43,18 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             margin: 30px 0;
         }
-        @media (max-width: 768px) {
-            .sidebar {
-                min-height: auto;
-                padding-top: 10px;
-            }
-            .main-content {
-                padding: 15px 5px;
-                margin: 10px 0;
-            }
+        a.card-link {
+            text-decoration: none;
+        }
+        .card {
+            min-height: 150px; /* cao bằng nhau */
+            display: flex;
+            align-items: center;
+        }
+        .card:hover {
+            transform: scale(1.03);
+            transition: 0.2s;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -65,105 +67,153 @@
                 <h3 class="text-center mb-4">
                     <i class="bi bi-speedometer2"></i> Admin Panel
                 </h3>
-                <a href="ViewMenteeAccount"><i class="bi bi-person-plus"></i> Account Mentee List</a>
-                <a href="ViewMentorAccount"><i class="bi bi-person-plus"></i> Account Mentor List</a>
+                <a href="ViewMenteeAccount"><i class="bi bi-person-lines-fill"></i> Account Mentee List</a>
+                <a href="ViewMentorAccount"><i class="bi bi-person-badge-fill"></i> Account Mentor List</a>
                 <a href="AdminViewAllRequest"><i class="bi bi-list-check"></i> Total Request</a>
-                <a href="AdminViewAllHireRequest"><i class="bi bi-briefcase"></i> Total Hire Request</a>
-                <a href="AdminViewAllPost"><i class="bi bi-file-earmark-text"></i> Total Post</a>
-                <a href="AdminViewAllFeedback"><i class="bi bi-chat-dots"></i> Total Feedback</a>
-                <a href="AdminViewAllAnswer"><i class="bi bi-pencil-square"></i> Total Answer</a>
+                <a href="AdminViewAllHireRequest"><i class="bi bi-briefcase-fill"></i> Total Hire Request</a>
+                <a href="AdminViewAllPost"><i class="bi bi-file-earmark-text-fill"></i> Total Post</a>
+                <a href="AdminViewAllFeedback"><i class="bi bi-chat-dots-fill"></i> Total Feedback</a>
+                <a href="AdminSkillManager"><i class="bi bi-lightning-charge-fill"></i> Skill Manager</a>
+                <a href="JobManager"><i class="bi bi-briefcase"></i> Job Manager</a>
                 <a href="LogOut"><i class="bi bi-box-arrow-right"></i> Logout</a>
             </div>
 
             <!-- Main Content -->
             <div class="col-md-10 main-content">
                 <h2 class="mb-4">Welcome to Admin Dashboard</h2>
+
+                <!-- Row 1: Total -->
                 <div class="row">
-                    <!-- Total Request -->
-                    <div class="col-md-2 mb-4">
-                        <div class="card text-white bg-primary h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
+                    <div class="col-md-3 mb-4">
+                        <a href="AdminViewAllRequest" class="card-link">
+                            <div class="card text-white bg-primary h-100">
+                                <div class="card-body d-flex align-items-center">
                                     <i class="bi bi-list-check display-5 me-3"></i>
                                     <div>
-                                        <h5 class="card-title">Total Request</h5>
-                                        <p class="card-text fs-3">${totalRequest}</p>
+                                        <h5>Total Request</h5>
+                                        <p class="fs-3">${totalRequest}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                    <!-- Total Hire Request -->
-                    <div class="col-md-2 mb-4">
-                        <div class="card text-white bg-success h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
+                    <div class="col-md-3 mb-4">
+                        <a href="AdminViewAllHireRequest" class="card-link">
+                            <div class="card text-white bg-success h-100">
+                                <div class="card-body d-flex align-items-center">
                                     <i class="bi bi-briefcase display-5 me-3"></i>
                                     <div>
-                                        <h5 class="card-title">Total Hire Request</h5>
-                                        <p class="card-text fs-3">${totalHireRequest}</p>
+                                        <h5>Total Hire Request</h5>
+                                        <p class="fs-3">${totalHireRequest}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                    <!-- Total Post -->
-                    <div class="col-md-2 mb-4">
-                        <div class="card text-white bg-info h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
+                    <div class="col-md-3 mb-4">
+                        <a href="AdminViewAllPost" class="card-link">
+                            <div class="card text-white bg-info h-100">
+                                <div class="card-body d-flex align-items-center">
                                     <i class="bi bi-file-earmark-text display-5 me-3"></i>
                                     <div>
-                                        <h5 class="card-title">Total Post</h5>
-                                        <p class="card-text fs-3">${totalPost}</p>
+                                        <h5>Total Post</h5>
+                                        <p class="fs-3">${totalPost}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
-                    <!-- Total Feedback -->
-                    <div class="col-md-2 mb-4">
-                        <div class="card text-white bg-warning h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
+                    <div class="col-md-3 mb-4">
+                        <a href="AdminViewAllFeedback" class="card-link">
+                            <div class="card text-white bg-warning h-100">
+                                <div class="card-body d-flex align-items-center">
                                     <i class="bi bi-chat-dots display-5 me-3"></i>
                                     <div>
-                                        <h5 class="card-title">Total Feedback</h5>
-                                        <p class="card-text fs-3">${totalFeedback}</p>
+                                        <h5>Total Feedback</h5>
+                                        <p class="fs-3">${totalFeedback}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Total Answer -->
-                    <div class="col-md-2 mb-4">
-                        <div class="card text-white bg-danger h-100">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-pencil-square display-5 me-3"></i>
-                                    <div>
-                                        <h5 class="card-title">Total Answer</h5>
-                                        <p class="card-text fs-3">${totalAnswer}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Chart -->
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header bg-secondary text-white">
-                                <i class="bi bi-bar-chart"></i> Thống kê tổng quan
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <a href="AdminViewAllAnswer" class="card-link">
+                            <div class="card text-white bg-danger h-100">
+                                <div class="card-body d-flex align-items-center">
+                                    <i class="bi bi-pencil-square display-5 me-3"></i>
+                                    <div>
+                                        <h5>Total Answer</h5>
+                                        <p class="fs-3">${totalAnswer}</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <canvas id="adminChart" height="80"></canvas>
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
+
+                <!-- Row 2: Manager -->
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <a href="JobManager" class="card-link">
+                            <div class="card text-white h-100" style="background:#20c997;">
+                                <div class="card-body d-flex align-items-center">
+                                    <i class="bi bi-briefcase-fill display-5 me-3"></i>
+                                    <div>
+                                        <h5>Job Manager</h5>
+                                        <p class="fs-3">${totalJob}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <a href="AdminSkillManager" class="card-link">
+                            <div class="card text-white h-100" style="background:#6f42c1;">
+                                <div class="card-body d-flex align-items-center">
+                                    <i class="bi bi-lightning-charge-fill display-5 me-3"></i>
+                                    <div>
+                                        <h5>Skill Manager</h5>
+                                        <p class="fs-3">${totalSkill}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Row 3: Account -->
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <a href="ViewMenteeAccount" class="card-link">
+                            <div class="card text-white bg-secondary h-100">
+                                <div class="card-body d-flex align-items-center">
+                                    <i class="bi bi-person-lines-fill display-5 me-3"></i>
+                                    <div>
+                                        <h5>Account Mentee</h5>
+                                        <p class="fs-3">${totalMentee}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <a href="ViewMentorAccount" class="card-link">
+                            <div class="card text-white bg-dark h-100">
+                                <div class="card-body d-flex align-items-center">
+                                    <i class="bi bi-person-badge-fill display-5 me-3"></i>
+                                    <div>
+                                        <h5>Account Mentor</h5>
+                                        <p class="fs-3">${totalMentor}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -171,50 +221,5 @@
     <jsp:include page="../guest/Footer.jsp" />
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('adminChart').getContext('2d');
-        const adminChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Total Request', 'Total Hire Request', 'Total Post', 'Total Feedback', 'Total Answer'],
-                datasets: [{
-                    label: 'Số lượng',
-                    data: [
-                        <c:out value="${totalRequest != null ? totalRequest : 0}"/>,
-                        <c:out value="${totalHireRequest != null ? totalHireRequest : 0}"/>,
-                        <c:out value="${totalPost != null ? totalPost : 0}"/>,
-                        <c:out value="${totalFeedback != null ? totalFeedback : 0}"/>,
-                        <c:out value="${totalAnswer != null ? totalAnswer : 0}"/>
-                    ],
-                    backgroundColor: [
-                        'rgba(0, 123, 255, 0.7)',
-                        'rgba(40, 167, 69, 0.7)',
-                        'rgba(23, 162, 184, 0.7)',
-                        'rgba(255, 193, 7, 0.7)',
-                        'rgba(220, 53, 69, 0.7)'
-                    ],
-                    borderColor: [
-                        'rgba(0, 123, 255, 1)',
-                        'rgba(40, 167, 69, 1)',
-                        'rgba(23, 162, 184, 1)',
-                        'rgba(255, 193, 7, 1)',
-                        'rgba(220, 53, 69, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { stepSize: 1 }
-                    }
-                }
-            }
-        });
-    </script>
 </body>
 </html>
