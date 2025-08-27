@@ -593,6 +593,89 @@ public Map<String, Object> getMentorDetail(int accountId) {
     return data;
 }
 
+// Lấy account theo id (viết lại cho rõ ràng)
+public Account getAccountById(int id) {
+    Account account = null;
+    String sql = "SELECT * FROM Account WHERE id=?";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            account = new Account(
+                rs.getInt("id"),
+                rs.getString("accountname"),
+                rs.getString("password"),
+                rs.getInt("roleid"),
+                rs.getString("email")
+            );
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return account;
+}
+
+// Update account (admin sửa accountname/email/roleid, có thể có hoặc không có password)
+public boolean updateAccount(Account acc) {
+    String sql = "UPDATE Account SET accountname=?, email=?, roleid=? WHERE id=?";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, acc.getAccountname());
+        ps.setString(2, acc.getEmail());
+        ps.setInt(3, acc.getRoleid());
+        ps.setInt(4, acc.getId());
+        return ps.executeUpdate() > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
+// Nếu admin muốn update luôn cả password
+public boolean updateAccountWithPassword(Account acc) {
+    String sql = "UPDATE Account SET accountname=?, email=?, roleid=?, password=? WHERE id=?";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, acc.getAccountname());
+        ps.setString(2, acc.getEmail());
+        ps.setInt(3, acc.getRoleid());
+        ps.setString(4, acc.getPassword());
+        ps.setInt(5, acc.getId());
+        return ps.executeUpdate() > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+        return false;
+    }
+}
+
+
+public void deleteAccountCascade(int accountId) {
+    try {
+        connection.setAutoCommit(false);
+        String sqlMentee = "DELETE FROM Mentee WHERE accountid=?";
+        PreparedStatement ps1 = connection.prepareStatement(sqlMentee);
+        ps1.setInt(1, accountId);
+        ps1.executeUpdate();
+
+        String sqlMentor = "DELETE FROM Mentor WHERE accountid=?";
+        PreparedStatement ps2 = connection.prepareStatement(sqlMentor);
+        ps2.setInt(1, accountId);
+        ps2.executeUpdate();
+
+        String sqlAccount = "DELETE FROM Account WHERE id=?";
+        PreparedStatement ps3 = connection.prepareStatement(sqlAccount);
+        ps3.setInt(1, accountId);
+        ps3.executeUpdate();
+
+        connection.commit();
+    } catch (Exception e) {
+        try { connection.rollback(); } catch (Exception ex) {}
+        e.printStackTrace();
+    } finally {
+        try { connection.setAutoCommit(true); } catch (Exception ex) {}
+    }
+}
 
 
 }

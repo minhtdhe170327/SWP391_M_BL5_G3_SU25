@@ -151,6 +151,7 @@
         </div>
     </main>
 </c:if>
+    <jsp:include page="../guest/Footer.jsp" />
 <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

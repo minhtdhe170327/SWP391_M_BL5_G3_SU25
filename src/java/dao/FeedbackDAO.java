@@ -53,13 +53,23 @@ public class FeedbackDAO extends DBContext {
     }
 
     public void deleteFeedback(int id) {
-        String sql = "DELETE FROM Feedback WHERE id=?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    String sql1 = "DELETE FROM feedbackanswer WHERE feedbackid=?";
+    String sql2 = "DELETE FROM Feedback WHERE id=?";
+    try {
+        PreparedStatement ps1 = connection.prepareStatement(sql1);
+        ps1.setInt(1, id);
+        ps1.executeUpdate();
+        ps1.close();
+
+        PreparedStatement ps2 = connection.prepareStatement(sql2);
+        ps2.setInt(1, id);
+        int rows = ps2.executeUpdate();
+        System.out.println("Deleted feedback rows = " + rows);
+        ps2.close();
+
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+
 }

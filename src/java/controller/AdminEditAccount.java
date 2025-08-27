@@ -1,30 +1,39 @@
 package controller;
 
-import dao.AccountDAO;
-import entity.Account;
+import dao.*;
+import entity.*;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
-//@WebServlet("/AdminEditAccount")
 public class AdminEditAccount extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        if (id == null) {
-            response.sendRedirect("views/AccountList.jsp");
-            return;
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            AccountDAO accDao = new AccountDAO();
+            MenteeDAO menteeDao = new MenteeDAO();
+            MentorDAO mentorDao = new MentorDAO();
+            Account editAccount = accDao.getAccountByid(id);
+            if (editAccount == null) {
+                response.sendRedirect("ViewAllAccount");
+                return;
+            }
+            request.setAttribute("editAccount", editAccount);
+            if (editAccount.getRoleid() == 1) {
+                Mentee mentee = menteeDao.getMenteebyAccID(id);
+                request.setAttribute("mentee", mentee);
+            } else if (editAccount.getRoleid() == 2) {
+                Mentor mentor = mentorDao.getMentorbyAccID(id);
+                request.setAttribute("mentor", mentor);
+            }
+            request.getRequestDispatcher("/views/AdminEditAccount.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("ViewAllAccount");
         }
-        AccountDAO dao = new AccountDAO();
-        Account acc = dao.getAccountByid(Integer.parseInt(id));
-        request.setAttribute("account", acc);
-        request.setAttribute("roleList", dao.getRole());
-        request.getRequestDispatcher("views/AdminEditAccount.jsp").forward(request, response);
     }
 
     @Override
@@ -34,33 +43,65 @@ public class AdminEditAccount extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             String accountname = request.getParameter("accountname");
             String email = request.getParameter("email");
-            int roleid = Integer.parseInt(request.getParameter("roleid"));
             String password = request.getParameter("password");
-
-            if (accountname == null || accountname.trim().isEmpty() ||
-                email == null || email.trim().isEmpty()) {
-                request.setAttribute("error", "Please fill in all required fields");
-                doGet(request, response);
+            int roleid = Integer.parseInt(request.getParameter("roleid"));
+            AccountDAO accDao = new AccountDAO();
+            MenteeDAO menteeDao = new MenteeDAO();
+            MentorDAO mentorDao = new MentorDAO();
+            Account acc = accDao.getAccountByid(id);
+            if (acc == null) {
+                response.sendRedirect("ViewAllAccount");
                 return;
             }
-
-            AccountDAO dao = new AccountDAO();
-            boolean success;
             if (password != null && !password.trim().isEmpty()) {
-                success = dao.updateAccountByAdminWithPassword(id, accountname, email, roleid, password);
+                accDao.updateAccountByAdminWithPassword(id, accountname, email, roleid, password);
             } else {
-                success = dao.updateAccountByAdmin(id, accountname, email, roleid);
+                accDao.updateAccountByAdmin(id, accountname, email, roleid);
             }
-            if (success) {
-                response.sendRedirect(request.getContextPath() + "/ViewAllAccount");
-            } else {
-                request.setAttribute("error", "Failed to update account");
-                doGet(request, response);
+            if (roleid == 1) {
+                Mentee mentee = menteeDao.getMenteebyAccID(id);
+                if (mentee != null) {
+                    String firstname = request.getParameter("firstname");
+                    String lastname = request.getParameter("lastname");
+                    String sex = request.getParameter("sex");
+                    String address = request.getParameter("address");
+                    String phone = request.getParameter("phone");
+                    String birthday = request.getParameter("birthday");
+                    String introduce = request.getParameter("introduce");
+                    menteeDao.updateMenteeProfile(
+                            mentee.getId(),
+                            firstname, lastname, sex, address, phone,
+                            (birthday != null && !birthday.isEmpty() ? java.sql.Date.valueOf(birthday) : null),
+                            introduce
+                    );
+                }
             }
+            if (roleid == 2) {
+                Mentor mentor = mentorDao.getMentorbyAccID(id);
+                if (mentor != null) {
+                    String firstname = request.getParameter("firstname");
+                    String lastname = request.getParameter("lastname");
+                    String sex = request.getParameter("sex");
+                    String address = request.getParameter("address");
+                    String phone = request.getParameter("phone");
+                    String birthday = request.getParameter("birthday");
+                    String introduce = request.getParameter("introduce");
+                    String achievement = request.getParameter("achievement");
+                    String costStr = request.getParameter("cost");
+                    float costHire = 0;
+                    try { costHire = Float.parseFloat(costStr); } catch (Exception ex) {}
+                    mentorDao.updateMentorProfile(
+                            mentor.getId(),
+                            firstname, lastname, sex, address, phone,
+                            (birthday != null && !birthday.isEmpty() ? java.sql.Date.valueOf(birthday) : null),
+                            introduce, achievement, costHire
+                    );
+                }
+            }
+            response.sendRedirect("ViewAllAccount");
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "An error occurred while updating account");
-            doGet(request, response);
+            response.sendRedirect("ViewAllAccount");
         }
     }
 }
